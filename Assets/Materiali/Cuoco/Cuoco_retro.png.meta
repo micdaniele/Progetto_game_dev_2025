@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Cuoco_retro_0: 2004972343060797254
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

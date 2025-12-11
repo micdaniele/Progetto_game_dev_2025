@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Cuoco_frontale_0: -474280348207718210
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

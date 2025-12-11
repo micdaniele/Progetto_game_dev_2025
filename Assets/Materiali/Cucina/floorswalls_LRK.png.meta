@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 3285312c770da43098a802b6018ec243
+guid: f832a169ee5453740a61c7243f382711
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6525640615702364813
-    second: Cuoco_lato_0
+      213: 7576019152854704486
+    second: floorswalls_LRK_0
+  - first:
+      213: 7817564924171052601
+    second: floorswalls_LRK_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +103,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Cuoco_lato_0
+      name: floorswalls_LRK_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 149
-        height: 289
+        x: 11
+        y: 123
+        width: 202
+        height: 122
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +118,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 37df2313f644075a0800000000000000
-      internalID: -6525640615702364813
+      spriteID: 661e571b74d632960800000000000000
+      internalID: 7576019152854704486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floorswalls_LRK_1
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 11
+        width: 202
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 936e4c911e19d7c60800000000000000
+      internalID: 7817564924171052601
       vertices: []
       indices: 
       edges: []
@@ -134,8 +159,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Cuoco_lato_0: -6525640615702364813
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
