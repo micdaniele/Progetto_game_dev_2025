@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 2cb46f846950e4ce79b608cd844db383
+guid: cf0e21f3ca7832748abefed1c817886a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5549798987827506936
-    second: Fridge_scene_0
+      213: -8053078892282804309
+    second: Muro_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Fridge_scene_0
+      name: Muro_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 1024
-        height: 1024
+        y: 241
+        width: 1344
+        height: 527
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8fee74c76c8d40d40800000000000000
-      internalID: 5549798987827506936
+      spriteID: ba7894d1a67bd3090800000000000000
+      internalID: -8053078892282804309
       vertices: []
       indices: 
       edges: []
@@ -134,8 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Fridge_scene_0: 5549798987827506936
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

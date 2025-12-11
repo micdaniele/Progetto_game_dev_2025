@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 2cb46f846950e4ce79b608cd844db383
+guid: 4f465a23ce2aa1f439d862044842c358
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5549798987827506936
-    second: Fridge_scene_0
+      213: 5763658958618022970
+    second: Pavimento_prosp_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Fridge_scene_0
+      name: Pavimento_prosp_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1024
-        height: 1024
+        width: 1344
+        height: 247
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8fee74c76c8d40d40800000000000000
-      internalID: 5549798987827506936
+      spriteID: a34dce22941acff40800000000000000
+      internalID: 5763658958618022970
       vertices: []
       indices: 
       edges: []
@@ -134,8 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Fridge_scene_0: 5549798987827506936
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
