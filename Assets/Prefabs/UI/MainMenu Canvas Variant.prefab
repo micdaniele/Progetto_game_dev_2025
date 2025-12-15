@@ -891,8 +891,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -24.4}
-  m_SizeDelta: {x: 31.7495, y: 33.2379}
+  m_AnchoredPosition: {x: 0.00045013, y: -24.883}
+  m_SizeDelta: {x: 36.43, y: 30.005}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7884603458237067617
 CanvasRenderer:
@@ -1226,6 +1226,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3037586586974968339, guid: f8797e49395e0644ea94fed4db895440, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 79459efec17a4d00a321bdcc27bbc385, type: 2}
     - target: {fileID: 4047519549687841471, guid: f8797e49395e0644ea94fed4db895440, type: 3}
       propertyPath: m_SizeDelta.y
       value: 30.1
@@ -1302,6 +1306,34 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6431821384340608184, guid: f8797e49395e0644ea94fed4db895440, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6431821384340608184, guid: f8797e49395e0644ea94fed4db895440, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6431821384340608184, guid: f8797e49395e0644ea94fed4db895440, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -24.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6431821384340608184, guid: f8797e49395e0644ea94fed4db895440, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -17.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6604980619589204436, guid: f8797e49395e0644ea94fed4db895440, type: 3}
+      propertyPath: m_margin.x
+      value: -27.604584
+      objectReference: {fileID: 0}
+    - target: {fileID: 6604980619589204436, guid: f8797e49395e0644ea94fed4db895440, type: 3}
+      propertyPath: m_margin.z
+      value: -75.74786
+      objectReference: {fileID: 0}
+    - target: {fileID: 6604980619589204436, guid: f8797e49395e0644ea94fed4db895440, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 79459efec17a4d00a321bdcc27bbc385, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
