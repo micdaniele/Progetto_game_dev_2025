@@ -8,9 +8,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 4b43317b2b906a24eab63f79d4bf718e
-  - enabled: 1
-    path: Assets/Scenes/Kitchen.unity
-    guid: c60e6fdf9344544c185c6d2665379cb5
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
