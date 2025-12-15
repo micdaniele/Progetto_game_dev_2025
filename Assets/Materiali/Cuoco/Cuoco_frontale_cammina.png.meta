@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Cuoco_frontale_cammina_0: -537292616680668031
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
