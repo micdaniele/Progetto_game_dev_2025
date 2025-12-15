@@ -25,13 +25,13 @@ public class Player2DGroundMover : MonoBehaviour
         _moveAction = InputSystem.actions.FindAction("Move");
 
         // Configurazione Rigidbody2D per movimento libero 2D
-        _rb.gravityScale = 0f; // Nessuna gravità per movimento libero
+        _rb.gravityScale = 0f; // Nessuna gravità
         _rb.constraints = RigidbodyConstraints2D.FreezeRotation; // Blocca la rotazione
     }
 
     void Update()
     {
-        // Leggi input in entrambe le direzioni (WASD o Frecce)
+        // Legge input per entrambe le direzioni (WASD)
         _inputMovement = _moveAction.ReadValue<Vector2>();
     }
 
@@ -42,7 +42,6 @@ public class Player2DGroundMover : MonoBehaviour
         _isGrounded = groundCollider != null;
 
         // Movimento in tutte le direzioni (WASD)
-        // W/S = su/giù, A/D = sinistra/destra
         Vector2 velocity = _inputMovement * _speed;
         _rb.linearVelocity = velocity;
     }
