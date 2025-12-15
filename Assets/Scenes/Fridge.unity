@@ -598,7 +598,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -3712190950654719672, guid: cb1d1612bf6034112906b48648e44d9e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1970,7 +1970,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -424647726627762553, guid: cb1d1612bf6034112906b48648e44d9e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3012,19 +3012,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3359730067212447654, guid: 91aa28911e7284f7da9bdc65d4b5d3e2, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 3.2154
+      value: 123.5756
       objectReference: {fileID: 0}
     - target: {fileID: 3359730067212447654, guid: 91aa28911e7284f7da9bdc65d4b5d3e2, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 1.6389
+      value: 88.0164
       objectReference: {fileID: 0}
     - target: {fileID: 3359730067212447654, guid: 91aa28911e7284f7da9bdc65d4b5d3e2, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -373.95007
+      value: -323
       objectReference: {fileID: 0}
     - target: {fileID: 3359730067212447654, guid: 91aa28911e7284f7da9bdc65d4b5d3e2, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -201.7
+      value: -153.49
       objectReference: {fileID: 0}
     - target: {fileID: 7394239635979044399, guid: 91aa28911e7284f7da9bdc65d4b5d3e2, type: 3}
       propertyPath: m_PreserveAspect
@@ -3109,6 +3109,10 @@ PrefabInstance:
     - target: {fileID: 7600937325205584163, guid: 91aa28911e7284f7da9bdc65d4b5d3e2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7661121272334648509, guid: 91aa28911e7284f7da9bdc65d4b5d3e2, type: 3}
+      propertyPath: m_SortingOrder
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
