@@ -1073,6 +1073,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6961228642942622108, guid: 17a58e447c8242f498dde3b0448e3da9, type: 3}
+      propertyPath: m_margin.x
+      value: -113.98424
+      objectReference: {fileID: 0}
+    - target: {fileID: 6961228642942622108, guid: 17a58e447c8242f498dde3b0448e3da9, type: 3}
+      propertyPath: m_margin.z
+      value: -114.873474
+      objectReference: {fileID: 0}
+    - target: {fileID: 6961228642942622108, guid: 17a58e447c8242f498dde3b0448e3da9, type: 3}
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 2100000, guid: 79459efec17a4d00a321bdcc27bbc385, type: 2}
