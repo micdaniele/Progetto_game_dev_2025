@@ -2,15 +2,22 @@ using UnityEngine;
 
 public class MoodWindow : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public GameObject moodContent;
+    public GameObject recipeContent;
+
+    public void SelectMood(string mood)
     {
-        
+        GameManager.Instance.SetMood(mood);
+
+        moodContent.SetActive(false);
+        recipeContent.SetActive(true);
+
+        GameManager.Instance.PrepareRecipes();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SelectRecipe(string recipe)
     {
-        
+        GameManager.Instance.SetRecipe(recipe);
+        Hide();
     }
 }
