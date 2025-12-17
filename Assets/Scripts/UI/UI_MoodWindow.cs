@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
-public class UI_MOOdWindow : MonoBehaviour
+public class UI_MoodWindow : MonoBehaviour
 
 {
     [Header("Main Panels")]
