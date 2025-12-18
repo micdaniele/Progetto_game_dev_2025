@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using TMPro;
 public class UI_MoodWindow : MonoBehaviour
 
 {
@@ -16,7 +17,8 @@ public class UI_MoodWindow : MonoBehaviour
     
     [Header("Ingredients Panel Elements")]
     public Transform ingredientsContent;
-    public Text ingredientsTitleText;
+    //public Text ingredientsTitleText;
+    public TextMeshProUGUI ingredientsTitleText;
     public Button startButton;
     
     [Header("Optional")]
@@ -146,7 +148,8 @@ public class UI_MoodWindow : MonoBehaviour
             ingredientObj.transform.SetParent(ingredientsContent);
             
             Text text = ingredientObj.AddComponent<Text>();
-            text.font = Resources.GetBuiltinResource<Font>("Arial.ttf");
+            //text.font = Resources.GetBuiltinResource<Font>("Arial.ttf");
+            text.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
             text.fontSize = 18;
             text.color = Color.black;
             text.alignment = TextAnchor.MiddleLeft;
