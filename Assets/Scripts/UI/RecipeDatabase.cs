@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 
 //classe padre che usa ereditarietà
-public abstract class RecipeDatabase : MonoBehaviour
+public abstract class RecipeDatabase
 {
     protected string moodType; // protected = accessibile nelle classi figlie
     
@@ -10,7 +10,7 @@ public abstract class RecipeDatabase : MonoBehaviour
     public RecipeDatabase(string mood)
     {
         moodType = mood;
-    }
+    }   
     
     // Metodo ASTRATTO - POLIMORFISMO
     // Ogni classe figlia DEVE implementare questo metodo

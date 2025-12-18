@@ -1,4 +1,4 @@
-using UnityEngine;
+    using UnityEngine;
 
 public class InitialVignette : MonoBehaviour
 {
@@ -8,13 +8,16 @@ public class InitialVignette : MonoBehaviour
     
     [Tooltip("Tasto per chiudere la vignetta")]
     public KeyCode closeKey = KeyCode.E;
-    
+
+
     [Header("Player Control")]
     [Tooltip("Blocca il movimento del player durante la vignetta?")]
     public bool freezePlayer = true;
     
     private bool vignetteShown = false;
-    
+    public bool lockCursorAfterClose = false;
+
+
     void Start()
     {
         // Mostra la vignetta all'inizio
@@ -67,10 +70,21 @@ public class InitialVignette : MonoBehaviour
             
             // Sblocca il gioco
             Time.timeScale = 1f;
-            
-            // Blocca il cursore per il gameplay
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+
+            // Blocca il cursore per il gameplay       
+            //Cursor.lockState = CursorLockMode.Locked;<--Non va bene perchè dopo non fa cliccare altri pulsanti
+            //Cursor.visible = false;
+
+            if (lockCursorAfterClose)
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
         }
     }
 }
