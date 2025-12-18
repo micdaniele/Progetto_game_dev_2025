@@ -20,9 +20,7 @@ public class UI_MoodWindow : MonoBehaviour
     //public Text ingredientsTitleText;
     public TextMeshProUGUI ingredientsTitleText;
     public Button startButton;
-    
-    [Header("Optional")]
-    public GameObject ingredientTextPrefab;
+   
     
     private int selectedMood = -1;
     private string selectedRecipe = "";
@@ -137,27 +135,20 @@ public class UI_MoodWindow : MonoBehaviour
     void CreateIngredientText(string ingredientText)
     {
         GameObject ingredientObj;
-        
-        if (ingredientTextPrefab != null)
-        {
-            ingredientObj = Instantiate(ingredientTextPrefab, ingredientsContent);
-        }
-        else
-        {
-            ingredientObj = new GameObject("Ingredient");
-            ingredientObj.transform.SetParent(ingredientsContent);
-            
-            Text text = ingredientObj.AddComponent<Text>();
-            //text.font = Resources.GetBuiltinResource<Font>("Arial.ttf");
-            text.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-            text.fontSize = 18;
-            text.color = Color.black;
-            text.alignment = TextAnchor.MiddleLeft;
-            
-            RectTransform rt = ingredientObj.GetComponent<RectTransform>();
-            rt.sizeDelta = new Vector2(0, 30);
-        }
-        
+
+        ingredientObj = new GameObject("Ingredient");
+        ingredientObj.transform.SetParent(ingredientsContent);
+
+        Text text = ingredientObj.AddComponent<Text>();
+        //text.font = Resources.GetBuiltinResource<Font>("Arial.ttf");
+        text.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+        text.fontSize = 18;
+        text.color = Color.black;
+        text.alignment = TextAnchor.MiddleLeft;
+
+        RectTransform rt = ingredientObj.GetComponent<RectTransform>();
+        rt.sizeDelta = new Vector2(0, 30);
+
         Text textComponent = ingredientObj.GetComponent<Text>();
         if (textComponent != null)
             textComponent.text = ingredientText;
