@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
             
             // SAD RECIPES
             { "Hot Chocolate", new List<string> { "Chocolate", "Milk", "Sugar" }},
-            { "Mushroom risotto", new List<string> { "Mushroom", "Rice", "Spices" }},
+            { "Mushroom Risotto", new List<string> { "Mushroom", "Rice", "Spices" }},
             
             // SICK RECIPES
             { "Chicken Broth", new List<string> { "Chicken", "Carot", "Spices" }},
