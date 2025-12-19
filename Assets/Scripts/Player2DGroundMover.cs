@@ -6,6 +6,9 @@ public class Player2DGroundMover : MonoBehaviour
     [Header("Movement Config")]
     [SerializeField] private float _speed = 5f;
 
+    [Header("Animation Config")]
+    [SerializeField] private Animator _animator; // Questa riga serve per vedere la casella nell'Inspector
+
     [Header("Ground Check Config")]
     [SerializeField] private LayerMask _whatIsGround;
     [SerializeField] private Transform _groundChecker;
@@ -22,17 +25,46 @@ public class Player2DGroundMover : MonoBehaviour
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+
+        // Se non hai trascinato l'animator, lo cerca da solo
+        if (_animator == null) _animator = GetComponent<Animator>();
+
         _moveAction = InputSystem.actions.FindAction("Move");
 
-        // Configurazione Rigidbody2D per movimento libero 2D
-        _rb.gravityScale = 0f; // Nessuna gravità
-        _rb.constraints = RigidbodyConstraints2D.FreezeRotation; // Blocca la rotazione
+        // Configurazione Rigidbody2D
+        _rb.gravityScale = 0f;
+        _rb.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
     void Update()
     {
-        // Legge input per entrambe le direzioni (WASD)
+        // 1. Legge l'input (WASD o Frecce)
         _inputMovement = _moveAction.ReadValue<Vector2>();
+
+        // 2. Aggiorna l'Animator solo se il cuoco si sta muovendo
+        if (_animator != null)
+        {
+            // Usiamo una piccola soglia (0.1) per capire se stiamo premendo i tasti
+            if (_inputMovement.magnitude > 0.1f)
+            {
+                _animator.SetFloat("Move x", _inputMovement.x);
+                _animator.SetFloat("Move y", _inputMovement.y);
+
+                // LOGICA PER GIRARE IL CUOCO (FLIP)
+                // Se vai a destra (x positivo), scala normale
+                if (_inputMovement.x > 0)
+                {
+                    transform.localScale = new Vector3(1, 1, 1);
+                }
+                // Se vai a sinistra (x negativo), scala invertita
+                else if (_inputMovement.x < 0)
+                {
+                    transform.localScale = new Vector3(-1, 1, 1);
+                }
+            }
+
+            
+        }
     }
 
     void FixedUpdate()
@@ -41,12 +73,11 @@ public class Player2DGroundMover : MonoBehaviour
         Collider2D groundCollider = Physics2D.OverlapCircle(_groundChecker.position, _groundCheckRadius, _whatIsGround);
         _isGrounded = groundCollider != null;
 
-        // Movimento in tutte le direzioni (WASD)
+        // Movimento
         Vector2 velocity = _inputMovement * _speed;
         _rb.linearVelocity = velocity;
     }
 
-    // Visualizza il ground checker nell'editor
     private void OnDrawGizmos()
     {
         if (_groundChecker != null)
