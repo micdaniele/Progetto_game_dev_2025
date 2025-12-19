@@ -7,7 +7,7 @@ public class Player2DGroundMover : MonoBehaviour
     [SerializeField] private float _speed = 5f;
 
     [Header("Animation Config")]
-    [SerializeField] private Animator _animator; // Questa riga serve per vedere la casella nell'Inspector
+    [SerializeField] private Animator _animator;
 
     [Header("Ground Check Config")]
     [SerializeField] private LayerMask _whatIsGround;
@@ -26,43 +26,46 @@ public class Player2DGroundMover : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
 
-        // Se non hai trascinato l'animator, lo cerca da solo
         if (_animator == null) _animator = GetComponent<Animator>();
 
         _moveAction = InputSystem.actions.FindAction("Move");
 
-        // Configurazione Rigidbody2D
+        // Forza la gravità a 0 per evitare che cada fuori scena
         _rb.gravityScale = 0f;
         _rb.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
     void Update()
     {
-        // 1. Legge l'input (WASD o Frecce)
+        // 1. Legge l'input
         _inputMovement = _moveAction.ReadValue<Vector2>();
 
-        // 2. Aggiorna l'Animator solo se il cuoco si sta muovendo
         if (_animator != null)
         {
-            // Usiamo una piccola soglia (0.1) per capire se stiamo premendo i tasti
-            if (_inputMovement.magnitude > 0.1f)
+            // 2. GESTIONE STATO FERMO/CAMMINA
+            // Usiamo la magnitudine per dire all'Animator se il cuoco è fermo o si muove
+            // RICORDATI: Crea un parametro Float chiamato "Speed" nell'Animator
+            _animator.SetFloat("Speed", _inputMovement.magnitude);
+
+            // 3. AGGIORNA DIREZIONE SOLO SE C'E' MOVIMENTO
+            if (_inputMovement.magnitude > 0.01f)
             {
+                // Aggiorna i valori Move x e Move y nel Blend Tree
                 _animator.SetFloat("Move x", _inputMovement.x);
                 _animator.SetFloat("Move y", _inputMovement.y);
 
-                // LOGICA PER GIRARE IL CUOCO (FLIP)
-                // Se vai a destra (x positivo), scala normale
-                if (_inputMovement.x > 0)
-                {
-                    transform.localScale = new Vector3(1, 1, 1);
-                }
-                // Se vai a sinistra (x negativo), scala invertita
-                else if (_inputMovement.x < 0)
+                // 4. LOGICA DI ROTAZIONE (FLIP)
+                // Se vai a sinistra (x negativo), specchia la scala
+                if (_inputMovement.x < -0.01f)
                 {
                     transform.localScale = new Vector3(-1, 1, 1);
                 }
+                // Se vai a destra (x positivo), rimetti la scala normale
+                else if (_inputMovement.x > 0.01f)
+                {
+                    transform.localScale = new Vector3(1, 1, 1);
+                }
             }
-
             
         }
     }
@@ -73,9 +76,8 @@ public class Player2DGroundMover : MonoBehaviour
         Collider2D groundCollider = Physics2D.OverlapCircle(_groundChecker.position, _groundCheckRadius, _whatIsGround);
         _isGrounded = groundCollider != null;
 
-        // Movimento
-        Vector2 velocity = _inputMovement * _speed;
-        _rb.linearVelocity = velocity;
+        // Applica il movimento fisico
+        _rb.linearVelocity = _inputMovement * _speed;
     }
 
     private void OnDrawGizmos()
