@@ -6,6 +6,9 @@ public class Player2DGroundMover : MonoBehaviour
     [Header("Movement Config")]
     [SerializeField] private float _speed = 5f;
 
+    [Header("Animation Config")]
+    [SerializeField] private Animator _animator;
+
     [Header("Ground Check Config")]
     [SerializeField] private LayerMask _whatIsGround;
     [SerializeField] private Transform _groundChecker;
@@ -22,17 +25,49 @@ public class Player2DGroundMover : MonoBehaviour
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+
+        if (_animator == null) _animator = GetComponent<Animator>();
+
         _moveAction = InputSystem.actions.FindAction("Move");
 
-        // Configurazione Rigidbody2D per movimento libero 2D
-        _rb.gravityScale = 0f; // Nessuna gravità
-        _rb.constraints = RigidbodyConstraints2D.FreezeRotation; // Blocca la rotazione
+        // Forza la gravità a 0 per evitare che cada fuori scena
+        _rb.gravityScale = 0f;
+        _rb.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
     void Update()
     {
-        // Legge input per entrambe le direzioni (WASD)
+        // 1. Legge l'input
         _inputMovement = _moveAction.ReadValue<Vector2>();
+
+        if (_animator != null)
+        {
+            // 2. GESTIONE STATO FERMO/CAMMINA
+            // Usiamo la magnitudine per dire all'Animator se il cuoco è fermo o si muove
+            // RICORDATI: Crea un parametro Float chiamato "Speed" nell'Animator
+            _animator.SetFloat("Speed", _inputMovement.magnitude);
+
+            // 3. AGGIORNA DIREZIONE SOLO SE C'E' MOVIMENTO
+            if (_inputMovement.magnitude > 0.01f)
+            {
+                // Aggiorna i valori Move x e Move y nel Blend Tree
+                _animator.SetFloat("Move x", _inputMovement.x);
+                _animator.SetFloat("Move y", _inputMovement.y);
+
+                // 4. LOGICA DI ROTAZIONE (FLIP)
+                // Se vai a sinistra (x negativo), specchia la scala
+                if (_inputMovement.x < -0.01f)
+                {
+                    transform.localScale = new Vector3(-1, 1, 1);
+                }
+                // Se vai a destra (x positivo), rimetti la scala normale
+                else if (_inputMovement.x > 0.01f)
+                {
+                    transform.localScale = new Vector3(1, 1, 1);
+                }
+            }
+            
+        }
     }
 
     void FixedUpdate()
@@ -41,12 +76,10 @@ public class Player2DGroundMover : MonoBehaviour
         Collider2D groundCollider = Physics2D.OverlapCircle(_groundChecker.position, _groundCheckRadius, _whatIsGround);
         _isGrounded = groundCollider != null;
 
-        // Movimento in tutte le direzioni (WASD)
-        Vector2 velocity = _inputMovement * _speed;
-        _rb.linearVelocity = velocity;
+        // Applica il movimento fisico
+        _rb.linearVelocity = _inputMovement * _speed;
     }
 
-    // Visualizza il ground checker nell'editor
     private void OnDrawGizmos()
     {
         if (_groundChecker != null)

@@ -7,7 +7,7 @@ public class InitialVignette : MonoBehaviour
     public GameObject vignettePanel;
     
     [Tooltip("Tasto per chiudere la vignetta")]
-    public KeyCode closeKey = KeyCode.E;
+    public KeyCode closeKey = KeyCode.Escape;
 
 
     [Header("Player Control")]
