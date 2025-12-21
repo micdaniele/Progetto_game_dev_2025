@@ -14,7 +14,12 @@ public class GameController : MonoBehaviour
 
     void GetButtons()
     {
-        GameObject objects = GameObject.Find("name");
+        GameObject[] objects = GameObject.FindGameObjectsWithTag ("PuzzleButton");
+
+        for (int i=0; i<objects.Length; i++)
+        {
+            btns.Add(objects[i].GetComponent<Button>());
+        }
     }
   
     
