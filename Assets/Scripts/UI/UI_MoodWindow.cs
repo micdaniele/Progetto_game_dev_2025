@@ -20,6 +20,8 @@ public class UI_MoodWindow : MonoBehaviour
     //public Text ingredientsTitleText;
     public TextMeshProUGUI ingredientsTitleText;
     public Button startButton;
+    public GameObject fridgePrompt; 
+    public GameObject pantryPrompt; 
    
     
     private int selectedMood = -1;
@@ -130,6 +132,13 @@ public class UI_MoodWindow : MonoBehaviour
         
         if (ingredientsPanel != null)
             ingredientsPanel.SetActive(true);
+
+        // Mostra anche i prompt per frigo e dispensa
+        if (fridgePrompt != null)
+            fridgePrompt.SetActive(true);
+    
+        if (pantryPrompt != null)
+            pantryPrompt.SetActive(true);
     }
     
     void CreateIngredientText(string ingredientText)
@@ -180,6 +189,8 @@ public class UI_MoodWindow : MonoBehaviour
         if (moodWindowPanel != null) moodWindowPanel.SetActive(false);
         HideAllRecipePanels();
         if (ingredientsPanel != null) ingredientsPanel.SetActive(false);
+        if (fridgePrompt != null) fridgePrompt.SetActive(false);
+        if (pantryPrompt != null) pantryPrompt.SetActive(false);
     }
     
     void ResumeGame()
