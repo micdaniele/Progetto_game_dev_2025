@@ -1,0 +1,1729 @@
+fileFormatVersion: 2
+guid: dd56ff6dd0cbda54d95491e622b49a25
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2548332905155816269
+    second: Vegies_0
+  - first:
+      213: -1635985323430085857
+    second: Vegies_1
+  - first:
+      213: 7671191023976181893
+    second: Vegies_2
+  - first:
+      213: -4833470527549775905
+    second: Vegies_3
+  - first:
+      213: 6311465489102313455
+    second: Vegies_4
+  - first:
+      213: 5023416660264964631
+    second: Vegies_5
+  - first:
+      213: -2074811809449147099
+    second: Vegies_6
+  - first:
+      213: -6558197796899628240
+    second: Vegies_7
+  - first:
+      213: -1903631445787226777
+    second: Vegies_8
+  - first:
+      213: -2811388556265902357
+    second: Vegies_9
+  - first:
+      213: 4879248188585718165
+    second: Vegies_10
+  - first:
+      213: -9126388158370690571
+    second: Vegies_11
+  - first:
+      213: 6930160059753878170
+    second: Vegies_12
+  - first:
+      213: -3755938266574474074
+    second: Vegies_13
+  - first:
+      213: 291533958979182844
+    second: Vegies_14
+  - first:
+      213: 1943732644421799339
+    second: Vegies_15
+  - first:
+      213: -5651674462296222951
+    second: Vegies_16
+  - first:
+      213: 7421177619412051403
+    second: Vegies_17
+  - first:
+      213: -1268557187834449837
+    second: Vegies_18
+  - first:
+      213: 6596467611406978471
+    second: Vegies_19
+  - first:
+      213: -8124366887479635123
+    second: Vegies_20
+  - first:
+      213: -5698646098402168980
+    second: Vegies_21
+  - first:
+      213: -2460159619586471325
+    second: Vegies_22
+  - first:
+      213: -7962223775867652029
+    second: Vegies_23
+  - first:
+      213: 6360893917635896345
+    second: Vegies_24
+  - first:
+      213: -6661018789380172802
+    second: Vegies_25
+  - first:
+      213: 2024052456310637578
+    second: Vegies_26
+  - first:
+      213: -1652427159343026478
+    second: Vegies_27
+  - first:
+      213: -264315679798985830
+    second: Vegies_28
+  - first:
+      213: 1938882349855675614
+    second: Vegies_29
+  - first:
+      213: -204703105881260922
+    second: Vegies_30
+  - first:
+      213: -2905144640891135429
+    second: Vegies_31
+  - first:
+      213: -5067767302917444297
+    second: Vegies_32
+  - first:
+      213: 4783947166720873239
+    second: Vegies_33
+  - first:
+      213: -4391309473992677714
+    second: Vegies_34
+  - first:
+      213: -2756142187414918958
+    second: Vegies_35
+  - first:
+      213: 900865559317655428
+    second: Vegies_36
+  - first:
+      213: -3412146795084195536
+    second: Vegies_37
+  - first:
+      213: 6351956581980672287
+    second: Vegies_38
+  - first:
+      213: 4341007324951326489
+    second: Vegies_39
+  - first:
+      213: -2602680992033307580
+    second: Vegies_40
+  - first:
+      213: 1104080481989812866
+    second: Vegies_41
+  - first:
+      213: 1074930813421057012
+    second: Vegies_42
+  - first:
+      213: -7196740849844420464
+    second: Vegies_43
+  - first:
+      213: -1624506051248402773
+    second: Vegies_44
+  - first:
+      213: -2619673396920747670
+    second: Vegies_45
+  - first:
+      213: -5380567237182292105
+    second: Vegies_46
+  - first:
+      213: 4653373495134620878
+    second: Vegies_47
+  - first:
+      213: -8981888055606476044
+    second: Vegies_48
+  - first:
+      213: 7519192382750260121
+    second: Vegies_49
+  - first:
+      213: 2616886106166030797
+    second: Vegies_50
+  - first:
+      213: -6066102078515443134
+    second: Vegies_51
+  - first:
+      213: 6099371871636451215
+    second: Vegies_52
+  - first:
+      213: -46236035911728610
+    second: Vegies_53
+  - first:
+      213: -3910621857020644571
+    second: Vegies_54
+  - first:
+      213: 5350107811043243044
+    second: Vegies_55
+  - first:
+      213: 1849191857374609618
+    second: Vegies_56
+  - first:
+      213: -522928318055596730
+    second: Vegies_57
+  - first:
+      213: 1270873281898275413
+    second: Vegies_58
+  - first:
+      213: 413487851095357126
+    second: Vegies_59
+  - first:
+      213: -905699643141571487
+    second: Vegies_60
+  - first:
+      213: 5287136099535294284
+    second: Vegies_61
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Vegies_0
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 229
+        width: 22
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5e197735396634429d90196f2d79b60
+      internalID: -863272710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_1
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 229
+        width: 22
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 442ad4861af7b4246aa9a8048e2176c6
+      internalID: 123824611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_2
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 230
+        width: 16
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96ac491f003f58f4782e4dc5402a3804
+      internalID: -1263577894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_3
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 228
+        width: 26
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d52e52b6dc52ddc47a98dcfc9a2b228d
+      internalID: -1302511410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_4
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 226
+        width: 25
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a43558a77c25654f81a5ba47a115e6d
+      internalID: 1775699024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_5
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 226
+        width: 25
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3044d7f77257b5945b5fe9b66b2961ba
+      internalID: 408237703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_6
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 226
+        width: 25
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95f35725f2af31045a6de3655b9c9e36
+      internalID: -876897554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_7
+      rect:
+        serializedVersion: 2
+        x: 226
+        y: 225
+        width: 29
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a78024e621ca3fe4a94695810f5b5c11
+      internalID: -612399614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_8
+      rect:
+        serializedVersion: 2
+        x: 262
+        y: 227
+        width: 22
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5d417c9923a42d4389fbc20b5b6d997
+      internalID: 892407035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_9
+      rect:
+        serializedVersion: 2
+        x: 295
+        y: 230
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5c03f025b41850459e2a5cec8cd69b6
+      internalID: -1896048998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_10
+      rect:
+        serializedVersion: 2
+        x: 327
+        y: 229
+        width: 19
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a274408734550cc459b521bc153d7fb4
+      internalID: 1432470473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_11
+      rect:
+        serializedVersion: 2
+        x: 358
+        y: 227
+        width: 22
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8050578b3883c04c8742bf80a71ed3c
+      internalID: 1329883637
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_12
+      rect:
+        serializedVersion: 2
+        x: 393
+        y: 227
+        width: 19
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8156af48a062f444b925d6bece8b2274
+      internalID: -135383631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_13
+      rect:
+        serializedVersion: 2
+        x: 421
+        y: 230
+        width: 24
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24bf45d017aeda143b95796895893ce4
+      internalID: 796167989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_14
+      rect:
+        serializedVersion: 2
+        x: 457
+        y: 229
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 657f47e77711ebd43b13748c7ddd856d
+      internalID: -628568519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_15
+      rect:
+        serializedVersion: 2
+        x: 489
+        y: 228
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ee45eaa67baca24ca844e31681e0824
+      internalID: 1085959
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_16
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 196
+        width: 23
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4fc40b9d5e83024c8d5cb21b99c4fd3
+      internalID: 1590517429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_17
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 198
+        width: 23
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6a411cd4fb0fd1418facb8c03fb6837
+      internalID: -225146670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_18
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 196
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab06dbcda0eeeab41bba8e3579d7da4f
+      internalID: 158382210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_19
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 198
+        width: 24
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a75f5140fd73d434d8930ccdc50f1252
+      internalID: 600924008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_20
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 198
+        width: 16
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe6aff400b978d64a866fb72d061f49c
+      internalID: 1764993620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_21
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 196
+        width: 24
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d910fb3df9a806647bb0ae968309b700
+      internalID: 1057308669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_22
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 199
+        width: 25
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76cf47ba1727aed46af818918d8882b9
+      internalID: -1773595060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_23
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 198
+        width: 25
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f88eaa14c9e692498ff807518beccab
+      internalID: 2133594045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_24
+      rect:
+        serializedVersion: 2
+        x: 262
+        y: 197
+        width: 21
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04566efe6326afb44b2591a83392b150
+      internalID: -1322280463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_25
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 197
+        width: 21
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9f9ce965c3d1744c87fc4fac70a0c45
+      internalID: 1378946567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_26
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 192
+        width: 13
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1546295b57d2b5c449447c44791a69dd
+      internalID: 1634990139
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_27
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 166
+        width: 23
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 267bf10b51f23754188defc1c8f28dbd
+      internalID: 1590621238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_28
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 166
+        width: 22
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c55dabcf69dbf6d4b958c30a6ba58e05
+      internalID: 1170987619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_29
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 166
+        width: 17
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 581670e85fcc71a4681c87716348f79f
+      internalID: 68781580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_30
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 132
+        width: 24
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52506652981649a4993cf813897070de
+      internalID: 23214341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_31
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 102
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a14d5d09c7b6a03439c5d9a2eba22663
+      internalID: 893271359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_32
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 103
+        width: 21
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 314b7fe830f5dc64996f30e20c5f08eb
+      internalID: -539086567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_33
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 103
+        width: 16
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7d9a80c6ed145a45be3dd8be1e27510
+      internalID: -1535568593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_34
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 101
+        width: 25
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b43d9cda470f4b499b17237aec78882
+      internalID: -1506519931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_35
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 100
+        width: 25
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b49eef4a60013b149bc49c68da8f659c
+      internalID: 2049225649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_36
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 100
+        width: 25
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66a213066378361478688af52e910d59
+      internalID: -1280888879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_37
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 100
+        width: 25
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f823def6bd44d674181e4e733d25eee9
+      internalID: -1705405130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_38
+      rect:
+        serializedVersion: 2
+        x: 226
+        y: 100
+        width: 28
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17aaa6d18e0d3ed4685839bfb8e086e5
+      internalID: 1189607904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_39
+      rect:
+        serializedVersion: 2
+        x: 262
+        y: 101
+        width: 21
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5684a0144df748b4cba109a6a0955278
+      internalID: -1498428701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_40
+      rect:
+        serializedVersion: 2
+        x: 295
+        y: 104
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a64931172ad4c04daa2db65c06534b9
+      internalID: -645511305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_41
+      rect:
+        serializedVersion: 2
+        x: 327
+        y: 103
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f4d67f782892d542bed0e5b9d227a44
+      internalID: 2077319503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_42
+      rect:
+        serializedVersion: 2
+        x: 358
+        y: 101
+        width: 21
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d20c61e4f6d119240bf6bf72faf8f1a9
+      internalID: -1098302999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_43
+      rect:
+        serializedVersion: 2
+        x: 393
+        y: 99
+        width: 13
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0646b49d4cc469043a2f80d24333efc6
+      internalID: -473682241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_44
+      rect:
+        serializedVersion: 2
+        x: 421
+        y: 104
+        width: 23
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb279d89cf6ac6446913342399ebe7ae
+      internalID: -466728604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_45
+      rect:
+        serializedVersion: 2
+        x: 457
+        y: 103
+        width: 16
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92ec7833701edd141bf311d83299ee09
+      internalID: 201687484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_46
+      rect:
+        serializedVersion: 2
+        x: 489
+        y: 103
+        width: 18
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1e19554a3146dd4791a09fd794e3759
+      internalID: -980230366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_47
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 71
+        width: 22
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09f812170cbecfe4094e96dd529bd598
+      internalID: 1243930853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_48
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 72
+        width: 21
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc50bed4824952c45a8a6620922e4dcb
+      internalID: -1671053265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_49
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 71
+        width: 15
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab5cf9a8b88f27947b2c38b32501690f
+      internalID: 1697313592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_50
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 72
+        width: 24
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf95de3cb0c1c3247bad86eca2eb7b86
+      internalID: -1849720995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_51
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 73
+        width: 15
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2797a33e5096663419a8431b762b9f9a
+      internalID: 1271320333
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_52
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 70
+        width: 20
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21ad368d7ec2045468e754d4f9385991
+      internalID: -1902878212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_53
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 73
+        width: 25
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7321865a1d6d5014f8288b9022db6a42
+      internalID: -1662492645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_54
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 71
+        width: 25
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41e4a99fff99da44eb1755ed3ae4bd43
+      internalID: -1306061138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_55
+      rect:
+        serializedVersion: 2
+        x: 262
+        y: 72
+        width: 20
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7dadbeb3c46d9174f96481b95ddb5427
+      internalID: -1389702847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_56
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 72
+        width: 22
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 805b25bf4be90c34a995997bf7403270
+      internalID: 771333953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_57
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 64
+        width: 13
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: acd425ed189ca0f449079ed118a9bf62
+      internalID: -1555883178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_58
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 40
+        width: 23
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e07aa4dd814a0d54a9e788d4daec0548
+      internalID: -1225312655
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_59
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 37
+        width: 19
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 161f48df473de68468cbbf1d59760c38
+      internalID: 1421205106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_60
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 39
+        width: 15
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cbe25289e9e8fec45b9c36e809733285
+      internalID: -114687549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vegies_61
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 6
+        width: 23
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 726443da2445bb246b06681556c89ff1
+      internalID: -1386028718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 02dc55d75200fb148ba62747eb7d457d
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Vegies_0: -863272710
+      Vegies_1: 123824611
+      Vegies_10: 1432470473
+      Vegies_11: 1329883637
+      Vegies_12: -135383631
+      Vegies_13: 796167989
+      Vegies_14: -628568519
+      Vegies_15: 1085959
+      Vegies_16: 1590517429
+      Vegies_17: -225146670
+      Vegies_18: 158382210
+      Vegies_19: 600924008
+      Vegies_2: -1263577894
+      Vegies_20: 1764993620
+      Vegies_21: 1057308669
+      Vegies_22: -1773595060
+      Vegies_23: 2133594045
+      Vegies_24: -1322280463
+      Vegies_25: 1378946567
+      Vegies_26: 1634990139
+      Vegies_27: 1590621238
+      Vegies_28: 1170987619
+      Vegies_29: 68781580
+      Vegies_3: -1302511410
+      Vegies_30: 23214341
+      Vegies_31: 893271359
+      Vegies_32: -539086567
+      Vegies_33: -1535568593
+      Vegies_34: -1506519931
+      Vegies_35: 2049225649
+      Vegies_36: -1280888879
+      Vegies_37: -1705405130
+      Vegies_38: 1189607904
+      Vegies_39: -1498428701
+      Vegies_4: 1775699024
+      Vegies_40: -645511305
+      Vegies_41: 2077319503
+      Vegies_42: -1098302999
+      Vegies_43: -473682241
+      Vegies_44: -466728604
+      Vegies_45: 201687484
+      Vegies_46: -980230366
+      Vegies_47: 1243930853
+      Vegies_48: -1671053265
+      Vegies_49: 1697313592
+      Vegies_5: 408237703
+      Vegies_50: -1849720995
+      Vegies_51: 1271320333
+      Vegies_52: -1902878212
+      Vegies_53: -1662492645
+      Vegies_54: -1306061138
+      Vegies_55: -1389702847
+      Vegies_56: 771333953
+      Vegies_57: -1555883178
+      Vegies_58: -1225312655
+      Vegies_59: 1421205106
+      Vegies_6: -876897554
+      Vegies_60: -114687549
+      Vegies_61: -1386028718
+      Vegies_7: -612399614
+      Vegies_8: 892407035
+      Vegies_9: -1896048998
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
