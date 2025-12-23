@@ -4,46 +4,39 @@ using UnityEngine.SceneManagement;
 
 public class FridgeInteraction : MonoBehaviour
 {
-    [Header("Interaction Settings")]
-    [Tooltip("Tasto per interagire")]
-    public KeyCode interactionKey = KeyCode.E;
     
-    [Tooltip("Distanza massima per interagire")]
-    public float interactionDistance = 2f;
+    [Header("Input")]
+    public KeyCode interactKey = KeyCode.E;
+    public string playerTag = "Player";
     
-    [Header("Scene Settings")]
-    [Tooltip("Nome della scena del frigo")]
+    [Header("Scene")]
     public string fridgeSceneName = "Fridge";
     
-    private Transform player;
-    private bool playerInRange = false;
+    private bool playerInside = false;
     
-    void Start()
+    
+    void OnTriggerEnter2D(Collider2D other)
     {
-        // Trova il player
-        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
-        if (playerObj != null)
+        if (other.CompareTag(playerTag))
         {
-            player = playerObj.transform;
+            playerInside = true;
+            Debug.Log("[FridgeInteraction] Player entered fridge zone");
         }
-        else
+    }
+    
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag(playerTag))
         {
-            Debug.LogError("[FridgeInteraction] Player not found! Tag your player as 'Player'");
+            playerInside = false;
+            Debug.Log("[FridgeInteraction] Player left fridge zone");
         }
     }
     
     void Update()
     {
-        if (player == null) return;
-        
-        // Calcola distanza
-        float distance = Vector3.Distance(transform.position, player.position);
-        
-        // Player nel raggio?
-        playerInRange = (distance <= interactionDistance);
-        
-        // Se player è nel raggio e preme E
-        if (playerInRange && Input.GetKeyDown(interactionKey))
+        // se player è dentro il trigger E preme il tasto
+        if (playerInside && Input.GetKeyDown(interactKey))
         {
             OpenFridge();
         }
@@ -55,12 +48,5 @@ public class FridgeInteraction : MonoBehaviour
         
         // Carica la scena del frigo
         SceneManager.LoadScene(fridgeSceneName);
-    }
-    
-    // Visualizza raggio nell'Editor
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawWireSphere(transform.position, interactionDistance);
     }
 }

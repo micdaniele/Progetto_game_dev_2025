@@ -19,7 +19,7 @@ public class UI_MoodWindow : MonoBehaviour
     public Transform ingredientsContent;
     //public Text ingredientsTitleText;
     public TextMeshProUGUI ingredientsTitleText;
-    public Button startButton;
+    //public Button startButton;
     public GameObject fridgePrompt; 
     public GameObject pantryPrompt; 
    
@@ -48,8 +48,8 @@ public class UI_MoodWindow : MonoBehaviour
             Debug.Log(db.GetMoodDescription()); // Chiama il metodo sovrascritto!
         }
         
-        if (startButton != null)
-            startButton.onClick.AddListener(OnStartButtonClicked);
+        //if (startButton != null)
+        //    startButton.onClick.AddListener(OnStartButtonClicked);
     }
     
     // CHIAMATO DAI BOTTONI MOOD 
@@ -139,6 +139,9 @@ public class UI_MoodWindow : MonoBehaviour
     
         if (pantryPrompt != null)
             pantryPrompt.SetActive(true);
+
+        //sblocca il gioco 
+        ResumeGame();
     }
     
     void CreateIngredientText(string ingredientText)
@@ -151,7 +154,7 @@ public class UI_MoodWindow : MonoBehaviour
         Text text = ingredientObj.AddComponent<Text>();
         //text.font = Resources.GetBuiltinResource<Font>("Arial.ttf");
         text.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-        text.fontSize = 18;
+        text.fontSize = 14;
         text.color = Color.black;
         text.alignment = TextAnchor.MiddleLeft;
 
@@ -163,18 +166,18 @@ public class UI_MoodWindow : MonoBehaviour
             textComponent.text = ingredientText;
     }
     
-    void OnStartButtonClicked()
-    {
-        Debug.Log("[MoodWindow] Start button clicked!");
+    //void OnStartButtonClicked()
+    //{
+    //    Debug.Log("[MoodWindow] Start button clicked!");
         
-        CloseAllPanels();
-        ResumeGame();
+    //    CloseAllPanels();
+    //    ResumeGame();
         
-        if (GameManager.Instance != null)
-        {
-            GameManager.Instance.StartCookingGameplay();
-        }
-    }
+    //    if (GameManager.Instance != null)
+    //    {
+    //        GameManager.Instance.StartCookingGameplay();
+    //    }
+    //}
     
     void HideAllRecipePanels()
     {
