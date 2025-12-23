@@ -2872,6 +2872,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3852284451321499261, guid: 1512f17d9ace9444bab3907791fb2db3, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3852284451321499261, guid: 1512f17d9ace9444bab3907791fb2db3, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 3852284451321499261, guid: 1512f17d9ace9444bab3907791fb2db3, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 170
+      objectReference: {fileID: 0}
     - target: {fileID: 6065505469580859708, guid: 1512f17d9ace9444bab3907791fb2db3, type: 3}
       propertyPath: m_Name
       value: PantryHUDCanvas Variant Variant
