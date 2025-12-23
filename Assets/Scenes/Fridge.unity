@@ -2478,6 +2478,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FridgeHUDCanvas Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 4415004622684775867, guid: 4836706ab3c0544cabb440c60afcf7c7, type: 3}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4995852000440147740, guid: 4836706ab3c0544cabb440c60afcf7c7, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 27.7
@@ -2485,6 +2489,18 @@ PrefabInstance:
     - target: {fileID: 4995852000440147740, guid: 4836706ab3c0544cabb440c60afcf7c7, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 2.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5269126353961792925, guid: 4836706ab3c0544cabb440c60afcf7c7, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5269126353961792925, guid: 4836706ab3c0544cabb440c60afcf7c7, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 307
+      objectReference: {fileID: 0}
+    - target: {fileID: 5269126353961792925, guid: 4836706ab3c0544cabb440c60afcf7c7, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 456
       objectReference: {fileID: 0}
     - target: {fileID: 5590359338795904247, guid: 4836706ab3c0544cabb440c60afcf7c7, type: 3}
       propertyPath: m_Pivot.x
