@@ -147,7 +147,7 @@ public class GameManager : MonoBehaviour
         ingredientsToCollect.Clear();
         collectedIngredients.Clear();
         cookingStarted = false;
-        Debug.Log("🔄 Selezioni resettate");
+        Debug.Log("Selezioni resettate");
     }
 
     // ============ UTILITY ============
