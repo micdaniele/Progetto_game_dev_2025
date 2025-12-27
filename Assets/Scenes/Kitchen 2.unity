@@ -1074,7 +1074,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 493566086}
-  - component: {fileID: 493566085}
   - component: {fileID: 493566087}
   m_Layer: 0
   m_Name: GameManager
@@ -1083,18 +1082,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &493566085
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 493566084}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27edfed362fb942d4a4048c23b15fca8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &493566086
 Transform:
   m_ObjectHideFlags: 0
@@ -1119,15 +1106,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 493566084}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a659826e538b802469260743579b4cae, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c8984260138f8b438ba33987a3d3f59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moodText: {fileID: 1232802205}
-  recipeText: {fileID: 0}
-  feedbackText: {fileID: 0}
-  startButton: {fileID: 0}
-  recipeButtonsContainer: {fileID: 0}
-  gameSceneName: GameScene
 --- !u!1 &494951648
 GameObject:
   m_ObjectHideFlags: 0
@@ -7635,7 +7616,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 867371352}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.99999976
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
