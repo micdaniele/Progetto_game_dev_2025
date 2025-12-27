@@ -1106,7 +1106,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 493566084}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c8984260138f8b438ba33987a3d3f59, type: 3}
+  m_Script: {fileID: 11500000, guid: 27edfed362fb942d4a4048c23b15fca8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &494951648
@@ -7616,7 +7616,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 867371352}
   m_Direction: 0
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.99999976
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
