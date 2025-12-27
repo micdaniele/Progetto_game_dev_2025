@@ -16,11 +16,11 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        // Singleton pattern
+        // Singleton pattern con DontDestroyOnLoad per persistenza tra scene
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(gameObject); // Questo mantiene l'oggetto tra le scene
         }
         else
         {
@@ -32,21 +32,20 @@ public class GameManager : MonoBehaviour
     public void SetMood(int mood)
     {
         currentMood = mood;
-        Debug.Log($"[GameManager] Mood set to: {GetMoodName(mood)}");
+        Debug.Log($"[GameManager] Mood salvato: {GetMoodName(mood)} ({mood})");
     }
 
-    // Metodo aggiunto per preparare le ricette dopo la selezione del mood
+    // Metodo per preparare le ricette dopo la selezione del mood
     public void PrepareRecipes()
     {
         Debug.Log($"[GameManager] Preparing recipes for mood: {GetMoodName(currentMood)}");
-        // TODO aggiungere logica per filtrare/preparare le ricette in base al mood
     }
 
     // Chiamato dal MoodWindow quando viene selezionata una ricetta
     public void SetRecipe(string recipe)
     {
         currentRecipe = recipe;
-        Debug.Log($"[GameManager] Recipe selected: {recipe}");
+        Debug.Log($" [GameManager] Ricetta salvata: {recipe}");
 
         // Imposta gli ingredienti da raccogliere
         SetIngredientsForRecipe(recipe);
@@ -60,20 +59,20 @@ public class GameManager : MonoBehaviour
         // Database ingredienti (nomi base senza quantità)
         Dictionary<string, List<string>> recipeIngredients = new Dictionary<string, List<string>>()
         {
-            // HAPPY RECIPES
+            // HAPPY RECIPES (mood 0)
             { "Strawberry Milkshake", new List<string> { "Strawberries", "Milk" }},
             { "Pastry Cream", new List<string> { "Eggs", "Lemon", "Sugar", "Corn Starch" }},
             
-            // ANGRY RECIPES
+            // ANGRY RECIPES (mood 1)
             { "Garlic Oil and Chilli", new List<string> { "Pasta", "Oil", "Chili Pepper", "Garlic" }},
             { "Mac & Cheese", new List<string> { "Pasta", "Cheese", "Milk"}},
             
-            // SAD RECIPES
+            // SAD RECIPES (mood 2)
             { "Hot Chocolate", new List<string> { "Chocolate", "Milk", "Sugar" }},
             { "Mushroom Risotto", new List<string> { "Mushroom", "Rice", "Spices" }},
             
-            // SICK RECIPES
-            { "Chicken Broth", new List<string> { "Chicken", "Carot", "Spices" }},
+            // SICK RECIPES (mood 3)
+            { "Chicken Broth", new List<string> { "Chicken", "Carrot", "Water", "Spices" }},
             { "Pumpkin and Chickpea Soup", new List<string> { "Pumpkin", "Water", "Chickpea", "Spices" }}
         };
 
@@ -94,7 +93,6 @@ public class GameManager : MonoBehaviour
         Debug.Log($"Mood: {GetMoodName(currentMood)}");
         Debug.Log($"Ingredients needed: {ingredientsToCollect.Count}");
 
-        // TODO: Qui puoi spawnare gli ingredienti nella scena
         SpawnIngredients();
     }
 
@@ -103,7 +101,6 @@ public class GameManager : MonoBehaviour
         foreach (string ingredient in ingredientsToCollect)
         {
             Debug.Log($"[GameManager] Should spawn ingredient: {ingredient}");
-            // TODO: Instantiate(ingredientPrefab, position, rotation);
         }
     }
 
@@ -128,14 +125,34 @@ public class GameManager : MonoBehaviour
         // TODO: Passa alla fase di cucina
     }
 
-    // Getter methods
+    // ============ GETTER METHODS ============
+
     public string GetCurrentRecipe() { return currentRecipe; }
     public int GetCurrentMood() { return currentMood; }
     public bool IsCookingStarted() { return cookingStarted; }
     public List<string> GetIngredientsToCollect() { return new List<string>(ingredientsToCollect); }
     public List<string> GetCollectedIngredients() { return new List<string>(collectedIngredients); }
 
-    string GetMoodName(int mood)
+    // Verifica se ci sono dati validi salvati
+    public bool HasValidSelection()
+    {
+        return currentMood >= 0 && !string.IsNullOrEmpty(currentRecipe);
+    }
+
+    //Resetta le selezioni
+    public void ResetSelections()
+    {
+        currentMood = -1;
+        currentRecipe = "";
+        ingredientsToCollect.Clear();
+        collectedIngredients.Clear();
+        cookingStarted = false;
+        Debug.Log("🔄 Selezioni resettate");
+    }
+
+    // ============ UTILITY ============
+
+    public string GetMoodName(int mood)
     {
         switch (mood)
         {
@@ -144,6 +161,19 @@ public class GameManager : MonoBehaviour
             case 2: return "Sad";
             case 3: return "Sick";
             default: return "Unknown";
+        }
+    }
+
+    // Ottieni l'indice del mood dal nome 
+    public int GetMoodIndex(string moodName)
+    {
+        switch (moodName.ToLower())
+        {
+            case "happy": return 0;
+            case "angry": return 1;
+            case "sad": return 2;
+            case "sick": return 3;
+            default: return -1;
         }
     }
 }
