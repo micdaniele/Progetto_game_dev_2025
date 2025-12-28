@@ -17,13 +17,30 @@ public class RecipeManager : MonoBehaviour
 
     void Start()
     {
-        // Trova tutti gli ingredienti nella scena
+        // === 1. RISOLUZIONE PROBLEMA MOUSE (Così non devi premere ESC) ===
+        Cursor.lockState = CursorLockMode.None; // Sblocca il cursore dal centro
+        Cursor.visible = true;                  // Lo rende visibile
+        Time.timeScale = 1f;                    // Assicura che il gioco non sia in pausa
+
+        // === 2. INIZIALIZZAZIONE LOGICA ===
+        // Trova tutti gli ingredienti (bottoni) nella scena
         allIngredients = Object.FindObjectsByType<Ingredient>(FindObjectsSortMode.None);
 
         Debug.Log($"[RecipeManager] Trovati {allIngredients.Length} ingredienti nella scena");
 
-        //CARICA I DATI SALVATI DAL GAMEMANAGER
+        // Carica la ricetta che hai scelto in cucina
         LoadSavedSelection();
+
+        // === 3. SINCRONIZZAZIONE (Per non perdere gli oggetti già presi) ===
+        if (GameManager.Instance != null)
+        {
+            // Copia la lista dallo "zaino" globale del GameManager alla lista locale
+            selectedIngredients = new List<string>(GameManager.Instance.ingredientiPresi);
+        }
+
+        // === 4. AGGIORNAMENTO GRAFICO ===
+        // Colora di verde quelli da prendere e di giallo quelli già presi
+        UpdateIngredientsState();
     }
 
     // Carica mood e ricetta salvati dal GameManager
@@ -138,7 +155,6 @@ public class RecipeManager : MonoBehaviour
         });
     }
 
-    // Chiamato quando un ingrediente viene cliccato
     public bool TrySelectIngredient(string ingredientName)
     {
         if (IsIngredientRequired(ingredientName))
@@ -146,19 +162,18 @@ public class RecipeManager : MonoBehaviour
             if (!selectedIngredients.Contains(ingredientName))
             {
                 selectedIngredients.Add(ingredientName);
-                Debug.Log($"[OK] Ingrediente aggiunto: {ingredientName}");
 
-                // Controlla se la ricetta è completa
+                // SALVA SUBITO NEL GAMEMANAGER!
+                if (GameManager.Instance != null)
+                {
+                    GameManager.Instance.ingredientiPresi.Add(ingredientName);
+                }
+
+                Debug.Log($"[OK] Preso: {ingredientName}");
                 CheckRecipeCompletion();
                 return true;
             }
         }
-        else
-        {
-            Debug.Log($"[X] Ingrediente '{ingredientName}' non necessario per questa ricetta!");
-            return false;
-        }
-
         return false;
     }
 

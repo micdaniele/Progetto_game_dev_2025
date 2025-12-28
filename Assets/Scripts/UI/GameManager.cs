@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic; // Serve per le Liste!
 
 public class GameManager : MonoBehaviour
 {
@@ -6,6 +7,10 @@ public class GameManager : MonoBehaviour
 
     private int selectedMood = -1;
     private string selectedRecipe = "";
+
+    // === LO ZAINO (LA VARIABILE CHE MANCAVA) ===
+    public List<string> ingredientiPresi = new List<string>();
+    // ===========================================
 
     void Awake()
     {
@@ -22,18 +27,36 @@ public class GameManager : MonoBehaviour
         Debug.Log("[GameManager] Inizializzato e persistente tra le scene");
     }
 
-    // === SALVATAGGIO ===
+    // === METODO NUOVO (Consigliato) ===
+    public void SetSelection(int mood, string recipe)
+    {
+        selectedMood = mood;
+        selectedRecipe = recipe;
+
+        // Svuota lo zaino quando inizi una nuova ricetta
+        ingredientiPresi.Clear();
+
+        Debug.Log($"[GameManager] Nuova partita -> Mood: {mood}, Ricetta: {recipe}");
+        Debug.Log("[GameManager] Inventario svuotato.");
+    }
+
+    // === METODI VECCHI (Aggiunti per compatibilità con MoodWindow) ===
+    // Questi metodi servono per non far dare errore al tuo MoodWindow.cs
+
     public void SetMood(int mood)
     {
         selectedMood = mood;
-        Debug.Log($"[GameManager] Mood salvato: {mood} ({GetMoodName(mood)})");
+        ingredientiPresi.Clear(); // Reset anche qui per sicurezza
+        Debug.Log($"[GameManager] Mood impostato: {mood}");
     }
 
     public void SetRecipe(string recipe)
     {
         selectedRecipe = recipe;
-        Debug.Log($"[GameManager] Ricetta salvata: {recipe}");
+        // Nota: non puliamo la lista qui perché di solito chiami SetMood prima
+        Debug.Log($"[GameManager] Ricetta impostata: {recipe}");
     }
+    // ================================================================
 
     // === LETTURA ===
     public int GetCurrentMood() => selectedMood;
@@ -42,12 +65,9 @@ public class GameManager : MonoBehaviour
 
     public bool HasValidSelection()
     {
-        bool isValid = selectedMood >= 0 && !string.IsNullOrEmpty(selectedRecipe);
-        Debug.Log($"[GameManager] HasValidSelection: {isValid} (Mood: {selectedMood}, Recipe: {selectedRecipe})");
-        return isValid;
+        return selectedMood >= 0 && !string.IsNullOrEmpty(selectedRecipe);
     }
 
-    // Converte il numero del mood in nome
     public string GetMoodName(int mood)
     {
         switch (mood)
@@ -60,21 +80,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Metodo per resettare la selezione (opzionale)
-    public void ResetSelection()
-    {
-        selectedMood = -1;
-        selectedRecipe = "";
-        Debug.Log("[GameManager] Selezione resettata");
-    }
-
-    // Debug: stampa lo stato corrente
     public void PrintCurrentState()
     {
         Debug.Log("=== GAMEMANAGER STATE ===");
-        Debug.Log($"Mood: {selectedMood} ({GetMoodName(selectedMood)})");
+        Debug.Log($"Mood: {selectedMood}");
         Debug.Log($"Recipe: {selectedRecipe}");
-        Debug.Log($"Valid: {HasValidSelection()}");
+        Debug.Log($"Ingredienti Presi: {ingredientiPresi.Count}");
         Debug.Log("========================");
     }
 }

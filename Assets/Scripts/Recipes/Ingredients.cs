@@ -1,180 +1,73 @@
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.UI; // Fondamentale per i Button
 
-[RequireComponent(typeof(Collider2D))]
 public class Ingredient : MonoBehaviour
 {
-    [Header("Ingredient Info")]
-    public string ingredientName;
+    [Header("Configurazione")]
+    public string ingredientName; // DEVE ESSERE IDENTICO AL DATABASE
 
-    [Header("Visual Feedback")]
+    [Header("Colori")]
     public Color normalColor = Color.white;
-    public Color selectableColor = Color.green;
-    public Color selectedColor = Color.yellow;
-    public Color disabledColor = Color.gray;
+    public Color selectableColor = Color.green; // Verde = Serve
+    public Color selectedColor = Color.yellow;  // Giallo = Preso
+    public Color disabledColor = Color.gray;    // Grigio = Inutile
 
-    [Header("Components")]
-    private SpriteRenderer spriteRenderer;
+    private Image btnImage;
+    private Button btn;
     private RecipeManager recipeManager;
 
     private bool isSelectable = false;
     private bool isSelected = false;
 
-    void Start()
+    void Awake()
     {
-        // Ottieni il componente SpriteRenderer
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        if (spriteRenderer == null)
-        {
-            Debug.LogWarning($"SpriteRenderer non trovato su {gameObject.name}");
-        }
-
-        // Trova il RecipeManager nella scena
+        btnImage = GetComponent<Image>();
+        btn = GetComponent<Button>();
         recipeManager = Object.FindFirstObjectByType<RecipeManager>();
 
-        if (recipeManager == null)
+        // Auto-collegamento del click
+        if (btn != null)
         {
-            Debug.LogError("RecipeManager non trovato nella scena!");
-        }
-
-        // Inizializza come non selezionabile
-        SetSelectable(false);
-    }
-
-    void OnMouseDown()
-    {
-        // Controlla se l'ingrediente può essere selezionato
-        if (isSelectable && !isSelected)
-        {
-            TrySelect();
-        }
-        else if (!isSelectable)
-        {
-            // Feedback visivo o sonoro quando si clicca un ingrediente sbagliato
-            StartCoroutine(ShakeEffect());
-            Debug.Log($" {ingredientName} non è necessario per questa ricetta!");
+            btn.onClick.RemoveAllListeners();
+            btn.onClick.AddListener(OnClick);
         }
     }
 
-    private void TrySelect()
-    {
-        if (recipeManager != null)
-        {
-            bool success = recipeManager.TrySelectIngredient(ingredientName);
-
-            if (success)
-            {
-                isSelected = true;
-                UpdateVisualState();
-
-                // Opzionale: animazione o effetto
-                StartCoroutine(SelectAnimation());
-            }
-        }
-    }
-
-    // Imposta se l'ingrediente può essere selezionato
+    // Chiamato dal RecipeManager all'avvio
     public void SetSelectable(bool selectable)
     {
         isSelectable = selectable;
         isSelected = false;
-        UpdateVisualState();
+        UpdateVisual();
     }
 
-    // Aggiorna l'aspetto visivo dell'ingrediente
-    private void UpdateVisualState()
+    public void OnClick()
     {
-        if (spriteRenderer == null) return;
+        if (isSelected) return; // Già preso, non fare nulla
 
-        if (isSelected)
+        if (isSelectable)
         {
-            spriteRenderer.color = selectedColor;
-        }
-        else if (isSelectable)
-        {
-            spriteRenderer.color = selectableColor;
+            // È GIUSTO!
+            if (recipeManager.TrySelectIngredient(ingredientName))
+            {
+                isSelected = true;
+                UpdateVisual();
+            }
         }
         else
         {
-            spriteRenderer.color = disabledColor;
+            // È SBAGLIATO!
+            Debug.Log($"Errore: {ingredientName} non serve!");
+            // Qui puoi aggiungere animazione di errore
         }
     }
 
-    // Animazione quando viene selezionato
-    private System.Collections.IEnumerator SelectAnimation()
+    void UpdateVisual()
     {
-        Vector3 originalScale = transform.localScale;
-        float duration = 0.2f;
-        float elapsed = 0f;
+        if (btnImage == null) return;
 
-        // Ingrandisci
-        while (elapsed < duration)
-        {
-            elapsed += Time.deltaTime;
-            float scale = Mathf.Lerp(1f, 1.2f, elapsed / duration);
-            transform.localScale = originalScale * scale;
-            yield return null;
-        }
-
-        elapsed = 0f;
-
-        // Torna normale
-        while (elapsed < duration)
-        {
-            elapsed += Time.deltaTime;
-            float scale = Mathf.Lerp(1.2f, 1f, elapsed / duration);
-            transform.localScale = originalScale * scale;
-            yield return null;
-        }
-
-        transform.localScale = originalScale;
-    }
-
-    // Effetto shake per ingrediente sbagliato
-    private System.Collections.IEnumerator ShakeEffect()
-    {
-        Vector3 originalPos = transform.position;
-        float duration = 0.3f;
-        float magnitude = 0.1f;
-        float elapsed = 0f;
-
-        while (elapsed < duration)
-        {
-            float x = originalPos.x + Random.Range(-magnitude, magnitude);
-            float y = originalPos.y + Random.Range(-magnitude, magnitude);
-
-            transform.position = new Vector3(x, y, originalPos.z);
-
-            elapsed += Time.deltaTime;
-            yield return null;
-        }
-
-        transform.position = originalPos;
-    }
-
-    // Resetta l'ingrediente
-    public void Reset()
-    {
-        isSelected = false;
-        isSelectable = false;
-        UpdateVisualState();
-    }
-
-    // Per debug
-    void OnMouseEnter()
-    {
-        if (isSelectable && !isSelected)
-        {
-            // Opzionale: effetto hover
-            if (spriteRenderer != null)
-            {
-                spriteRenderer.color = Color.Lerp(selectableColor, Color.white, 0.5f);
-            }
-        }
-    }
-
-    void OnMouseExit()
-    {
-        UpdateVisualState();
+        if (isSelected) btnImage.color = selectedColor;
+        else if (isSelectable) btnImage.color = selectableColor;
+        else btnImage.color = disabledColor;
     }
 }

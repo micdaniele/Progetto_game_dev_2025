@@ -38,12 +38,18 @@ public class PantryInteraction : MonoBehaviour
             OpenPantry();
         }
     }
-    
+
     void OpenPantry()
     {
-        Debug.Log("[PantryInteraction] Opening pantry scene!");
-        
-        // Carica la scena della dispensa
-        SceneManager.LoadScene(pantrySceneName);
+        // Controllo di sicurezza
+        if (GameManager.Instance != null && GameManager.Instance.HasValidSelection())
+        {
+            Debug.Log("Vado in dispensa...");
+            UnityEngine.SceneManagement.SceneManager.LoadScene(pantrySceneName);
+        }
+        else
+        {
+            Debug.Log("NON PUOI ENTRARE: Devi prima scegliere una ricetta dal pannello!");
+        }
     }
 }

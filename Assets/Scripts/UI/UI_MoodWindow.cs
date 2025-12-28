@@ -79,22 +79,19 @@ public class UI_MoodWindow : MonoBehaviour
     public void OnRecipeSelected(string recipeName)
     {
         selectedRecipe = recipeName;
-        Debug.Log($"[MoodWindow] Recipe selected: {recipeName}");
+        Debug.Log($"[MoodWindow] Hai scelto: {recipeName}");
 
-        // SALVA NEL GAMEMANAGER
+        // 1. SALVA NEL GAMEMANAGER
         if (GameManager.Instance != null)
         {
-            GameManager.Instance.SetMood(selectedMood);
-            GameManager.Instance.SetRecipe(selectedRecipe);
-
-            // Debug: stampa lo stato
-            GameManager.Instance.PrintCurrentState();
+            GameManager.Instance.SetSelection(selectedMood, recipeName);
         }
         else
         {
-            Debug.LogError("[MoodWindow] GameManager.Instance è NULL!");
+            Debug.LogError("ERRORE: GameManager non trovato nella scena!");
         }
 
+        // 2. Aggiorna la UI (mostra ingredienti necessari nel pannello)
         HideAllRecipePanels();
         ShowIngredientsPanel(recipeName);
     }

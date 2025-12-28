@@ -43,14 +43,14 @@ public class HappyRecipes : RecipeDatabase
         return new Dictionary<string, List<string>>()
         {
             { "Strawberry Milkshake", new List<string> { 
-                "• Strawberries", 
-                "• Milk" 
+                "Strawberries", 
+                "Milk" 
             }},
             { "Pastry Cream", new List<string> { 
-                "• Eggs", 
-                "• Lemon", 
-                "• Sugar", 
-                "• Corn Starch" 
+                "Eggs", 
+                "Lemon", 
+                "Sugar", 
+                "Corn Starch" 
             }}
         };
     }
@@ -71,15 +71,15 @@ public class AngryRecipes : RecipeDatabase
         return new Dictionary<string, List<string>>()
         {
             { "Garlic Oil and Chilli", new List<string> { 
-                "• Pasta", 
-                "• Oil", 
-                "• Chili Pepper", 
-                "• Garlic" 
+                "Pasta", 
+                "Oil", 
+                "Chili Pepper", 
+                "Garlic" 
             }},
             { "Mac & Cheese", new List<string> { 
-                "• Pasta", 
-                "• Cheese", 
-                "• Milk" 
+                "Pasta", 
+                "Cheese", 
+                "Milk" 
             }}
         };
     }
@@ -99,14 +99,14 @@ public class SadRecipes : RecipeDatabase
         return new Dictionary<string, List<string>>()
         {
             { "Hot Chocolate", new List<string> { 
-                "• Chocolate", 
-                "• Milk", 
-                "• Sugar" 
+                "Chocolate", 
+                "Milk", 
+                "Sugar" 
             }},
             { "Mushroom Risotto", new List<string> { 
-                "• Mushroom", 
-                "• Rice", 
-                "• Spices" 
+                "Mushroom", 
+                "Rice", 
+                "Spices" 
             }}
         };
     }
@@ -126,16 +126,16 @@ public class SickRecipes : RecipeDatabase
         return new Dictionary<string, List<string>>()
         {
             { "Chicken Broth", new List<string> { 
-                "• Chicken", 
-                "• Carrot", 
-                "• Water", 
-                "• Spices" 
+                "Chicken", 
+                "Carrot", 
+                "Water", 
+                "Spices" 
             }},
             { "Pumpkin and Chickpea Soup", new List<string> { 
-                "• Pumpkin", 
-                "• Water", 
-                "• Chickpea", 
-                "• Spices" 
+                "Pumpkin", 
+                "Water", 
+                "Chickpea", 
+                "Spices" 
             }}
         };
     }
