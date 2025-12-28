@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.UI; // Fondamentale per i Button
+using UnityEngine.UI;
 
 public class Ingredient : MonoBehaviour
 {
@@ -33,32 +33,52 @@ public class Ingredient : MonoBehaviour
         }
     }
 
-    // Chiamato dal RecipeManager all'avvio
+    // Chiamato dal RecipeManager per gli ingredienti NON ancora presi
     public void SetSelectable(bool selectable)
     {
-        isSelectable = selectable;
-        isSelected = false;
+        // NON resettare isSelected se è già true!
+        if (!isSelected)
+        {
+            isSelectable = selectable;
+            isSelected = false;
+        }
+        UpdateVisual();
+    }
+
+    // Chiamato dal RecipeManager per gli ingredienti GIA' presi
+    public void SetSelected(bool selected)
+    {
+        isSelected = selected;
+        if (selected)
+        {
+            isSelectable = false; // Se già preso, non è più selezionabile
+        }
         UpdateVisual();
     }
 
     public void OnClick()
     {
-        if (isSelected) return; // Già preso, non fare nulla
+        if (isSelected)
+        {
+            Debug.Log($"[Ingredient] {ingredientName} e gia stato preso!");
+            return;
+        }
 
         if (isSelectable)
         {
-            // È GIUSTO!
-            if (recipeManager.TrySelectIngredient(ingredientName))
+            // SE E' GIUSTO
+            if (recipeManager != null && recipeManager.TrySelectIngredient(ingredientName))
             {
                 isSelected = true;
+                isSelectable = false;
                 UpdateVisual();
             }
         }
         else
         {
-            // È SBAGLIATO!
-            Debug.Log($"Errore: {ingredientName} non serve!");
-            // Qui puoi aggiungere animazione di errore
+            // SE E' SBAGLIATO
+            Debug.Log($"[Ingredient] Errore: {ingredientName} non serve!");
+            // TODO: Aggiungi animazione di errore
         }
     }
 
@@ -66,8 +86,27 @@ public class Ingredient : MonoBehaviour
     {
         if (btnImage == null) return;
 
-        if (isSelected) btnImage.color = selectedColor;
-        else if (isSelectable) btnImage.color = selectableColor;
-        else btnImage.color = disabledColor;
+        if (isSelected)
+        {
+            // GIA PRESO = GIALLO
+            btnImage.color = selectedColor;
+            if (btn != null) btn.interactable = false; // Disabilita il bottone
+        }
+        else if (isSelectable)
+        {
+            // DA PRENDERE = VERDE
+            btnImage.color = selectableColor;
+            if (btn != null) btn.interactable = true;
+        }
+        else
+        {
+            // NON SERVE = GRIGIO
+            btnImage.color = disabledColor;
+            if (btn != null) btn.interactable = false;
+        }
     }
+
+    // Per debug
+    public bool IsSelected() => isSelected;
+    public bool IsSelectable() => isSelectable;
 }

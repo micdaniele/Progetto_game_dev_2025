@@ -17,38 +17,40 @@ public class RecipeManager : MonoBehaviour
 
     void Start()
     {
-        // === 1. RISOLUZIONE PROBLEMA MOUSE (Così non devi premere ESC) ===
-        Cursor.lockState = CursorLockMode.None; // Sblocca il cursore dal centro
-        Cursor.visible = true;                  // Lo rende visibile
-        Time.timeScale = 1f;                    // Assicura che il gioco non sia in pausa
+        // Mouse libero
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        Time.timeScale = 1f;
 
-        // === 2. INIZIALIZZAZIONE LOGICA ===
-        // Trova tutti gli ingredienti (bottoni) nella scena
+        // Trova SOLO gli ingredienti fisicamente presenti in QUESTA scena
         allIngredients = Object.FindObjectsByType<Ingredient>(FindObjectsSortMode.None);
+        Debug.Log($"[RecipeManager] Trovati {allIngredients.Length} ingredienti FISICI nella scena");
 
-        Debug.Log($"[RecipeManager] Trovati {allIngredients.Length} ingredienti nella scena");
-
-        // Carica la ricetta che hai scelto in cucina
+        // Carica la ricetta scelta
         LoadSavedSelection();
 
-        // === 3. SINCRONIZZAZIONE (Per non perdere gli oggetti già presi) ===
+        // Sincronizza con gli ingredienti già presi
         if (GameManager.Instance != null)
         {
-            // Copia la lista dallo "zaino" globale del GameManager alla lista locale
             selectedIngredients = new List<string>(GameManager.Instance.ingredientiPresi);
+            Debug.Log($"[RecipeManager] === ZAINO ===");
+            Debug.Log($"[RecipeManager] Ingredienti già presi: {selectedIngredients.Count}");
+            foreach (string ing in selectedIngredients)
+            {
+                Debug.Log($"[RecipeManager]   - {ing}");
+            }
+            Debug.Log($"[RecipeManager] ===============");
         }
 
-        // === 4. AGGIORNAMENTO GRAFICO ===
-        // Colora di verde quelli da prendere e di giallo quelli già presi
+        // Aggiorna i colori
         UpdateIngredientsState();
     }
 
-    // Carica mood e ricetta salvati dal GameManager
     private void LoadSavedSelection()
     {
         if (GameManager.Instance == null)
         {
-            Debug.LogError("[RecipeManager] GameManager.Instance e NULL! Assicurati che ci sia un GameManager nella scena precedente.");
+            Debug.LogError("[RecipeManager] GameManager.Instance e NULL!");
             return;
         }
 
@@ -57,58 +59,33 @@ public class RecipeManager : MonoBehaviour
             int savedMood = GameManager.Instance.GetCurrentMood();
             string savedRecipe = GameManager.Instance.GetCurrentRecipe();
 
-            Debug.Log($"[RecipeManager] Carico selezione salvata: {GameManager.Instance.GetMoodName(savedMood)} ({savedMood}) - {savedRecipe}");
+            Debug.Log($"[RecipeManager] Ricetta caricata: {savedRecipe}");
 
             SetMood(savedMood);
             SelectRecipe(savedRecipe);
-
-            // DEBUG: Stampa lo stato degli ingredienti
-            PrintIngredientsState();
         }
         else
         {
-            Debug.LogWarning("[RecipeManager] Nessuna selezione salvata trovata!");
+            Debug.LogWarning("[RecipeManager] Nessuna selezione salvata!");
         }
     }
 
-    // DEBUG: Stampa lo stato di tutti gli ingredienti
-    private void PrintIngredientsState()
-    {
-        Debug.Log("=== STATO INGREDIENTI ===");
-        foreach (var ingredient in allIngredients)
-        {
-            bool isRequired = IsIngredientRequired(ingredient.ingredientName);
-            Debug.Log($"{ingredient.ingredientName}: {(isRequired ? "[OK] SELEZIONABILE" : "[X] DISABILITATO")}");
-        }
-        Debug.Log("========================");
-    }
-
-    // Imposta il mood usando l'int (0=Happy, 1=Angry, 2=Sad, 3=Sick)
     public void SetMood(int mood)
     {
         switch (mood)
         {
-            case 0: // Happy
-                currentDatabase = new HappyRecipes();
-                break;
-            case 1: // Angry
-                currentDatabase = new AngryRecipes();
-                break;
-            case 2: // Sad
-                currentDatabase = new SadRecipes();
-                break;
-            case 3: // Sick
-                currentDatabase = new SickRecipes();
-                break;
+            case 0: currentDatabase = new HappyRecipes(); break;
+            case 1: currentDatabase = new AngryRecipes(); break;
+            case 2: currentDatabase = new SadRecipes(); break;
+            case 3: currentDatabase = new SickRecipes(); break;
             default:
                 Debug.LogError("Mood non riconosciuto!");
                 return;
         }
 
-        Debug.Log(currentDatabase.GetMoodDescription());
+        Debug.Log($"[RecipeManager] Mood: {currentDatabase.GetMoodDescription()}");
     }
 
-    // Seleziona una ricetta specifica
     public void SelectRecipe(string recipeName)
     {
         if (currentDatabase == null)
@@ -123,13 +100,9 @@ public class RecipeManager : MonoBehaviour
         {
             currentRecipeName = recipeName;
             requiredIngredients = recipes[recipeName];
-            selectedIngredients.Clear();
 
-            // Aggiorna lo stato di tutti gli ingredienti
-            UpdateIngredientsState();
-
-            Debug.Log($"[RecipeManager] Ricetta selezionata: {recipeName}");
-            Debug.Log($"[RecipeManager] Ingredienti richiesti: {string.Join(", ", requiredIngredients)}");
+            Debug.Log($"[RecipeManager] Ricetta: {recipeName}");
+            Debug.Log($"[RecipeManager] Ingredienti totali richiesti: {string.Join(", ", requiredIngredients)}");
         }
         else
         {
@@ -137,22 +110,28 @@ public class RecipeManager : MonoBehaviour
         }
     }
 
-    // Verifica se un ingrediente è richiesto per la ricetta corrente
+    // Uso una key per controllare se l'ingrediente è richiesto e presente nella scena
     public bool IsIngredientRequired(string ingredientName)
     {
         if (string.IsNullOrEmpty(currentRecipeName))
             return false;
 
-        // Puliamo il nome dell'ingrediente cliccato
         string cleanInput = ingredientName.Trim().ToLower();
 
-        return requiredIngredients.Any(req => {
-            // Rimuoviamo il punto elenco, underscore e spazi extra dal database
+        // Controlla se è nella lista della ricetta
+        bool inRecipe = requiredIngredients.Any(req => {
             string cleanReq = req.Replace("-", "").Replace("_", "").Trim().ToLower();
-
-            Debug.Log($"[RecipeManager] Confronto: '{cleanReq}' vs '{cleanInput}'");
             return cleanReq == cleanInput;
         });
+
+        // Se è nella ricetta, verifica anche che NON sia già stato preso
+        if (inRecipe)
+        {
+            bool alreadyTaken = selectedIngredients.Contains(ingredientName);
+            return !alreadyTaken; // Selezionabile SOLO se non è già stato preso
+        }
+
+        return false;
     }
 
     public bool TrySelectIngredient(string ingredientName)
@@ -163,76 +142,121 @@ public class RecipeManager : MonoBehaviour
             {
                 selectedIngredients.Add(ingredientName);
 
-                // SALVA SUBITO NEL GAMEMANAGER!
+                // Salva subito nel GameManager
                 if (GameManager.Instance != null)
                 {
                     GameManager.Instance.ingredientiPresi.Add(ingredientName);
                 }
 
-                Debug.Log($"[OK] Preso: {ingredientName}");
+                // Trova l'ingrediente nella scena e marcalo come "selezionato"
+                Ingredient ing = System.Array.Find(allIngredients, i => i.ingredientName == ingredientName);
+                if (ing != null)
+                {
+                    ing.SetSelected(true);
+                }
+
+                Debug.Log($"[OK] Preso: {ingredientName} ({selectedIngredients.Count}/{GetRequiredIngredientsInScene().Count})");
                 CheckRecipeCompletion();
                 return true;
             }
         }
+        else
+        {
+            Debug.Log($"[X] {ingredientName} non serve o e gia stato preso!");
+        }
         return false;
     }
 
-    // Aggiorna lo stato di tutti gli ingredienti (abilitati/disabilitati)
-    private void UpdateIngredientsState()
+    // Conta solo gli ingredienti richiesti che sono FISICAMENTE nella scena
+    private List<string> GetRequiredIngredientsInScene()
     {
-        Debug.Log("[RecipeManager] Aggiornamento stato ingredienti...");
+        List<string> inSceneRequired = new List<string>();
 
         foreach (var ingredient in allIngredients)
         {
-            bool isRequired = IsIngredientRequired(ingredient.ingredientName);
-            ingredient.SetSelectable(isRequired);
+            string cleanName = ingredient.ingredientName.Trim().ToLower();
 
-            Debug.Log($"[RecipeManager] {ingredient.ingredientName} -> {(isRequired ? "VERDE" : "GRIGIO")}");
+            bool isRequired = requiredIngredients.Any(req => {
+                string cleanReq = req.Replace("-", "").Replace("_", "").Trim().ToLower();
+                return cleanReq == cleanName;
+            });
+
+            if (isRequired && !inSceneRequired.Contains(ingredient.ingredientName))
+            {
+                inSceneRequired.Add(ingredient.ingredientName);
+            }
         }
+
+        return inSceneRequired;
     }
 
-    // Controlla se tutti gli ingredienti sono stati raccolti
+    private void UpdateIngredientsState()
+    {
+        Debug.Log("[RecipeManager] Aggiornamento colori...");
+
+        foreach (var ingredient in allIngredients)
+        {
+            bool alreadySelected = selectedIngredients.Contains(ingredient.ingredientName);
+
+            if (alreadySelected)
+            {
+                // GIA PRESO = GIALLO (non cliccabile)
+                ingredient.SetSelected(true);
+                Debug.Log($"[RecipeManager] {ingredient.ingredientName} -> GIA PRESO (giallo)");
+            }
+            else
+            {
+                // NON ANCORA PRESO
+                bool isRequired = IsIngredientRequired(ingredient.ingredientName);
+                ingredient.SetSelectable(isRequired);
+                Debug.Log($"[RecipeManager] {ingredient.ingredientName} -> {(isRequired ? "VERDE (da prendere)" : "GRIGIO (non serve)")}");
+            }
+        }
+
+        // Stampa ingredienti presenti nella scena e richiesti
+        var inSceneRequired = GetRequiredIngredientsInScene();
+        Debug.Log($"[RecipeManager] Ingredienti richiesti IN QUESTA SCENA: {string.Join(", ", inSceneRequired)}");
+    }
+
     private void CheckRecipeCompletion()
     {
-        int requiredCount = requiredIngredients.Count;
+        // Conta solo gli ingredienti che sono nella scena
+        var requiredInScene = GetRequiredIngredientsInScene();
 
-        if (selectedIngredients.Count == requiredCount)
+        // Conta quanti di questi sono stati presi
+        int takenCount = selectedIngredients.Count(ing => requiredInScene.Contains(ing));
+
+        Debug.Log($"[Progresso] {takenCount}/{requiredInScene.Count} ingredienti (solo questa scena)");
+
+        // Controlla se TUTTI gli ingredienti della ricetta sono stati presi
+        // (non solo quelli di questa scena)
+        int totalRequired = requiredIngredients.Count;
+        int totalTaken = selectedIngredients.Count;
+
+        if (totalTaken >= totalRequired)
         {
             Debug.Log("*** RICETTA COMPLETATA! ***");
             OnRecipeCompleted();
         }
-        else
-        {
-            Debug.Log($"[Progresso] {selectedIngredients.Count}/{requiredCount} ingredienti");
-        }
     }
 
-    // Chiamato quando la ricetta è completata
     private void OnRecipeCompleted()
     {
-        // TODO aggiungere logica per
-        // - Mostrare una UI di completamento
-        // - Dare ingredienti al giocatore
-        // - Cambiare scena con il memory
-
-        Debug.Log("*** Complimenti! Hai completato la ricetta! ***");
+        Debug.Log("*** Hai tutti gli ingredienti! ***");
     }
 
-    // Resetta la selezione corrente
     public void ResetSelection()
     {
         selectedIngredients.Clear();
         currentRecipeName = "";
         requiredIngredients.Clear();
 
-        // Disabilita tutti gli ingredienti
         foreach (var ingredient in allIngredients)
         {
             ingredient.SetSelectable(false);
         }
     }
 
-    // Metodi helper per UI
     public List<string> GetAvailableRecipes()
     {
         if (currentDatabase == null) return new List<string>();

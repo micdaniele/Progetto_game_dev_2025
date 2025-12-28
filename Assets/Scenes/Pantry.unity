@@ -390,7 +390,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 355e9b9c9e2c9e141b00c7a4941db14b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ingredientName: 
+  ingredientName: OIL
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   selectableColor: {r: 0, g: 1, b: 0, a: 1}
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -850,7 +850,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 355e9b9c9e2c9e141b00c7a4941db14b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ingredientName: 
+  ingredientName: PASTA
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   selectableColor: {r: 0, g: 1, b: 0, a: 1}
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -1391,7 +1391,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfa225e7096029f449b81c98dacbdd59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentRecipeName: Mac & Cheese
+  currentRecipeName: 
 --- !u!4 &987077690
 Transform:
   m_ObjectHideFlags: 0
@@ -1904,7 +1904,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 355e9b9c9e2c9e141b00c7a4941db14b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ingredientName: 
+  ingredientName: RICE
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   selectableColor: {r: 0, g: 1, b: 0, a: 1}
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -2090,7 +2090,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 355e9b9c9e2c9e141b00c7a4941db14b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ingredientName: 
+  ingredientName: WINE
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   selectableColor: {r: 0, g: 1, b: 0, a: 1}
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -2412,7 +2412,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 355e9b9c9e2c9e141b00c7a4941db14b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ingredientName: 
+  ingredientName: SUGAR
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   selectableColor: {r: 0, g: 1, b: 0, a: 1}
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -2598,7 +2598,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 355e9b9c9e2c9e141b00c7a4941db14b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ingredientName: 
+  ingredientName: CHICK PEAS
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   selectableColor: {r: 0, g: 1, b: 0, a: 1}
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -2920,7 +2920,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 355e9b9c9e2c9e141b00c7a4941db14b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ingredientName: 
+  ingredientName: POISON
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   selectableColor: {r: 0, g: 1, b: 0, a: 1}
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -3106,7 +3106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 355e9b9c9e2c9e141b00c7a4941db14b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ingredientName: 
+  ingredientName: CORN STRACH
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   selectableColor: {r: 0, g: 1, b: 0, a: 1}
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -3371,7 +3371,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 355e9b9c9e2c9e141b00c7a4941db14b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ingredientName: 
+  ingredientName: SPIECES
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   selectableColor: {r: 0, g: 1, b: 0, a: 1}
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
