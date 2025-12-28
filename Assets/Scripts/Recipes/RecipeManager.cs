@@ -12,6 +12,10 @@ public class RecipeManager : MonoBehaviour
     [Header("Ingredient Tracking")]
     private List<string> selectedIngredients = new List<string>();
 
+    [Header("Minigame Settings")]
+    public string fridgeMinigameScene = "FridgeGame";
+    public string pantryMinigameScene = "MemoryGame";
+
     // Riferimento a tutti gli ingredienti nella scena
     private Ingredient[] allIngredients;
 
@@ -110,7 +114,6 @@ public class RecipeManager : MonoBehaviour
         }
     }
 
-    // Uso una key per controllare se l'ingrediente è richiesto e presente nella scena
     public bool IsIngredientRequired(string ingredientName)
     {
         if (string.IsNullOrEmpty(currentRecipeName))
@@ -156,7 +159,7 @@ public class RecipeManager : MonoBehaviour
                 }
 
                 Debug.Log($"[OK] Preso: {ingredientName} ({selectedIngredients.Count}/{GetRequiredIngredientsInScene().Count})");
-                CheckRecipeCompletion();
+                CheckSceneCompletion();
                 return true;
             }
         }
@@ -167,7 +170,6 @@ public class RecipeManager : MonoBehaviour
         return false;
     }
 
-    // Conta solo gli ingredienti richiesti che sono FISICAMENTE nella scena
     private List<string> GetRequiredIngredientsInScene()
     {
         List<string> inSceneRequired = new List<string>();
@@ -218,53 +220,80 @@ public class RecipeManager : MonoBehaviour
         Debug.Log($"[RecipeManager] Ingredienti richiesti IN QUESTA SCENA: {string.Join(", ", inSceneRequired)}");
     }
 
-    private void CheckRecipeCompletion()
+    private void CheckSceneCompletion()
     {
-        // 1. Scopriamo cosa c'è in QUESTA stanza (es. solo Pasta e Olio)
+        // Conta gli ingredienti richiesti in questa scena
         var requiredInScene = GetRequiredIngredientsInScene();
 
-        // 2. Contiamo quanti ne hai presi tra quelli presenti qui
-        int takenInSceneCount = 0;
+        // Conta quanti ne hai presi
+        int takenCount = 0;
         foreach (string required in requiredInScene)
         {
             if (selectedIngredients.Contains(required))
             {
-                takenInSceneCount++;
+                takenCount++;
             }
         }
 
-        Debug.Log($"[Progresso Stanza] Presi: {takenInSceneCount} su {requiredInScene.Count} necessari qui.");
+        Debug.Log($"[Progresso] {takenCount}/{requiredInScene.Count} ingredienti in questa scena");
 
-        // 3. IL CAMBIAMENTO FONDAMENTALE:
-        // Controlliamo se hai finito la STANZA, non l'intera ricetta.
-        // (Aggiungiamo > 0 per evitare che cambi scena se non c'è nulla da prendere)
-        if (requiredInScene.Count > 0 && takenInSceneCount >= requiredInScene.Count)
+        // Se hai preso tutto quello che c'era qui, determina quale minigioco aprire
+        if (requiredInScene.Count > 0 && takenCount >= requiredInScene.Count)
         {
-            Debug.Log("*** STANZA COMPLETATA! Vado al Memory... ***");
-            OnRecipeCompleted();
+            Debug.Log("*** TUTTI GLI INGREDIENTI DI QUESTA SCENA RACCOLTI! ***");
+            DetermineAndLoadMinigame();
         }
     }
 
-    private void OnRecipeCompleted()
+    // Determina quale minigioco caricare in base alla scena corrente
+    private void DetermineAndLoadMinigame()
     {
-        Debug.Log("*** TUTTI GLI INGREDIENTI RACCOLTI! Avvio il Memory Game... ***");
+        // Ottieni il nome della scena corrente
+        string currentSceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
 
-        // 1. Blocca i click sugli ingredienti rimasti (per evitare problemi durante il cambio scena)
-        foreach (var ing in allIngredients)
+        Debug.Log($"[RecipeManager] Scena corrente: {currentSceneName}");
+
+        // Determina quale minigioco caricare
+        string minigameToLoad = "";
+
+        // Controlla il nome della scena (puoi personalizzare questi nomi)
+        if (currentSceneName.ToLower().Contains("fridge"))
         {
-            var btn = ing.GetComponent<UnityEngine.UI.Button>();
-            if (btn != null) btn.interactable = false;
+            minigameToLoad = fridgeMinigameScene;
+            Debug.Log($"[RecipeManager] Rilevato FRIGO -> Carico {minigameToLoad}");
+        }
+        else if (currentSceneName.ToLower().Contains("pantry"))
+        {
+            minigameToLoad = pantryMinigameScene;
+            Debug.Log($"[RecipeManager] Rilevato DISPENSA -> Carico {minigameToLoad}");
+        }
+        else
+        {
+            Debug.LogWarning($"[RecipeManager] Scena '{currentSceneName}' non riconosciuta! Carico minigioco di default.");
+            minigameToLoad = fridgeMinigameScene; // Default
         }
 
-        // 2. Aspetta 1.5 secondi e poi carica la scena del Memory
-        Invoke("LoadMemoryScene", 1.5f);
+        // Carica il minigioco dopo un breve delay
+        Invoke("LoadMinigame", 1.5f);
+
+        // Salva quale minigioco caricare (per usarlo in LoadMinigame)
+        nextMinigameScene = minigameToLoad;
     }
 
-    // Funzione specifica per caricare la scena
-    private void LoadMemoryScene()
+    // Variabile temporanea per salvare quale scena caricare
+    private string nextMinigameScene = "";
+
+    private void LoadMinigame()
     {
-        // CAMBIO SCENA
-        UnityEngine.SceneManagement.SceneManager.LoadScene("MemoryGame");
+        if (!string.IsNullOrEmpty(nextMinigameScene))
+        {
+            Debug.Log($"[RecipeManager] Caricamento minigioco: {nextMinigameScene}");
+            UnityEngine.SceneManagement.SceneManager.LoadScene(nextMinigameScene);
+        }
+        else
+        {
+            Debug.LogError("[RecipeManager] Errore: nessun minigioco da caricare!");
+        }
     }
 
     public void ResetSelection()
