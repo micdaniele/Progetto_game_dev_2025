@@ -938,6 +938,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bgImage: {fileID: -1133925961, guid: 1a925a11c71105040a14f2e0c41fa51d, type: 3}
+  feedbackText: {fileID: 0}
   puzzles:
   - {fileID: 1775699024, guid: dd56ff6dd0cbda54d95491e622b49a25, type: 3}
   - {fileID: -1902878212, guid: dd56ff6dd0cbda54d95491e622b49a25, type: 3}

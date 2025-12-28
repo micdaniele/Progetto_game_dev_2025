@@ -120,7 +120,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2221786796528456457}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6011334178136824278}
+        m_TargetAssemblyTypeName: UI_MainMenu, Assembly-CSharp
+        m_MethodName: OnNewGameClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1621129975850086834
 GameObject:
   m_ObjectHideFlags: 0
@@ -1089,8 +1101,28 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4576168069633081308, guid: 17a58e447c8242f498dde3b0448e3da9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5708929045846132950}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4092409166573774733, guid: 17a58e447c8242f498dde3b0448e3da9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6011334178136824278}
   m_SourcePrefab: {fileID: 100100000, guid: 17a58e447c8242f498dde3b0448e3da9, type: 3}
+--- !u!1 &235726309537478158 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4092409166573774733, guid: 17a58e447c8242f498dde3b0448e3da9, type: 3}
+  m_PrefabInstance: {fileID: 4291472636688421251}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6011334178136824278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 235726309537478158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dbca295d53cd09478b2f9f84d792a6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &292609993627774559 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4576168069633081308, guid: 17a58e447c8242f498dde3b0448e3da9, type: 3}

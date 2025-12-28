@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.UI; // Necessario per usare il componente Text
 using System.Collections;
 using System.Collections.Generic;
 
@@ -7,6 +7,10 @@ public class GameController : MonoBehaviour
 {
     [SerializeField]
     private Sprite bgImage;
+
+    [Header("UI Settings")]
+    [SerializeField]
+    private Text feedbackText; // Trascina qui un oggetto Text dalla scena Unity
 
     public List<Sprite> puzzles = new List<Sprite>();
     public List<Sprite> gamePuzzles = new List<Sprite>();
@@ -19,12 +23,22 @@ public class GameController : MonoBehaviour
     private int firstGuessIndex, secondGuessIndex;
     private string firstGuessPuzzle, secondGuessPuzzle;
 
+    // Variabili per la gestione degli errori
+    private int currentErrors = 0;
+    private const int maxErrors = 4;
+    private bool gameEnded = false; // Per bloccare il gioco se finisce
+
     void Start()
     {
         GetButtons();
         AddGamePuzzles();
         Shuffle(gamePuzzles);
         gameGuesses = gamePuzzles.Count / 2;
+
+        // Resetta il testo all'inizio
+        if (feedbackText != null)
+            feedbackText.text = "";
+
         AddListeners();
     }
 
@@ -73,42 +87,12 @@ public class GameController : MonoBehaviour
         }
     }
 
-    IEnumerator FlipCard(int index, Sprite targetSprite)
-    {
-        Button btn = btns[index];
-        Vector3 originalScale = btn.transform.localScale;
-
-        // Riduci la scala X a 0 (nasconde)
-        float elapsed = 0f;
-        float duration = 0.2f;
-
-        while (elapsed < duration)
-        {
-            elapsed += Time.deltaTime;
-            float scaleX = Mathf.Lerp(1f, 0f, elapsed / duration);
-            btn.transform.localScale = new Vector3(scaleX, originalScale.y, originalScale.z);
-            yield return null;
-        }
-
-        // Cambia sprite
-        btn.image.sprite = targetSprite;
-
-        // Riporta la scala X a 1 (mostra)
-        elapsed = 0f;
-        while (elapsed < duration)
-        {
-            elapsed += Time.deltaTime;
-            float scaleX = Mathf.Lerp(0f, 1f, elapsed / duration);
-            btn.transform.localScale = new Vector3(scaleX, originalScale.y, originalScale.z);
-            yield return null;
-        }
-
-        btn.transform.localScale = originalScale;
-    }
-
     public void PickAPuzzle(int index)
     {
-        // Evita di cliccare sulla stessa carta due volte
+        // Se il gioco è finito, non fare nulla
+        if (gameEnded) return;
+
+        // Evita di cliccare sulla stessa carta due volte o mentre si stanno controllando le carte
         if (firstGuess && index == firstGuessIndex)
             return;
 
@@ -138,14 +122,12 @@ public class GameController : MonoBehaviour
 
         if (firstGuessPuzzle == secondGuessPuzzle)
         {
-            //COPPIA CORRETTA!
+            // --- COPPIA CORRETTA! ---
             yield return new WaitForSeconds(0.5f);
 
-            // Disabilita i bottoni delle carte trovate
             btns[firstGuessIndex].interactable = false;
             btns[secondGuessIndex].interactable = false;
 
-            // Opzionale: rendi le carte trasparenti
             btns[firstGuessIndex].image.color = new Color(1f, 1f, 1f, 0.5f);
             btns[secondGuessIndex].image.color = new Color(1f, 1f, 1f, 0.5f);
 
@@ -155,11 +137,19 @@ public class GameController : MonoBehaviour
         }
         else
         {
-            // COPPIA SBAGLIATA - rigira le carte
+            // --- COPPIA SBAGLIATA ---
+            currentErrors++; // Aumento gli errori
+
             yield return new WaitForSeconds(0.5f);
 
             StartCoroutine(FlipCard(firstGuessIndex, bgImage));
             StartCoroutine(FlipCard(secondGuessIndex, bgImage));
+
+            // Controllo se ho superato il limite di errori
+            if (currentErrors >= maxErrors)
+            {
+                GameOver();
+            }
         }
 
         // Reset per il prossimo turno
@@ -171,7 +161,59 @@ public class GameController : MonoBehaviour
         if (countCorrectGuesses == gameGuesses)
         {
             Debug.Log("GAME FINISHED!");
-            Debug.Log("It took you " + countGuesses + " guesses to finish the game!");
+            if (feedbackText != null)
+            {
+                feedbackText.text = "HAI VINTO, ORA CONTINUA A CUCINARE";
+                feedbackText.color = Color.green; // Opzionale: testo verde per vittoria
+            }
+            gameEnded = true;
         }
+    }
+
+    void GameOver()
+    {
+        Debug.Log("GAME OVER!");
+        if (feedbackText != null)
+        {
+            feedbackText.text = "GAME OVER HAI SBAGLIATO TROPPE VOLTE";
+            feedbackText.color = Color.red; // Opzionale: testo rosso per sconfitta
+        }
+
+        // Blocca il gioco e disabilita tutti i pulsanti rimasti
+        gameEnded = true;
+        foreach (Button btn in btns)
+        {
+            btn.interactable = false;
+        }
+    }
+
+    IEnumerator FlipCard(int index, Sprite targetSprite)
+    {
+        Button btn = btns[index];
+        Vector3 originalScale = btn.transform.localScale;
+
+        float elapsed = 0f;
+        float duration = 0.2f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float scaleX = Mathf.Lerp(1f, 0f, elapsed / duration);
+            btn.transform.localScale = new Vector3(scaleX, originalScale.y, originalScale.z);
+            yield return null;
+        }
+
+        btn.image.sprite = targetSprite;
+
+        elapsed = 0f;
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float scaleX = Mathf.Lerp(0f, 1f, elapsed / duration);
+            btn.transform.localScale = new Vector3(scaleX, originalScale.y, originalScale.z);
+            yield return null;
+        }
+
+        btn.transform.localScale = originalScale;
     }
 }

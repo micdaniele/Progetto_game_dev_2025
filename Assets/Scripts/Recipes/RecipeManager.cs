@@ -220,29 +220,51 @@ public class RecipeManager : MonoBehaviour
 
     private void CheckRecipeCompletion()
     {
-        // Conta solo gli ingredienti che sono nella scena
+        // 1. Scopriamo cosa c'è in QUESTA stanza (es. solo Pasta e Olio)
         var requiredInScene = GetRequiredIngredientsInScene();
 
-        // Conta quanti di questi sono stati presi
-        int takenCount = selectedIngredients.Count(ing => requiredInScene.Contains(ing));
-
-        Debug.Log($"[Progresso] {takenCount}/{requiredInScene.Count} ingredienti (solo questa scena)");
-
-        // Controlla se TUTTI gli ingredienti della ricetta sono stati presi
-        // (non solo quelli di questa scena)
-        int totalRequired = requiredIngredients.Count;
-        int totalTaken = selectedIngredients.Count;
-
-        if (totalTaken >= totalRequired)
+        // 2. Contiamo quanti ne hai presi tra quelli presenti qui
+        int takenInSceneCount = 0;
+        foreach (string required in requiredInScene)
         {
-            Debug.Log("*** RICETTA COMPLETATA! ***");
+            if (selectedIngredients.Contains(required))
+            {
+                takenInSceneCount++;
+            }
+        }
+
+        Debug.Log($"[Progresso Stanza] Presi: {takenInSceneCount} su {requiredInScene.Count} necessari qui.");
+
+        // 3. IL CAMBIAMENTO FONDAMENTALE:
+        // Controlliamo se hai finito la STANZA, non l'intera ricetta.
+        // (Aggiungiamo > 0 per evitare che cambi scena se non c'è nulla da prendere)
+        if (requiredInScene.Count > 0 && takenInSceneCount >= requiredInScene.Count)
+        {
+            Debug.Log("*** STANZA COMPLETATA! Vado al Memory... ***");
             OnRecipeCompleted();
         }
     }
 
     private void OnRecipeCompleted()
     {
-        Debug.Log("*** Hai tutti gli ingredienti! ***");
+        Debug.Log("*** TUTTI GLI INGREDIENTI RACCOLTI! Avvio il Memory Game... ***");
+
+        // 1. Blocca i click sugli ingredienti rimasti (per evitare problemi durante il cambio scena)
+        foreach (var ing in allIngredients)
+        {
+            var btn = ing.GetComponent<UnityEngine.UI.Button>();
+            if (btn != null) btn.interactable = false;
+        }
+
+        // 2. Aspetta 1.5 secondi e poi carica la scena del Memory
+        Invoke("LoadMemoryScene", 1.5f);
+    }
+
+    // Funzione specifica per caricare la scena
+    private void LoadMemoryScene()
+    {
+        // CAMBIO SCENA
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MemoryGame");
     }
 
     public void ResetSelection()
