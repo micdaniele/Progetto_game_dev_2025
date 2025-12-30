@@ -13,7 +13,7 @@ public class RecipeManager : MonoBehaviour
     private List<string> selectedIngredients = new List<string>();
 
     [Header("Minigame Settings")]
-    public string fridgeMinigameScene = "FridgeGame";
+    public string fridgeMinigameScene = "Fridge";
     public string pantryMinigameScene = "MemoryGame";
 
     // Riferimento a tutti gli ingredienti nella scena
@@ -33,12 +33,12 @@ public class RecipeManager : MonoBehaviour
         // Carica la ricetta scelta
         LoadSavedSelection();
 
-        // Sincronizza con gli ingredienti già presi
+        // Sincronizza con gli ingredienti giï¿½ presi
         if (GameManager.Instance != null)
         {
             selectedIngredients = new List<string>(GameManager.Instance.ingredientiPresi);
             Debug.Log($"[RecipeManager] === ZAINO ===");
-            Debug.Log($"[RecipeManager] Ingredienti già presi: {selectedIngredients.Count}");
+            Debug.Log($"[RecipeManager] Ingredienti giï¿½ presi: {selectedIngredients.Count}");
             foreach (string ing in selectedIngredients)
             {
                 Debug.Log($"[RecipeManager]   - {ing}");
@@ -121,17 +121,17 @@ public class RecipeManager : MonoBehaviour
 
         string cleanInput = ingredientName.Trim().ToLower();
 
-        // Controlla se è nella lista della ricetta
+        // Controlla se ï¿½ nella lista della ricetta
         bool inRecipe = requiredIngredients.Any(req => {
             string cleanReq = req.Replace("-", "").Replace("_", "").Trim().ToLower();
             return cleanReq == cleanInput;
         });
 
-        // Se è nella ricetta, verifica anche che NON sia già stato preso
+        // Se ï¿½ nella ricetta, verifica anche che NON sia giï¿½ stato preso
         if (inRecipe)
         {
             bool alreadyTaken = selectedIngredients.Contains(ingredientName);
-            return !alreadyTaken; // Selezionabile SOLO se non è già stato preso
+            return !alreadyTaken; // Selezionabile SOLO se non ï¿½ giï¿½ stato preso
         }
 
         return false;

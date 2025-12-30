@@ -1392,6 +1392,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentRecipeName: 
+  fridgeMinigameScene: FridgeGame
+  pantryMinigameScene: MemoryGame
 --- !u!4 &987077690
 Transform:
   m_ObjectHideFlags: 0
@@ -3661,6 +3663,14 @@ PrefabInstance:
     - target: {fileID: 6065505469580859708, guid: 1512f17d9ace9444bab3907791fb2db3, type: 3}
       propertyPath: m_Name
       value: PantryHUDCanvas Variant Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 7132985656978992446, guid: 1512f17d9ace9444bab3907791fb2db3, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -136.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7132985656978992446, guid: 1512f17d9ace9444bab3907791fb2db3, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -67.252
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
