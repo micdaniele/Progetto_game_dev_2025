@@ -39,7 +39,15 @@ public class FridgeDefrostGame : MonoBehaviour
         currentTime = gameTime;
         
         frozenIngredients = new List<FridgeIngredientButton>(allIngredients);
+
+        Ingredient[] selectableIngredients = FindObjectsByType<Ingredient>(FindObjectsSortMode.None);
+        foreach (var ing in selectableIngredients)
+        {
+            ing.enabled = false;
+        }
         
+
+
         foreach (var ingredient in allIngredients)
         {
             ingredient.InitializeForMinigame(clicksToDefrost);
@@ -135,7 +143,34 @@ public class FridgeDefrostGame : MonoBehaviour
         
         // Opzionale: se vuoi tornare a Kitchen2 dopo la selezione
         // Invoke("LoadKitchenScene", 3f);
-    }
+
+        // Disattiva i FridgeIngredientButton
+        foreach (var ingredient in allIngredients)
+        {
+            FridgeIngredientButton fridgeBtn = ingredient.GetComponent<FridgeIngredientButton>();
+            if (fridgeBtn != null)
+                fridgeBtn.enabled = false;
+        }
+    
+        // Attiva gli Ingredient per la selezione
+        Ingredient[] selectableIngredients = FindObjectsByType<Ingredient>(FindObjectsSortMode.None);
+        foreach (var ing in selectableIngredients)
+        {
+            ing.enabled = true;
+        }
+    
+        // Trova il RecipeManager
+        RecipeManager recipeManager = FindFirstObjectByType<RecipeManager>();
+        if (recipeManager != null)
+        {
+            Debug.Log("[FridgeDefrost] RecipeManager trovato!");
+        }
+        else
+       {
+        Debug.LogWarning("[FridgeDefrost] RecipeManager non trovato!");
+       }
+}
+
     
     
     void GameOver()

@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 51362726}
   - component: {fileID: 51362725}
   - component: {fileID: 51362728}
+  - component: {fileID: 51362729}
   m_Layer: 5
   m_Name: Avocado_Button
   m_TagString: Untagged
@@ -258,6 +259,23 @@ MonoBehaviour:
   highlightEffect: {fileID: 0}
   iceColor: {r: 0.7, g: 0.9, b: 1, a: 0.85}
   defrostParticles: {fileID: 0}
+--- !u!114 &51362729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 51362723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 355e9b9c9e2c9e141b00c7a4941db14b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredientName: Avocado
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  selectableColor: {r: 0, g: 1, b: 0, a: 1}
+  selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
 --- !u!1 &80928375
 GameObject:
   m_ObjectHideFlags: 0
@@ -358,6 +376,7 @@ GameObject:
   - component: {fileID: 123636611}
   - component: {fileID: 123636610}
   - component: {fileID: 123636613}
+  - component: {fileID: 123636614}
   m_Layer: 5
   m_Name: Cheese_Button
   m_TagString: Untagged
@@ -484,6 +503,70 @@ MonoBehaviour:
   highlightEffect: {fileID: 0}
   iceColor: {r: 0.7, g: 0.9, b: 1, a: 0.85}
   defrostParticles: {fileID: 0}
+--- !u!114 &123636614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 123636608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 355e9b9c9e2c9e141b00c7a4941db14b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredientName: Cheese
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  selectableColor: {r: 0, g: 1, b: 0, a: 1}
+  selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+--- !u!1 &124269030
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 124269032}
+  - component: {fileID: 124269031}
+  m_Layer: 0
+  m_Name: RecipeManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &124269031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 124269030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfa225e7096029f449b81c98dacbdd59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentRecipeName: 
+  fridgeMinigameScene: Fridge
+  pantryMinigameScene: MemoryGame
+--- !u!4 &124269032
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 124269030}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 371.35968, y: 214.43613, z: -0.47250816}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &175865181
 GameObject:
   m_ObjectHideFlags: 0
@@ -722,6 +805,7 @@ GameObject:
   - component: {fileID: 401244801}
   - component: {fileID: 401244800}
   - component: {fileID: 401244803}
+  - component: {fileID: 401244804}
   m_Layer: 5
   m_Name: Orange_Button
   m_TagString: Untagged
@@ -848,6 +932,23 @@ MonoBehaviour:
   highlightEffect: {fileID: 0}
   iceColor: {r: 0.7, g: 0.9, b: 1, a: 0.85}
   defrostParticles: {fileID: 0}
+--- !u!114 &401244804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 401244798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 355e9b9c9e2c9e141b00c7a4941db14b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredientName: Orange
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  selectableColor: {r: 0, g: 1, b: 0, a: 1}
+  selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
 --- !u!1 &430208570
 GameObject:
   m_ObjectHideFlags: 0
@@ -861,6 +962,7 @@ GameObject:
   - component: {fileID: 430208573}
   - component: {fileID: 430208572}
   - component: {fileID: 430208575}
+  - component: {fileID: 430208576}
   m_Layer: 5
   m_Name: Milk_Button
   m_TagString: Untagged
@@ -987,6 +1089,23 @@ MonoBehaviour:
   highlightEffect: {fileID: 0}
   iceColor: {r: 0.7, g: 0.9, b: 1, a: 0.85}
   defrostParticles: {fileID: 0}
+--- !u!114 &430208576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 430208570}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 355e9b9c9e2c9e141b00c7a4941db14b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredientName: Milk
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  selectableColor: {r: 0, g: 1, b: 0, a: 1}
+  selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
 --- !u!1 &434883499
 GameObject:
   m_ObjectHideFlags: 0
@@ -1375,6 +1494,7 @@ GameObject:
   - component: {fileID: 539400941}
   - component: {fileID: 539400940}
   - component: {fileID: 539400943}
+  - component: {fileID: 539400944}
   m_Layer: 5
   m_Name: Garlic_Button
   m_TagString: Untagged
@@ -1501,6 +1621,23 @@ MonoBehaviour:
   highlightEffect: {fileID: 0}
   iceColor: {r: 0.7, g: 0.9, b: 1, a: 0.85}
   defrostParticles: {fileID: 0}
+--- !u!114 &539400944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 539400938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 355e9b9c9e2c9e141b00c7a4941db14b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredientName: Garlic
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  selectableColor: {r: 0, g: 1, b: 0, a: 1}
+  selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
 --- !u!1 &561195523
 GameObject:
   m_ObjectHideFlags: 0
@@ -1514,8 +1651,9 @@ GameObject:
   - component: {fileID: 561195526}
   - component: {fileID: 561195525}
   - component: {fileID: 561195528}
+  - component: {fileID: 561195529}
   m_Layer: 5
-  m_Name: ChiiPepper_Button
+  m_Name: ChiliPepper_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1640,6 +1778,23 @@ MonoBehaviour:
   highlightEffect: {fileID: 0}
   iceColor: {r: 0.7, g: 0.9, b: 1, a: 0.85}
   defrostParticles: {fileID: 0}
+--- !u!114 &561195529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 561195523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 355e9b9c9e2c9e141b00c7a4941db14b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredientName: Chili Pepper
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  selectableColor: {r: 0, g: 1, b: 0, a: 1}
+  selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
 --- !u!1 &759243747
 GameObject:
   m_ObjectHideFlags: 0
@@ -2032,6 +2187,7 @@ GameObject:
   - component: {fileID: 1145768773}
   - component: {fileID: 1145768772}
   - component: {fileID: 1145768775}
+  - component: {fileID: 1145768776}
   m_Layer: 5
   m_Name: Water_Button
   m_TagString: Untagged
@@ -2158,6 +2314,23 @@ MonoBehaviour:
   highlightEffect: {fileID: 0}
   iceColor: {r: 0.7, g: 0.9, b: 1, a: 0.85}
   defrostParticles: {fileID: 0}
+--- !u!114 &1145768776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1145768770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 355e9b9c9e2c9e141b00c7a4941db14b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredientName: Water
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  selectableColor: {r: 0, g: 1, b: 0, a: 1}
+  selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
 --- !u!1 &1173770430
 GameObject:
   m_ObjectHideFlags: 0
@@ -2233,6 +2406,85 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1173770430}
   m_CullTransparentMesh: 1
+--- !u!1 &1211300203
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1211300204}
+  - component: {fileID: 1211300205}
+  - component: {fileID: 1211300206}
+  m_Layer: 5
+  m_Name: TimerText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1211300204
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1211300203}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7161030456336248337}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -22.415, y: 63.6}
+  m_SizeDelta: {x: 74.336, y: 16.786}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &1211300205
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1211300203}
+  m_CullTransparentMesh: 1
+--- !u!114 &1211300206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1211300203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.9056604, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 8a2b9e2a607dd2143b58c44bc32410b4, type: 3}
+    m_FontSize: 14
+    m_FontStyle: 1
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'TIMER:'
 --- !u!1 &1241979088
 GameObject:
   m_ObjectHideFlags: 0
@@ -2246,6 +2498,7 @@ GameObject:
   - component: {fileID: 1241979091}
   - component: {fileID: 1241979090}
   - component: {fileID: 1241979093}
+  - component: {fileID: 1241979094}
   m_Layer: 5
   m_Name: Lemon_Button
   m_TagString: Untagged
@@ -2372,6 +2625,92 @@ MonoBehaviour:
   highlightEffect: {fileID: 0}
   iceColor: {r: 0.7, g: 0.9, b: 1, a: 0.85}
   defrostParticles: {fileID: 0}
+--- !u!114 &1241979094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1241979088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 355e9b9c9e2c9e141b00c7a4941db14b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredientName: Lemon
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  selectableColor: {r: 0, g: 1, b: 0, a: 1}
+  selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+--- !u!1 &1312956931
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1312956933}
+  - component: {fileID: 1312956932}
+  m_Layer: 0
+  m_Name: FridgeGameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1312956932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1312956931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f5738966a91e4d7380535726a2572d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timerText: {fileID: 1211300206}
+  minigamePanel: {fileID: 0}
+  gameCompletePanel: {fileID: 0}
+  gameTime: 25
+  highlightDuration: 1.5
+  timeBetweenHighlights: 0.5
+  clicksToDefrost: 3
+  allIngredients:
+  - {fileID: 430208575}
+  - {fileID: 1145768775}
+  - {fileID: 1663968352}
+  - {fileID: 1745644573}
+  - {fileID: 51362728}
+  - {fileID: 401244803}
+  - {fileID: 1808534723}
+  - {fileID: 1398216682}
+  - {fileID: 539400943}
+  - {fileID: 1385548277}
+  - {fileID: 561195528}
+  - {fileID: 123636613}
+  - {fileID: 1241979093}
+  - {fileID: 1941965492}
+  - {fileID: 1809427031}
+  - {fileID: 1785003555}
+  - {fileID: 2007616234}
+--- !u!4 &1312956933
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1312956931}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 371.35968, y: 214.43613, z: -0.47250816}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1385548272
 GameObject:
   m_ObjectHideFlags: 0
@@ -2385,6 +2724,7 @@ GameObject:
   - component: {fileID: 1385548275}
   - component: {fileID: 1385548274}
   - component: {fileID: 1385548277}
+  - component: {fileID: 1385548278}
   m_Layer: 5
   m_Name: Egg_Button
   m_TagString: Untagged
@@ -2511,6 +2851,23 @@ MonoBehaviour:
   highlightEffect: {fileID: 0}
   iceColor: {r: 0.7, g: 0.9, b: 1, a: 0.85}
   defrostParticles: {fileID: 0}
+--- !u!114 &1385548278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1385548272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 355e9b9c9e2c9e141b00c7a4941db14b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredientName: Eggs
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  selectableColor: {r: 0, g: 1, b: 0, a: 1}
+  selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
 --- !u!1 &1398216677
 GameObject:
   m_ObjectHideFlags: 0
@@ -2524,6 +2881,7 @@ GameObject:
   - component: {fileID: 1398216680}
   - component: {fileID: 1398216679}
   - component: {fileID: 1398216682}
+  - component: {fileID: 1398216683}
   m_Layer: 5
   m_Name: Mushroom_Button
   m_TagString: Untagged
@@ -2650,6 +3008,23 @@ MonoBehaviour:
   highlightEffect: {fileID: 0}
   iceColor: {r: 0.7, g: 0.9, b: 1, a: 0.85}
   defrostParticles: {fileID: 0}
+--- !u!114 &1398216683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1398216677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 355e9b9c9e2c9e141b00c7a4941db14b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredientName: Mushroom
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  selectableColor: {r: 0, g: 1, b: 0, a: 1}
+  selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
 --- !u!1 &1521254864
 GameObject:
   m_ObjectHideFlags: 0
@@ -2813,6 +3188,7 @@ GameObject:
   - component: {fileID: 1663968350}
   - component: {fileID: 1663968349}
   - component: {fileID: 1663968352}
+  - component: {fileID: 1663968353}
   m_Layer: 5
   m_Name: Chocolate_Button
   m_TagString: Untagged
@@ -2939,6 +3315,23 @@ MonoBehaviour:
   highlightEffect: {fileID: 0}
   iceColor: {r: 0.7, g: 0.9, b: 1, a: 0.85}
   defrostParticles: {fileID: 0}
+--- !u!114 &1663968353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1663968347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 355e9b9c9e2c9e141b00c7a4941db14b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredientName: Chocolate
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  selectableColor: {r: 0, g: 1, b: 0, a: 1}
+  selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
 --- !u!1 &1745644568
 GameObject:
   m_ObjectHideFlags: 0
@@ -2952,6 +3345,7 @@ GameObject:
   - component: {fileID: 1745644571}
   - component: {fileID: 1745644570}
   - component: {fileID: 1745644573}
+  - component: {fileID: 1745644574}
   m_Layer: 5
   m_Name: Strawberry_Button
   m_TagString: Untagged
@@ -3078,6 +3472,23 @@ MonoBehaviour:
   highlightEffect: {fileID: 0}
   iceColor: {r: 0.7, g: 0.9, b: 1, a: 0.85}
   defrostParticles: {fileID: 0}
+--- !u!114 &1745644574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1745644568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 355e9b9c9e2c9e141b00c7a4941db14b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredientName: Strawberries
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  selectableColor: {r: 0, g: 1, b: 0, a: 1}
+  selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
 --- !u!1 &1785003550
 GameObject:
   m_ObjectHideFlags: 0
@@ -3091,6 +3502,7 @@ GameObject:
   - component: {fileID: 1785003553}
   - component: {fileID: 1785003552}
   - component: {fileID: 1785003555}
+  - component: {fileID: 1785003556}
   m_Layer: 5
   m_Name: Cola_Button
   m_TagString: Untagged
@@ -3217,6 +3629,23 @@ MonoBehaviour:
   highlightEffect: {fileID: 0}
   iceColor: {r: 0.7, g: 0.9, b: 1, a: 0.85}
   defrostParticles: {fileID: 0}
+--- !u!114 &1785003556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1785003550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 355e9b9c9e2c9e141b00c7a4941db14b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredientName: Cola
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  selectableColor: {r: 0, g: 1, b: 0, a: 1}
+  selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
 --- !u!1 &1808534718
 GameObject:
   m_ObjectHideFlags: 0
@@ -3230,6 +3659,7 @@ GameObject:
   - component: {fileID: 1808534721}
   - component: {fileID: 1808534720}
   - component: {fileID: 1808534723}
+  - component: {fileID: 1808534724}
   m_Layer: 5
   m_Name: Pumpkin_Button
   m_TagString: Untagged
@@ -3356,6 +3786,23 @@ MonoBehaviour:
   highlightEffect: {fileID: 0}
   iceColor: {r: 0.7, g: 0.9, b: 1, a: 0.85}
   defrostParticles: {fileID: 0}
+--- !u!114 &1808534724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1808534718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 355e9b9c9e2c9e141b00c7a4941db14b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredientName: Pumpkin
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  selectableColor: {r: 0, g: 1, b: 0, a: 1}
+  selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
 --- !u!1 &1809427026
 GameObject:
   m_ObjectHideFlags: 0
@@ -3369,6 +3816,7 @@ GameObject:
   - component: {fileID: 1809427029}
   - component: {fileID: 1809427028}
   - component: {fileID: 1809427031}
+  - component: {fileID: 1809427032}
   m_Layer: 5
   m_Name: Chicken_Button
   m_TagString: Untagged
@@ -3495,6 +3943,23 @@ MonoBehaviour:
   highlightEffect: {fileID: 0}
   iceColor: {r: 0.7, g: 0.9, b: 1, a: 0.85}
   defrostParticles: {fileID: 0}
+--- !u!114 &1809427032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1809427026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 355e9b9c9e2c9e141b00c7a4941db14b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredientName: Chicken
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  selectableColor: {r: 0, g: 1, b: 0, a: 1}
+  selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
 --- !u!1 &1941965487
 GameObject:
   m_ObjectHideFlags: 0
@@ -3508,6 +3973,7 @@ GameObject:
   - component: {fileID: 1941965490}
   - component: {fileID: 1941965489}
   - component: {fileID: 1941965492}
+  - component: {fileID: 1941965493}
   m_Layer: 5
   m_Name: Meat_Button
   m_TagString: Untagged
@@ -3634,6 +4100,23 @@ MonoBehaviour:
   highlightEffect: {fileID: 0}
   iceColor: {r: 0.7, g: 0.9, b: 1, a: 0.85}
   defrostParticles: {fileID: 0}
+--- !u!114 &1941965493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1941965487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 355e9b9c9e2c9e141b00c7a4941db14b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredientName: Meat
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  selectableColor: {r: 0, g: 1, b: 0, a: 1}
+  selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
 --- !u!1 &2000252114
 GameObject:
   m_ObjectHideFlags: 0
@@ -3784,6 +4267,7 @@ GameObject:
   - component: {fileID: 2007616232}
   - component: {fileID: 2007616231}
   - component: {fileID: 2007616234}
+  - component: {fileID: 2007616235}
   m_Layer: 5
   m_Name: Carrot_Button
   m_TagString: Untagged
@@ -3910,6 +4394,23 @@ MonoBehaviour:
   highlightEffect: {fileID: 0}
   iceColor: {r: 0.7, g: 0.9, b: 1, a: 0.85}
   defrostParticles: {fileID: 0}
+--- !u!114 &2007616235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2007616229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 355e9b9c9e2c9e141b00c7a4941db14b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredientName: Carrot
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  selectableColor: {r: 0, g: 1, b: 0, a: 1}
+  selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
 --- !u!1 &2061276777
 GameObject:
   m_ObjectHideFlags: 0
@@ -4236,6 +4737,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5590359338795904247, guid: 4836706ab3c0544cabb440c60afcf7c7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2007616230}
+    - targetCorrespondingSourceObject: {fileID: 5590359338795904247, guid: 4836706ab3c0544cabb440c60afcf7c7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1211300204}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4836706ab3c0544cabb440c60afcf7c7, type: 3}
 --- !u!224 &7161030456336248337 stripped
@@ -4251,3 +4755,5 @@ SceneRoots:
   - {fileID: 759243750}
   - {fileID: 80928377}
   - {fileID: 7161030456336248336}
+  - {fileID: 1312956933}
+  - {fileID: 124269032}
