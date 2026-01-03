@@ -24,14 +24,30 @@ public class FridgeIngredientButton : MonoBehaviour
     
     void Awake()
     {
+        Debug.Log($"[{gameObject.name}] Awake chiamato");
         button = GetComponent<Button>();
         
         if (button != null)
         {
             button.onClick.AddListener(OnButtonClick);
+            Debug.Log($"[{gameObject.name}] Button trovato e listener aggiunto");
+        }
+        else
+        {
+            Debug.LogError($"[{gameObject.name}] BUTTON NON TROVATO!");
         }
         
         gameManager = FindFirstObjectByType<FridgeDefrostGame>();
+
+        if (gameManager != null)
+        {
+            Debug.Log($"[{gameObject.name}] GameManager trovato");
+        }
+        else
+        {
+            Debug.LogError($"[{gameObject.name}] GAMEMANAGER NON TROVATO!");
+        }
+
         
         if (highlightEffect != null)
             highlightEffect.SetActive(false);
@@ -147,12 +163,18 @@ public class FridgeIngredientButton : MonoBehaviour
     
     void UpdateIceOpacity()
     {
-        if (iceOverlay == null) return;
-        
+        if (iceOverlay == null)
+        {
+            Debug.LogError($"[{gameObject.name}] IceOverlay è NULL!");
+            return;
+        }
+
         float progress = (float)clicksRemaining / maxClicks;
         Color newColor = iceOverlay.color;
         newColor.a = progress;
         iceOverlay.color = newColor;
+
+        Debug.Log($"[{gameObject.name}] Alpha aggiornato: {newColor.a} (click: {clicksRemaining}/{maxClicks})");
     }
     
     IEnumerator DefrostEffect()

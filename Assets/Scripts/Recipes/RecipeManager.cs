@@ -21,6 +21,15 @@ public class RecipeManager : MonoBehaviour
 
     void Start()
     {
+        // Se c'è un FridgeDefrostGame nella scena, non fare nulla
+        FridgeDefrostGame fridgeGame = FindFirstObjectByType<FridgeDefrostGame>();
+        if (fridgeGame != null)
+        {
+            Debug.Log("[RecipeManager] FridgeDefrostGame trovato, resto disattivato");
+            return; // Esce dal metodo Start senza fare nulla
+        }
+
+
         // Mouse libero
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;

@@ -40,18 +40,11 @@ public class FridgeDefrostGame : MonoBehaviour
         
         frozenIngredients = new List<FridgeIngredientButton>(allIngredients);
 
-        Ingredient[] selectableIngredients = FindObjectsByType<Ingredient>(FindObjectsSortMode.None);
-        foreach (var ing in selectableIngredients)
-        {
-            ing.enabled = false;
-        }
-        
-
-
         foreach (var ingredient in allIngredients)
         {
             ingredient.InitializeForMinigame(clicksToDefrost);
         }
+        
         
         if (minigamePanel != null)
             minigamePanel.SetActive(true);
@@ -71,7 +64,7 @@ public class FridgeDefrostGame : MonoBehaviour
         if (timerText != null)
         {
             int seconds = Mathf.CeilToInt(currentTime);
-            timerText.text = "Tempo: " + seconds + "s";
+            timerText.text = "Timer: " + seconds + "s";
         }
         
         if (currentTime <= 0)
@@ -106,7 +99,6 @@ public class FridgeDefrostGame : MonoBehaviour
             if (ingredient.IsDefrosted())
             {
                 frozenIngredients.Remove(ingredient);
-                
             }
         }
     }
@@ -137,11 +129,11 @@ public class FridgeDefrostGame : MonoBehaviour
             gameCompletePanel.SetActive(false);
         
         // Ora gli ingredienti sono sbloccati e possono essere selezionati normalmente
-        // Se hai script Ingredient.cs sui bottoni, il RecipeManager gestirà i colori
+        // Se ho script Ingredient.cs sui bottoni, il RecipeManager gestirà i colori
         
         Debug.Log("[FridgeDefrost] Modalità selezione attivata!");
         
-        // Opzionale: se vuoi tornare a Kitchen2 dopo la selezione
+        // se vuoi tornare a Kitchen2 dopo la selezione
         // Invoke("LoadKitchenScene", 3f);
 
         // Disattiva i FridgeIngredientButton
@@ -153,26 +145,29 @@ public class FridgeDefrostGame : MonoBehaviour
         }
     
         // Attiva gli Ingredient per la selezione
-        Ingredient[] selectableIngredients = FindObjectsByType<Ingredient>(FindObjectsSortMode.None);
-        foreach (var ing in selectableIngredients)
+        foreach (var ingredient in allIngredients)
         {
-            ing.enabled = true;
+            Ingredient ing = ingredient.GetComponent<Ingredient>();
+            if (ing != null)
+            {
+                ing.enabled = true;
+                Debug.Log($"Attivato Ingredient su {ingredient.gameObject.name}");
+            }
         }
-    
-        // Trova il RecipeManager
-        RecipeManager recipeManager = FindFirstObjectByType<RecipeManager>();
-        if (recipeManager != null)
+
+        // RIATTIVA RecipeManager
+        GameObject recipeManagerObj = GameObject.Find("RecipeManager");
+        if (recipeManagerObj != null)
         {
-            Debug.Log("[FridgeDefrost] RecipeManager trovato!");
+            recipeManagerObj.SetActive(true);
+            Debug.Log("[FridgeDefrost] RecipeManager GameObject riattivato!");
         }
         else
-       {
-        Debug.LogWarning("[FridgeDefrost] RecipeManager non trovato!");
-       }
+        {
+            Debug.LogWarning("[FridgeDefrost] RecipeManager GameObject non trovato!");
+        }
 }
 
-    
-    
     void GameOver()
     {
         minigameActive = false;
