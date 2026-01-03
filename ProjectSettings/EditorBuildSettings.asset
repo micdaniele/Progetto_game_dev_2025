@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MemoryGame.unity
     guid: 41bd0fd5cbb75b944aa176de93826717
+  - enabled: 1
+    path: Assets/Scenes/Fridge.unity
+    guid: 2ecc8b2df8c3c438c929f360634b58dd
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

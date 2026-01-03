@@ -3108,7 +3108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 355e9b9c9e2c9e141b00c7a4941db14b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ingredientName: CORN STRACH
+  ingredientName: Corn Starch
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   selectableColor: {r: 0, g: 1, b: 0, a: 1}
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}

@@ -550,8 +550,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentRecipeName: 
-  fridgeMinigameScene: Fridge
+  fridgeMinigameScene: Kitchen2
   pantryMinigameScene: MemoryGame
+  useDebugMode: 1
+  debugMood: 0
+  debugRecipeName: Strawberry Milkshake
 --- !u!4 &124269032
 Transform:
   m_ObjectHideFlags: 0
@@ -2696,6 +2699,9 @@ MonoBehaviour:
   - {fileID: 1809427031}
   - {fileID: 1785003555}
   - {fileID: 2007616234}
+  useDebugMode: 1
+  debugMood: 0
+  debugRecipeName: Strawberry Milkshake
 --- !u!4 &1312956933
 Transform:
   m_ObjectHideFlags: 0

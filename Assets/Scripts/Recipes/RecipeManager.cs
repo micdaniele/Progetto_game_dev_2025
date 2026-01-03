@@ -13,8 +13,13 @@ public class RecipeManager : MonoBehaviour
     private List<string> selectedIngredients = new List<string>();
 
     [Header("Minigame Settings")]
-    public string fridgeMinigameScene = "Fridge";
+    public string fridgeMinigameScene = "FridgeGame";
     public string pantryMinigameScene = "MemoryGame";
+
+    [Header("DEBUG - Test rapido senza GameManager")]
+    public bool useDebugMode = false;
+    public int debugMood = 0; // 0=Happy, 1=Angry, 2=Sad, 3=Sick
+    public string debugRecipeName = "Strawberry Milkshake";
 
     // Riferimento a tutti gli ingredienti nella scena
     private Ingredient[] allIngredients;
@@ -33,12 +38,12 @@ public class RecipeManager : MonoBehaviour
         // Carica la ricetta scelta
         LoadSavedSelection();
 
-        // Sincronizza con gli ingredienti gi� presi
+        // Sincronizza con gli ingredienti già presi
         if (GameManager.Instance != null)
         {
             selectedIngredients = new List<string>(GameManager.Instance.ingredientiPresi);
             Debug.Log($"[RecipeManager] === ZAINO ===");
-            Debug.Log($"[RecipeManager] Ingredienti gi� presi: {selectedIngredients.Count}");
+            Debug.Log($"[RecipeManager] Ingredienti già presi: {selectedIngredients.Count}");
             foreach (string ing in selectedIngredients)
             {
                 Debug.Log($"[RecipeManager]   - {ing}");
@@ -52,6 +57,19 @@ public class RecipeManager : MonoBehaviour
 
     private void LoadSavedSelection()
     {
+        // MODALITA DEBUG: Usa i valori impostati nell'Inspector
+        if (useDebugMode)
+        {
+            Debug.LogWarning("[RecipeManager] *** MODALITA DEBUG ATTIVA ***");
+            Debug.Log($"[RecipeManager] Debug Mood: {debugMood}");
+            Debug.Log($"[RecipeManager] Debug Recipe: {debugRecipeName}");
+
+            SetMood(debugMood);
+            SelectRecipe(debugRecipeName);
+            return; // Salta il caricamento dal GameManager
+        }
+
+        // MODALITA NORMALE: Carica dal GameManager
         if (GameManager.Instance == null)
         {
             Debug.LogError("[RecipeManager] GameManager.Instance e NULL!");
@@ -121,17 +139,17 @@ public class RecipeManager : MonoBehaviour
 
         string cleanInput = ingredientName.Trim().ToLower();
 
-        // Controlla se � nella lista della ricetta
+        // Controlla se è nella lista della ricetta
         bool inRecipe = requiredIngredients.Any(req => {
             string cleanReq = req.Replace("-", "").Replace("_", "").Trim().ToLower();
             return cleanReq == cleanInput;
         });
 
-        // Se � nella ricetta, verifica anche che NON sia gi� stato preso
+        // Se è nella ricetta, verifica anche che NON sia già stato preso
         if (inRecipe)
         {
             bool alreadyTaken = selectedIngredients.Contains(ingredientName);
-            return !alreadyTaken; // Selezionabile SOLO se non � gi� stato preso
+            return !alreadyTaken; // Selezionabile SOLO se non è già stato preso
         }
 
         return false;
@@ -257,12 +275,14 @@ public class RecipeManager : MonoBehaviour
         string minigameToLoad = "";
 
         // Controlla il nome della scena (puoi personalizzare questi nomi)
-        if (currentSceneName.ToLower().Contains("fridge"))
+        if (currentSceneName.ToLower().Contains("frigo") ||
+            currentSceneName.ToLower().Contains("fridge"))
         {
             minigameToLoad = fridgeMinigameScene;
             Debug.Log($"[RecipeManager] Rilevato FRIGO -> Carico {minigameToLoad}");
         }
-        else if (currentSceneName.ToLower().Contains("pantry"))
+        else if (currentSceneName.ToLower().Contains("dispensa") ||
+                 currentSceneName.ToLower().Contains("pantry"))
         {
             minigameToLoad = pantryMinigameScene;
             Debug.Log($"[RecipeManager] Rilevato DISPENSA -> Carico {minigameToLoad}");
