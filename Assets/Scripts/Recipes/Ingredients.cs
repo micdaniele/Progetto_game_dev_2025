@@ -19,7 +19,7 @@ public class Ingredient : MonoBehaviour
     private bool isSelectable = false;
     private bool isSelected = false;
 
-    void Awake()
+    void OnEnable()
     {
         btnImage = GetComponent<Image>();
         btn = GetComponent<Button>();
@@ -32,11 +32,18 @@ public class Ingredient : MonoBehaviour
             btn.onClick.AddListener(OnClick);
         }
     }
+    void OnDisable()
+{
+    if (btn != null)
+    {
+        btn.onClick.RemoveListener(OnClick);
+    }
+}
 
     // Chiamato dal RecipeManager per gli ingredienti NON ancora presi
     public void SetSelectable(bool selectable)
     {
-        // NON resettare isSelected se è già true!
+        // NON resettare isSelected se ï¿½ giï¿½ true!
         if (!isSelected)
         {
             isSelectable = selectable;
@@ -51,7 +58,7 @@ public class Ingredient : MonoBehaviour
         isSelected = selected;
         if (selected)
         {
-            isSelectable = false; // Se già preso, non è più selezionabile
+            isSelectable = false; // Se giï¿½ preso, non ï¿½ piï¿½ selezionabile
         }
         UpdateVisual();
     }

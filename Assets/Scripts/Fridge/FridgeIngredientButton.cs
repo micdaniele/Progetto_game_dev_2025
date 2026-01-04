@@ -9,6 +9,10 @@ public class FridgeIngredientButton : MonoBehaviour
     public Image ingredientImage; // L'immagine dell'ingrediente
     public GameObject highlightEffect; // Effetto outline/glow (opzionale)
     
+    [Header("Sprite Ghiaccio (opzionale)")]
+    public Sprite[] iceSprites; // Array di sprite per i vari stati
+    public bool useSpriteChange = true; // Usa cambio sprite invece di alpha
+
     [Header("Impostazioni Ghiaccio")]
     public Color iceColor = new Color(0.7f, 0.9f, 1f, 0.85f);
     
@@ -143,22 +147,25 @@ public class FridgeIngredientButton : MonoBehaviour
     
     public bool OnClick()
     {
-        // Ritorna true se il click è valido
-        if (!isHighlighted || isDefrosted) return false;
-        
+        if (isDefrosted)
+        return false;
+
+        if (!isHighlighted)
+        {
+            Debug.Log($"[{gameObject.name}] ❄️ Click ignorato: NON evidenziato");
+            return false;
+        }
+
         clicksRemaining--;
-        
-        // Aggiorna l'opacità del ghiaccio
+
         UpdateIceOpacity();
-        
-        // Check se è completamente scongelato
         if (clicksRemaining <= 0)
         {
             isDefrosted = true;
             StartCoroutine(DefrostEffect());
         }
-        
-        return true;
+
+            return true;
     }
     
     void UpdateIceOpacity()
@@ -169,12 +176,29 @@ public class FridgeIngredientButton : MonoBehaviour
             return;
         }
 
-        float progress = (float)clicksRemaining / maxClicks;
-        Color newColor = iceOverlay.color;
-        newColor.a = progress;
-        iceOverlay.color = newColor;
+         // Se usiamo cambio sprite
+        if (useSpriteChange && iceSprites != null && iceSprites.Length > 0)
+        {
+        // Calcola quale sprite usare in base ai click rimanenti
+            int spriteIndex = maxClicks - clicksRemaining;
+        
+        // Assicurati che l'indice sia valido
+            if (spriteIndex >= 0 && spriteIndex < iceSprites.Length)
+            {
+                iceOverlay.sprite = iceSprites[spriteIndex];
+                Debug.Log($"[{gameObject.name}] Cambio sprite: {iceSprites[spriteIndex].name} (click: {clicksRemaining}/{maxClicks})");
+            }
+        }
+        else
+        {
 
-        Debug.Log($"[{gameObject.name}] Alpha aggiornato: {newColor.a} (click: {clicksRemaining}/{maxClicks})");
+            float progress = (float)clicksRemaining / maxClicks;
+            Color newColor = iceOverlay.color;
+            newColor.a = progress;
+            iceOverlay.color = newColor;
+
+            Debug.Log($"[{gameObject.name}] Alpha aggiornato: {newColor.a} (click: {clicksRemaining}/{maxClicks})");
+        }
     }
     
     IEnumerator DefrostEffect()
@@ -182,7 +206,10 @@ public class FridgeIngredientButton : MonoBehaviour
         // Effetto di "rottura" del ghiaccio
         if (iceOverlay != null)
         {
-            float duration = 0.4f;
+            Debug.Log($"[{gameObject.name}] 💥 Ghiaccio completamente rotto!");
+
+
+            float duration = 0.3f;
             float elapsed = 0f;
             Vector3 originalScale = iceOverlay.transform.localScale;
             Color startColor = iceOverlay.color;

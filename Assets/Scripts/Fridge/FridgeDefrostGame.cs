@@ -6,14 +6,14 @@ using System.Collections.Generic;
 public class FridgeDefrostGame : MonoBehaviour
 {
     [Header("Riferimenti UI")]
-    public Text timerText;
+    public Text timerValueText;
     public GameObject minigamePanel; // Panel attivo durante il minigioco
     public GameObject gameCompletePanel; // Panel "Minigioco completato!"
     
     [Header("Impostazioni Minigioco")]
     public float gameTime = 25f;
     public float highlightDuration = 1.5f;
-    public float timeBetweenHighlights = 0.5f;
+    public float timeBetweenHighlights = 0.3f;
     public int clicksToDefrost = 3;
     
     [Header("Ingredienti")]
@@ -43,6 +43,11 @@ public class FridgeDefrostGame : MonoBehaviour
         foreach (var ingredient in allIngredients)
         {
             ingredient.InitializeForMinigame(clicksToDefrost);
+
+            // BLOCCA Ingredient durante il minigioco
+            Ingredient ing = ingredient.GetComponent<Ingredient>();
+            if (ing != null)
+                ing.enabled = false;
         }
         
         
@@ -61,10 +66,10 @@ public class FridgeDefrostGame : MonoBehaviour
         
         currentTime -= Time.deltaTime;
         
-        if (timerText != null)
+        if (timerValueText != null)
         {
             int seconds = Mathf.CeilToInt(currentTime);
-            timerText.text = "Timer: " + seconds + "s";
+            timerValueText.text = seconds.ToString();
         }
         
         if (currentTime <= 0)
@@ -72,10 +77,6 @@ public class FridgeDefrostGame : MonoBehaviour
             GameOver();
         }
         
-        if (frozenIngredients.Count == 0)
-        {
-            Victory();
-        }
     }
     
     IEnumerator HighlightRoutine()
@@ -111,15 +112,25 @@ public class FridgeDefrostGame : MonoBehaviour
         
         Debug.Log("[FridgeDefrost] Minigioco completato!");
         
-        // Mostra panel di vittoria
-        if (gameCompletePanel != null)
-            gameCompletePanel.SetActive(true);
-        
-        if (minigamePanel != null)
-            minigamePanel.SetActive(false);
-        
-        // Attiva la modalità selezione dopo 2 secondi
-        Invoke("EnableSelectionMode", 2f);
+        // Nascondi il ghiaccio su TUTTI
+        foreach (var ingredient in allIngredients)
+        {
+            if (ingredient != null)
+            {
+                ingredient.gameObject.GetComponent<FridgeIngredientButton>().enabled = false;
+
+                if (ingredient.iceOverlay != null)
+                    ingredient.iceOverlay.gameObject.SetActive(false);
+            }
+        }
+        // RIATTIVA Ingredient (selezione ricetta)
+        foreach (var ingredient in allIngredients)
+        {
+            Ingredient ing = ingredient.GetComponent<Ingredient>();
+            if (ing != null)
+                ing.enabled = true;
+        }
+
     }
     
     void EnableSelectionMode()

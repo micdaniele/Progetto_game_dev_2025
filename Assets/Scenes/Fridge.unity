@@ -257,6 +257,11 @@ MonoBehaviour:
   iceOverlay: {fileID: 1527249515}
   ingredientImage: {fileID: 51362726}
   highlightEffect: {fileID: 0}
+  iceSprites:
+  - {fileID: 21300000, guid: 0ef3680f6280a4399a5ec2b07744a2c9, type: 3}
+  - {fileID: 5576566745851332043, guid: 2526837df474c4d2f9746ffcb6b9c837, type: 3}
+  - {fileID: -5578570498189194414, guid: 8e822e1c0280641799b7a8386c6a09ee, type: 3}
+  useSpriteChange: 1
   iceColor: {r: 0.7, g: 0.9, b: 1, a: 0.85}
   defrostParticles: {fileID: 0}
 --- !u!114 &51362729
@@ -501,6 +506,11 @@ MonoBehaviour:
   iceOverlay: {fileID: 1521254866}
   ingredientImage: {fileID: 123636611}
   highlightEffect: {fileID: 0}
+  iceSprites:
+  - {fileID: 21300000, guid: 0ef3680f6280a4399a5ec2b07744a2c9, type: 3}
+  - {fileID: 5576566745851332043, guid: 2526837df474c4d2f9746ffcb6b9c837, type: 3}
+  - {fileID: -5578570498189194414, guid: 8e822e1c0280641799b7a8386c6a09ee, type: 3}
+  useSpriteChange: 1
   iceColor: {r: 0.7, g: 0.9, b: 1, a: 0.85}
   defrostParticles: {fileID: 0}
 --- !u!114 &123636614
@@ -930,6 +940,11 @@ MonoBehaviour:
   iceOverlay: {fileID: 518782267}
   ingredientImage: {fileID: 401244801}
   highlightEffect: {fileID: 0}
+  iceSprites:
+  - {fileID: 21300000, guid: 0ef3680f6280a4399a5ec2b07744a2c9, type: 3}
+  - {fileID: 5576566745851332043, guid: 2526837df474c4d2f9746ffcb6b9c837, type: 3}
+  - {fileID: -5578570498189194414, guid: 8e822e1c0280641799b7a8386c6a09ee, type: 3}
+  useSpriteChange: 1
   iceColor: {r: 0.7, g: 0.9, b: 1, a: 0.85}
   defrostParticles: {fileID: 0}
 --- !u!114 &401244804
@@ -1087,6 +1102,11 @@ MonoBehaviour:
   iceOverlay: {fileID: 442407265}
   ingredientImage: {fileID: 430208573}
   highlightEffect: {fileID: 0}
+  iceSprites:
+  - {fileID: 21300000, guid: 0ef3680f6280a4399a5ec2b07744a2c9, type: 3}
+  - {fileID: 5576566745851332043, guid: 2526837df474c4d2f9746ffcb6b9c837, type: 3}
+  - {fileID: -5578570498189194414, guid: 8e822e1c0280641799b7a8386c6a09ee, type: 3}
+  useSpriteChange: 1
   iceColor: {r: 0.7, g: 0.9, b: 1, a: 0.85}
   defrostParticles: {fileID: 0}
 --- !u!114 &430208576
@@ -1642,6 +1662,11 @@ MonoBehaviour:
   iceOverlay: {fileID: 1145060658}
   ingredientImage: {fileID: 539400941}
   highlightEffect: {fileID: 0}
+  iceSprites:
+  - {fileID: 21300000, guid: 0ef3680f6280a4399a5ec2b07744a2c9, type: 3}
+  - {fileID: 5576566745851332043, guid: 2526837df474c4d2f9746ffcb6b9c837, type: 3}
+  - {fileID: -5578570498189194414, guid: 8e822e1c0280641799b7a8386c6a09ee, type: 3}
+  useSpriteChange: 1
   iceColor: {r: 0.7, g: 0.9, b: 1, a: 0.85}
   defrostParticles: {fileID: 0}
 --- !u!114 &539400944
@@ -1799,6 +1824,11 @@ MonoBehaviour:
   iceOverlay: {fileID: 200052303}
   ingredientImage: {fileID: 561195526}
   highlightEffect: {fileID: 0}
+  iceSprites:
+  - {fileID: 21300000, guid: 0ef3680f6280a4399a5ec2b07744a2c9, type: 3}
+  - {fileID: 5576566745851332043, guid: 2526837df474c4d2f9746ffcb6b9c837, type: 3}
+  - {fileID: -5578570498189194414, guid: 8e822e1c0280641799b7a8386c6a09ee, type: 3}
+  useSpriteChange: 1
   iceColor: {r: 0.7, g: 0.9, b: 1, a: 0.85}
   defrostParticles: {fileID: 0}
 --- !u!114 &561195529
@@ -2335,6 +2365,11 @@ MonoBehaviour:
   iceOverlay: {fileID: 2121199691}
   ingredientImage: {fileID: 1145768773}
   highlightEffect: {fileID: 0}
+  iceSprites:
+  - {fileID: 21300000, guid: 0ef3680f6280a4399a5ec2b07744a2c9, type: 3}
+  - {fileID: 5576566745851332043, guid: 2526837df474c4d2f9746ffcb6b9c837, type: 3}
+  - {fileID: -5578570498189194414, guid: 8e822e1c0280641799b7a8386c6a09ee, type: 3}
+  useSpriteChange: 1
   iceColor: {r: 0.7, g: 0.9, b: 1, a: 0.85}
   defrostParticles: {fileID: 0}
 --- !u!114 &1145768776
@@ -2429,6 +2464,85 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1173770430}
   m_CullTransparentMesh: 1
+--- !u!1 &1178571358
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1178571359}
+  - component: {fileID: 1178571360}
+  - component: {fileID: 1178571361}
+  m_Layer: 5
+  m_Name: TimerValue
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1178571359
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1178571358}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7161030456336248337}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 29, y: 57.163}
+  m_SizeDelta: {x: 65.1639, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &1178571360
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1178571358}
+  m_CullTransparentMesh: 1
+--- !u!114 &1178571361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1178571358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 8a2b9e2a607dd2143b58c44bc32410b4, type: 3}
+    m_FontSize: 15
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 25
 --- !u!1 &1211300203
 GameObject:
   m_ObjectHideFlags: 0
@@ -2441,7 +2555,7 @@ GameObject:
   - component: {fileID: 1211300205}
   - component: {fileID: 1211300206}
   m_Layer: 5
-  m_Name: TimerText
+  m_Name: TimerLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2646,6 +2760,11 @@ MonoBehaviour:
   iceOverlay: {fileID: 492676933}
   ingredientImage: {fileID: 1241979091}
   highlightEffect: {fileID: 0}
+  iceSprites:
+  - {fileID: 21300000, guid: 0ef3680f6280a4399a5ec2b07744a2c9, type: 3}
+  - {fileID: 5576566745851332043, guid: 2526837df474c4d2f9746ffcb6b9c837, type: 3}
+  - {fileID: -5578570498189194414, guid: 8e822e1c0280641799b7a8386c6a09ee, type: 3}
+  useSpriteChange: 1
   iceColor: {r: 0.7, g: 0.9, b: 1, a: 0.85}
   defrostParticles: {fileID: 0}
 --- !u!114 &1241979094
@@ -2694,7 +2813,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f5738966a91e4d7380535726a2572d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerText: {fileID: 1211300206}
+  timerValueText: {fileID: 1178571361}
   minigamePanel: {fileID: 0}
   gameCompletePanel: {fileID: 0}
   gameTime: 25
@@ -2872,6 +2991,11 @@ MonoBehaviour:
   iceOverlay: {fileID: 886567768}
   ingredientImage: {fileID: 1385548275}
   highlightEffect: {fileID: 0}
+  iceSprites:
+  - {fileID: 21300000, guid: 0ef3680f6280a4399a5ec2b07744a2c9, type: 3}
+  - {fileID: 5576566745851332043, guid: 2526837df474c4d2f9746ffcb6b9c837, type: 3}
+  - {fileID: -5578570498189194414, guid: 8e822e1c0280641799b7a8386c6a09ee, type: 3}
+  useSpriteChange: 1
   iceColor: {r: 0.7, g: 0.9, b: 1, a: 0.85}
   defrostParticles: {fileID: 0}
 --- !u!114 &1385548278
@@ -3029,6 +3153,11 @@ MonoBehaviour:
   iceOverlay: {fileID: 2061276779}
   ingredientImage: {fileID: 1398216680}
   highlightEffect: {fileID: 0}
+  iceSprites:
+  - {fileID: 21300000, guid: 0ef3680f6280a4399a5ec2b07744a2c9, type: 3}
+  - {fileID: 5576566745851332043, guid: 2526837df474c4d2f9746ffcb6b9c837, type: 3}
+  - {fileID: -5578570498189194414, guid: 8e822e1c0280641799b7a8386c6a09ee, type: 3}
+  useSpriteChange: 1
   iceColor: {r: 0.7, g: 0.9, b: 1, a: 0.85}
   defrostParticles: {fileID: 0}
 --- !u!114 &1398216683
@@ -3336,6 +3465,11 @@ MonoBehaviour:
   iceOverlay: {fileID: 1068355762}
   ingredientImage: {fileID: 1663968350}
   highlightEffect: {fileID: 0}
+  iceSprites:
+  - {fileID: 21300000, guid: 0ef3680f6280a4399a5ec2b07744a2c9, type: 3}
+  - {fileID: 5576566745851332043, guid: 2526837df474c4d2f9746ffcb6b9c837, type: 3}
+  - {fileID: -5578570498189194414, guid: 8e822e1c0280641799b7a8386c6a09ee, type: 3}
+  useSpriteChange: 1
   iceColor: {r: 0.7, g: 0.9, b: 1, a: 0.85}
   defrostParticles: {fileID: 0}
 --- !u!114 &1663968353
@@ -3493,6 +3627,11 @@ MonoBehaviour:
   iceOverlay: {fileID: 1173770432}
   ingredientImage: {fileID: 1745644571}
   highlightEffect: {fileID: 0}
+  iceSprites:
+  - {fileID: 21300000, guid: 0ef3680f6280a4399a5ec2b07744a2c9, type: 3}
+  - {fileID: 5576566745851332043, guid: 2526837df474c4d2f9746ffcb6b9c837, type: 3}
+  - {fileID: -5578570498189194414, guid: 8e822e1c0280641799b7a8386c6a09ee, type: 3}
+  useSpriteChange: 1
   iceColor: {r: 0.7, g: 0.9, b: 1, a: 0.85}
   defrostParticles: {fileID: 0}
 --- !u!114 &1745644574
@@ -3650,6 +3789,11 @@ MonoBehaviour:
   iceOverlay: {fileID: 434883501}
   ingredientImage: {fileID: 1785003553}
   highlightEffect: {fileID: 0}
+  iceSprites:
+  - {fileID: 21300000, guid: 0ef3680f6280a4399a5ec2b07744a2c9, type: 3}
+  - {fileID: 5576566745851332043, guid: 2526837df474c4d2f9746ffcb6b9c837, type: 3}
+  - {fileID: -5578570498189194414, guid: 8e822e1c0280641799b7a8386c6a09ee, type: 3}
+  useSpriteChange: 1
   iceColor: {r: 0.7, g: 0.9, b: 1, a: 0.85}
   defrostParticles: {fileID: 0}
 --- !u!114 &1785003556
@@ -3807,6 +3951,11 @@ MonoBehaviour:
   iceOverlay: {fileID: 363717019}
   ingredientImage: {fileID: 1808534721}
   highlightEffect: {fileID: 0}
+  iceSprites:
+  - {fileID: 21300000, guid: 0ef3680f6280a4399a5ec2b07744a2c9, type: 3}
+  - {fileID: 5576566745851332043, guid: 2526837df474c4d2f9746ffcb6b9c837, type: 3}
+  - {fileID: -5578570498189194414, guid: 8e822e1c0280641799b7a8386c6a09ee, type: 3}
+  useSpriteChange: 1
   iceColor: {r: 0.7, g: 0.9, b: 1, a: 0.85}
   defrostParticles: {fileID: 0}
 --- !u!114 &1808534724
@@ -3964,6 +4113,11 @@ MonoBehaviour:
   iceOverlay: {fileID: 175865183}
   ingredientImage: {fileID: 1809427029}
   highlightEffect: {fileID: 0}
+  iceSprites:
+  - {fileID: 21300000, guid: 0ef3680f6280a4399a5ec2b07744a2c9, type: 3}
+  - {fileID: 5576566745851332043, guid: 2526837df474c4d2f9746ffcb6b9c837, type: 3}
+  - {fileID: -5578570498189194414, guid: 8e822e1c0280641799b7a8386c6a09ee, type: 3}
+  useSpriteChange: 1
   iceColor: {r: 0.7, g: 0.9, b: 1, a: 0.85}
   defrostParticles: {fileID: 0}
 --- !u!114 &1809427032
@@ -4121,6 +4275,11 @@ MonoBehaviour:
   iceOverlay: {fileID: 532944912}
   ingredientImage: {fileID: 1941965490}
   highlightEffect: {fileID: 0}
+  iceSprites:
+  - {fileID: 21300000, guid: 0ef3680f6280a4399a5ec2b07744a2c9, type: 3}
+  - {fileID: 5576566745851332043, guid: 2526837df474c4d2f9746ffcb6b9c837, type: 3}
+  - {fileID: -5578570498189194414, guid: 8e822e1c0280641799b7a8386c6a09ee, type: 3}
+  useSpriteChange: 1
   iceColor: {r: 0.7, g: 0.9, b: 1, a: 0.85}
   defrostParticles: {fileID: 0}
 --- !u!114 &1941965493
@@ -4415,6 +4574,11 @@ MonoBehaviour:
   iceOverlay: {fileID: 1059567508}
   ingredientImage: {fileID: 2007616232}
   highlightEffect: {fileID: 0}
+  iceSprites:
+  - {fileID: 21300000, guid: 0ef3680f6280a4399a5ec2b07744a2c9, type: 3}
+  - {fileID: 5576566745851332043, guid: 2526837df474c4d2f9746ffcb6b9c837, type: 3}
+  - {fileID: -5578570498189194414, guid: 8e822e1c0280641799b7a8386c6a09ee, type: 3}
+  useSpriteChange: 1
   iceColor: {r: 0.7, g: 0.9, b: 1, a: 0.85}
   defrostParticles: {fileID: 0}
 --- !u!114 &2007616235
@@ -4602,6 +4766,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4415004622684775867, guid: 4836706ab3c0544cabb440c60afcf7c7, type: 3}
       propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4415004622684775867, guid: 4836706ab3c0544cabb440c60afcf7c7, type: 3}
+      propertyPath: m_PixelPerfect
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4995852000440147740, guid: 4836706ab3c0544cabb440c60afcf7c7, type: 3}
@@ -4763,6 +4931,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5590359338795904247, guid: 4836706ab3c0544cabb440c60afcf7c7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1211300204}
+    - targetCorrespondingSourceObject: {fileID: 5590359338795904247, guid: 4836706ab3c0544cabb440c60afcf7c7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1178571359}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4836706ab3c0544cabb440c60afcf7c7, type: 3}
 --- !u!224 &7161030456336248337 stripped
