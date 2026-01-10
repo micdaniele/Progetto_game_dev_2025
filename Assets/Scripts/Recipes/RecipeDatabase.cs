@@ -43,7 +43,8 @@ public class HappyRecipes : RecipeDatabase
         return new Dictionary<string, List<string>>()
         {
             { "Strawberry Milkshake", new List<string> { 
-                "Strawberries", 
+                "Strawberries",
+                "Sugar",
                 "Milk" 
             }},
             { "Pastry Cream", new List<string> { 
