@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement; // FONDAMENTALE per cambiare scena
+using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -10,12 +10,11 @@ public class GameController : MonoBehaviour
     private Sprite bgImage;
 
     [Header("COLLEGAMENTI UI")]
-    public GameObject pannelloGameOver; // Il tuo pop-up sconfitta
-    public GameObject pannelloVittoria; // Il tuo NUOVO pop-up vittoria
+    public GameObject pannelloGameOver;
+    public GameObject pannelloVittoria;
 
     [Header("IMPOSTAZIONI SCENA")]
-    // Scrivi qui esattamente il nome della scena della cucina (es. "Cucina")
-    public string nomeScenaCucina = "NomeDellaTuaScenaCucina";
+    public string cucina = "Kitchen2";
 
     public List<Sprite> puzzles = new List<Sprite>();
     public List<Sprite> gamePuzzles = new List<Sprite>();
@@ -28,14 +27,12 @@ public class GameController : MonoBehaviour
     private int firstGuessIndex, secondGuessIndex;
     private string firstGuessPuzzle, secondGuessPuzzle;
 
-    // --- IMPOSTAZIONI ERRORI ---
     private int erroriAttuali = 0;
     private int erroriMassimi = 6;
     private bool giocoFinito = false;
 
     void Start()
     {
-        // 1. Nascondiamo entrambi i pannelli all'inizio
         if (pannelloGameOver != null) pannelloGameOver.SetActive(false);
         if (pannelloVittoria != null) pannelloVittoria.SetActive(false);
 
@@ -44,22 +41,21 @@ public class GameController : MonoBehaviour
         Shuffle(gamePuzzles);
         gameGuesses = gamePuzzles.Count / 2;
         AddListeners();
+
+        Debug.Log("[Memory] Gioco iniziato");
     }
 
     void Update()
     {
-        // Riavvia con R solo se hai PERSO (Se vinci, cambia scena da solo)
         if (giocoFinito && Input.GetKeyDown(KeyCode.R))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 
-    // --- LOGICA DEL GIOCO ---
     public void PickAPuzzle(int index)
     {
         if (giocoFinito) return;
-
         if (firstGuess && index == firstGuessIndex) return;
 
         if (!firstGuess)
@@ -86,7 +82,6 @@ public class GameController : MonoBehaviour
 
         if (firstGuessPuzzle == secondGuessPuzzle)
         {
-            // --- INDOVINATO ---
             yield return new WaitForSeconds(0.5f);
             btns[firstGuessIndex].interactable = false;
             btns[secondGuessIndex].interactable = false;
@@ -98,7 +93,6 @@ public class GameController : MonoBehaviour
 
             countCorrectGuesses++;
 
-            // CONTROLLO VITTORIA
             if (countCorrectGuesses == gameGuesses)
             {
                 StartCoroutine(SequenzaVittoria());
@@ -106,14 +100,12 @@ public class GameController : MonoBehaviour
         }
         else
         {
-            // --- SBAGLIATO ---
             erroriAttuali++;
 
             yield return new WaitForSeconds(0.5f);
             StartCoroutine(FlipCard(firstGuessIndex, bgImage));
             StartCoroutine(FlipCard(secondGuessIndex, bgImage));
 
-            // CONTROLLO SCONFITTA
             if (erroriAttuali >= erroriMassimi)
             {
                 GameOver();
@@ -122,35 +114,52 @@ public class GameController : MonoBehaviour
         firstGuess = secondGuess = false;
     }
 
-    // --- NUOVA FUNZIONE VITTORIA ---
+   
     IEnumerator SequenzaVittoria()
     {
-        giocoFinito = true; // Blocca i click
+        giocoFinito = true;
 
-        // 1. Mostra il pannello vittoria
+        Debug.Log("[Memory] VITTORIA! ");
+
+        // Segna il memory come completato
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.CompleteTask("Memory");
+            Debug.Log("[Memory] Task 'Memory' completato nel GameManager!");
+        }
+        else
+        {
+            Debug.LogWarning("[Memory] GameManager non trovato!");
+        }
+
         if (pannelloVittoria != null)
         {
             pannelloVittoria.SetActive(true);
         }
 
-        // 2. Aspetta 2 secondi
         yield return new WaitForSeconds(2f);
 
-        // 3. Carica la scena della cucina
-        SceneManager.LoadScene("Kitchen2");
+        // Torna alla cucina
+        Debug.Log($"[Memory] Torno alla cucina: {cucina}");
+        SceneManager.LoadScene(cucina);
     }
 
     void GameOver()
     {
         giocoFinito = true;
+        Debug.Log("[Memory] GAME OVER!");
+
         if (pannelloGameOver != null)
         {
             pannelloGameOver.SetActive(true);
         }
-        foreach (Button btn in btns) btn.interactable = false;
+
+        foreach (Button btn in btns)
+        {
+            btn.interactable = false;
+        }
     }
 
-    // --- FUNZIONI STANDARD ---
     void GetButtons()
     {
         GameObject[] objects = GameObject.FindGameObjectsWithTag("PuzzleButton");

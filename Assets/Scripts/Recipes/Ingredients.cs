@@ -4,13 +4,13 @@ using UnityEngine.UI;
 public class Ingredient : MonoBehaviour
 {
     [Header("Configurazione")]
-    public string ingredientName; // DEVE ESSERE IDENTICO AL DATABASE
+    public string ingredientName;
 
     [Header("Colori")]
     public Color normalColor = Color.white;
-    public Color selectableColor = Color.green; // Verde = Serve
-    public Color selectedColor = Color.yellow;  // Giallo = Preso
-    public Color disabledColor = Color.gray;    // Grigio = Inutile
+    public Color selectableColor = Color.green; //Serve
+    public Color selectedColor = Color.yellow; //Preso
+    public Color disabledColor = Color.gray; //Non serve
 
     private Image btnImage;
     private Button btn;
@@ -25,25 +25,42 @@ public class Ingredient : MonoBehaviour
         btn = GetComponent<Button>();
         recipeManager = Object.FindFirstObjectByType<RecipeManager>();
 
-        // Auto-collegamento del click
         if (btn != null)
         {
             btn.onClick.RemoveAllListeners();
             btn.onClick.AddListener(OnClick);
         }
-    }
-    void OnDisable()
-{
-    if (btn != null)
-    {
-        btn.onClick.RemoveListener(OnClick);
-    }
-}
 
-    // Chiamato dal RecipeManager per gli ingredienti NON ancora presi
+        //Ripristina lo stato
+        RestoreState();
+    }
+
+    void OnDisable()
+    {
+        if (btn != null)
+        {
+            btn.onClick.RemoveListener(OnClick);
+        }
+    }
+
+    void RestoreState()
+    {
+        if (GameManager.Instance == null) return;
+
+        // Controlla se questo ingrediente è già stato raccolto
+        string objectId = "Ingredient_" + ingredientName;
+        bool wasCollected = !GameManager.Instance.GetObjectState(objectId, true);
+
+        if (wasCollected)
+        {
+            // Se già raccolto, nascondi l'oggetto
+            gameObject.SetActive(false);
+            Debug.Log($"[Ingredient] {ingredientName} già raccolto, nascosto");
+        }
+    }
+
     public void SetSelectable(bool selectable)
     {
-        // NON resettare isSelected se � gi� true!
         if (!isSelected)
         {
             isSelectable = selectable;
@@ -52,40 +69,27 @@ public class Ingredient : MonoBehaviour
         UpdateVisual();
     }
 
-    // Chiamato dal RecipeManager per gli ingredienti GIA' presi
     public void SetSelected(bool selected)
     {
         isSelected = selected;
         if (selected)
         {
-            isSelectable = false; // Se gi� preso, non � pi� selezionabile
+            isSelectable = false;
         }
         UpdateVisual();
     }
 
     public void OnClick()
     {
-        if (isSelected)
-        {
-            Debug.Log($"[Ingredient] {ingredientName} e gia stato preso!");
-            return;
-        }
+        if (isSelected) { Debug.Log($"[Ingredient] {ingredientName} già preso!"); return; }
+        if (!isSelectable) { Debug.Log($"[Ingredient] {ingredientName} non serve!"); return; }
 
-        if (isSelectable)
+        if (recipeManager != null && recipeManager.TrySelectIngredient(ingredientName))
         {
-            // SE E' GIUSTO
-            if (recipeManager != null && recipeManager.TrySelectIngredient(ingredientName))
-            {
-                isSelected = true;
-                isSelectable = false;
-                UpdateVisual();
-            }
-        }
-        else
-        {
-            // SE E' SBAGLIATO
-            Debug.Log($"[Ingredient] Errore: {ingredientName} non serve!");
-            // TODO: Aggiungi animazione di errore
+            isSelected = true;
+            isSelectable = false;
+            GameManager.Instance?.SaveObjectState("Ingredient_" + ingredientName, false);
+            gameObject.SetActive(false);
         }
     }
 
@@ -95,25 +99,21 @@ public class Ingredient : MonoBehaviour
 
         if (isSelected)
         {
-            // GIA PRESO = GIALLO
             btnImage.color = selectedColor;
-            if (btn != null) btn.interactable = false; // Disabilita il bottone
+            if (btn != null) btn.interactable = false;
         }
         else if (isSelectable)
         {
-            // DA PRENDERE = VERDE
             btnImage.color = selectableColor;
             if (btn != null) btn.interactable = true;
         }
         else
         {
-            // NON SERVE = GRIGIO
             btnImage.color = disabledColor;
             if (btn != null) btn.interactable = false;
         }
     }
 
-    // Per debug
     public bool IsSelected() => isSelected;
     public bool IsSelectable() => isSelectable;
 }
