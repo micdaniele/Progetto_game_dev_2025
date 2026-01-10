@@ -19,8 +19,10 @@ public class FridgeIngredientButton : MonoBehaviour
     private int clicksRemaining;
     private int maxClicks;
     private bool isDefrosted = false;
+    private bool isHighlighted = false;
     private Button button;
     private FridgeDefrostGame gameManager;
+    
 
     void Awake()
     {
@@ -79,6 +81,8 @@ public class FridgeIngredientButton : MonoBehaviour
 
     IEnumerator HighlightCoroutine(float duration)
     {
+        isHighlighted = true;
+
         // Attiva l'effetto visivo
         if (highlightEffect != null)
         {
@@ -91,6 +95,8 @@ public class FridgeIngredientButton : MonoBehaviour
         }
 
         yield return new WaitForSeconds(duration);
+
+        isHighlighted = false;
 
         if (highlightEffect != null)
         {
@@ -137,6 +143,11 @@ public class FridgeIngredientButton : MonoBehaviour
 
     public bool OnClick()
     {
+        if(!isHighlighted)
+        {
+            Debug.Log($"[{gameObject.name}] Click ignorato: NON lampeggia");
+            return false;
+        }
         if (isDefrosted)
         {
             Debug.Log($"[{gameObject.name}] Click ignorato: GIÀ scongelato");

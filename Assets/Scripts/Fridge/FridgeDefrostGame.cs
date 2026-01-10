@@ -12,8 +12,8 @@ public class FridgeDefrostGame : MonoBehaviour
 
     [Header("Impostazioni Minigioco")]
     public float gameTime = 25f;
-    public float highlightDuration = 1.5f;
-    public float timeBetweenHighlights = 0.3f;
+    public float highlightDuration = 0.6f;
+    public float timeBetweenHighlights = 0.15f;
     public int clicksToDefrost = 3;
 
     [Header("Ingredienti")]
@@ -82,13 +82,18 @@ public class FridgeDefrostGame : MonoBehaviour
 
     IEnumerator HighlightRoutine()
     {
-        while (minigameActive && frozenIngredients.Count > 0)
-        {
-            FridgeIngredientButton randomIngredient = frozenIngredients[Random.Range(0, frozenIngredients.Count)];
-            randomIngredient.Highlight(highlightDuration);
+       FridgeIngredientButton currentIngredient =
+            frozenIngredients[Random.Range(0, frozenIngredients.Count)];
 
-            yield return new WaitForSeconds(highlightDuration + timeBetweenHighlights);
+        while (minigameActive && !currentIngredient.IsDefrosted())
+        {
+            currentIngredient.Highlight(highlightDuration);
+            yield return new WaitForSeconds(highlightDuration);
         }
+
+        yield return new WaitForSeconds(timeBetweenHighlights);
+        
+        
     }
 
     public void OnIngredientClicked(FridgeIngredientButton ingredient)
