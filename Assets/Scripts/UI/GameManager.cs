@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
@@ -22,9 +21,11 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        // Singleton pattern
-        if (Instance != null)
+        // Singelton
+        if (Instance != null && Instance != this)
         {
+            // Se esiste già un'istanza diversa da questa, distruggi QUESTO oggetto
+            Debug.Log($"[GameManager] Già esiste un GameManager, distruggo il duplicato dalla scena");
             Destroy(gameObject);
             return;
         }
@@ -32,10 +33,10 @@ public class GameManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        Debug.Log("[GameManager] Inizializzato e persistente tra le scene");
+        Debug.Log($"[GameManager]Inizializzato come persistente");
+        Debug.Log($"[GameManager] Nome: {gameObject.name}");
     }
 
-   
 
     // Salva se l'ingrediente è stato già preso
 
@@ -79,11 +80,11 @@ public class GameManager : MonoBehaviour
     public void ResetKitchenState()
     {
         kitchenObjectsState.Clear();
-        completedTasks.Clear();
         hasPlayerPosition = false;
 
-        Debug.Log("[GameManager] RESET STATO CUCINA");
+        Debug.Log("[GameManager] RESET STATO CUCINA (senza resettare tasks)");
     }
+
 
     public void ResetAllGameState()
     {
@@ -91,11 +92,11 @@ public class GameManager : MonoBehaviour
         selectedRecipe = "";
         ingredientiPresi.Clear();
         kitchenObjectsState.Clear();
-        completedTasks.Clear();
         hasPlayerPosition = false;
 
-        Debug.Log("[GameManager] RESET COMPLETO");
+        Debug.Log("[GameManager] RESET COMPLETO (tasks mantenuti)");
     }
+
 
     public void PrintCurrentState()
     {
