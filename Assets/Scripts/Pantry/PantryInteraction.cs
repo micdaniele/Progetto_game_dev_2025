@@ -6,33 +6,32 @@ public class PantryInteraction : MonoBehaviour
     [Header("Input")]
     public KeyCode interactKey = KeyCode.E;
     public string playerTag = "Player";
-    
+
     [Header("Scene")]
     public string pantrySceneName = "Pantry";
-    
+
     private bool playerInside = false;
-    
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag(playerTag))
         {
             playerInside = true;
-            Debug.Log("[PantryInteraction] Player entered pantry zone");
+            Debug.Log("[PantryInteraction] Il player è entrato nella zona della dispensa");
         }
     }
-    
+
     void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag(playerTag))
         {
             playerInside = false;
-            Debug.Log("[PantryInteraction] Player left pantry zone");
+            Debug.Log("[PantryInteraction] Il player ha lasciato la zona della dispensa");
         }
     }
-    
+
     void Update()
     {
-        // Se player è dentro il trigger E preme il tasto
         if (playerInside && Input.GetKeyDown(interactKey))
         {
             OpenPantry();
@@ -41,15 +40,21 @@ public class PantryInteraction : MonoBehaviour
 
     void OpenPantry()
     {
-        // Controllo di sicurezza
         if (GameManager.Instance != null && GameManager.Instance.HasValidSelection())
         {
-            Debug.Log("Vado in dispensa...");
-            UnityEngine.SceneManagement.SceneManager.LoadScene(pantrySceneName);
+            // Salva la posizione prima di cambiare scena
+            GameObject player = GameObject.FindGameObjectWithTag(playerTag);
+            if (player != null)
+            {
+                GameManager.Instance.SavePlayerPosition(player.transform.position);
+            }
+
+            Debug.Log("[PantryInteraction] Vado in dispensa...");
+            SceneManager.LoadScene(pantrySceneName);
         }
         else
         {
-            Debug.Log("NON PUOI ENTRARE: Devi prima scegliere una ricetta dal pannello!");
+            Debug.Log("[PantryInteraction] NON PUOI ENTRARE: Devi prima scegliere una ricetta!");
         }
     }
 }

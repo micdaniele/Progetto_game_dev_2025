@@ -25,14 +25,17 @@ public class Player2DGroundMover : MonoBehaviour
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
-
         if (_animator == null) _animator = GetComponent<Animator>();
-
         _moveAction = InputSystem.actions.FindAction("Move");
-
-        // Forza la gravità a 0 per evitare che cada fuori scena
         _rb.gravityScale = 0f;
         _rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+
+        // Ripristina la posizione
+        if (GameManager.Instance != null && GameManager.Instance.HasSavedPlayerPosition())
+        {
+            transform.position = GameManager.Instance.GetPlayerPosition();
+            Debug.Log("[Player] Posizione ripristinata!");
+        }
     }
 
     void Update()
@@ -44,7 +47,7 @@ public class Player2DGroundMover : MonoBehaviour
         {
             // 2. GESTIONE STATO FERMO/CAMMINA
             // Usiamo la magnitudine per dire all'Animator se il cuoco è fermo o si muove
-            // RICORDATI: Crea un parametro Float chiamato "Speed" nell'Animator
+            // Uso anche un parametro Float chiamato "Speed" nell'Animator
             _animator.SetFloat("Speed", _inputMovement.magnitude);
 
             // 3. AGGIORNA DIREZIONE SOLO SE C'E' MOVIMENTO
@@ -86,6 +89,16 @@ public class Player2DGroundMover : MonoBehaviour
         {
             Gizmos.color = _isGrounded ? Color.green : Color.red;
             Gizmos.DrawWireSphere(_groundChecker.position, _groundCheckRadius);
+        }
+    }
+
+    // Metodo per salvare la posizione
+    public void SavePosition()
+    {
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.SavePlayerPosition(transform.position);
+            Debug.Log("[Player] Posizione salvata!");
         }
     }
 }

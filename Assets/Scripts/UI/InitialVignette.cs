@@ -1,56 +1,83 @@
-    using UnityEngine;
+// === VERSIONE DEBUG DI InitialVignette ===
+// Usa questa temporaneamente per capire cosa succede
+
+using UnityEngine;
 
 public class InitialVignette : MonoBehaviour
 {
     [Header("Vignette Settings")]
-    [Tooltip("Il pannello della vignetta")]
     public GameObject vignettePanel;
-    
-    [Tooltip("Tasto per chiudere la vignetta")]
     public KeyCode closeKey = KeyCode.Escape;
 
-
     [Header("Player Control")]
-    [Tooltip("Blocca il movimento del player durante la vignetta?")]
     public bool freezePlayer = true;
-    
     private bool vignetteShown = false;
     public bool lockCursorAfterClose = false;
 
-
     void Start()
     {
-        // Mostra la vignetta all'inizio
+        Debug.Log("=== [InitialVignette] START CHIAMATO ===");
+
+        // 1. Controlla se il GameManager esiste
+        if (GameManager.Instance == null)
+        {
+            Debug.LogError("[InitialVignette] ? GAMEMANAGER È NULL!");
+            ShowVignette(); // Mostra comunque
+            return;
+        }
+
+        Debug.Log("[InitialVignette] ? GameManager trovato");
+
+        // 2. Controlla se la vignetta è stata vista
+        bool alreadySeen = GameManager.Instance.IsTaskCompleted("VignetteShown");
+        Debug.Log($"[InitialVignette] IsTaskCompleted('VignetteShown') = {alreadySeen}");
+
+        // 3. Stampa tutti i task completati
+        GameManager.Instance.PrintCurrentState();
+
+        if (alreadySeen)
+        {
+            Debug.Log("[InitialVignette] ? Vignetta già vista - la salto");
+
+            if (vignettePanel != null)
+                vignettePanel.SetActive(false);
+
+            Time.timeScale = 1f;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+
+            gameObject.SetActive(false);
+            Debug.Log("[InitialVignette] GameObject disattivato");
+            return;
+        }
+
+        Debug.Log("[InitialVignette] ? Prima volta - mostro la vignetta");
         ShowVignette();
     }
-    
+
     void ShowVignette()
     {
         if (vignettePanel != null)
         {
             vignettePanel.SetActive(true);
             vignetteShown = true;
-            
-            Debug.Log("[TutorialVignette] Vignette shown");
-            
-            // Blocca il gioco
+
+            Debug.Log("[InitialVignette] Vignetta mostrata");
+
             if (freezePlayer)
             {
                 Time.timeScale = 0f;
             }
-            
-            // Sblocca il cursore per cliccare
+
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-            
         }
         else
         {
-            Debug.LogWarning("[TutorialVignette] Vignette panel not assigned!");
+            Debug.LogWarning("[InitialVignette] ? vignettePanel non assegnato!");
         }
     }
-    
-    
+
     void Update()
     {
         if (vignetteShown && Input.GetKeyDown(closeKey))
@@ -58,22 +85,37 @@ public class InitialVignette : MonoBehaviour
             CloseVignette();
         }
     }
-    // Metodo pubblico per chiudere la vignetta
+
     public void CloseVignette()
     {
+        Debug.Log("=== [InitialVignette] CLOSE VIGNETTE CHIAMATO ===");
+
         if (vignettePanel != null && vignetteShown)
         {
             vignettePanel.SetActive(false);
             vignetteShown = false;
-            
-            Debug.Log("[TutorialVignette] Vignette closed");
-            
-            // Sblocca il gioco
-            Time.timeScale = 1f;
 
-            // Blocca il cursore per il gameplay       
-            //Cursor.lockState = CursorLockMode.Locked;<--Non va bene perchè dopo non fa cliccare altri pulsanti
-            //Cursor.visible = false;
+            Debug.Log("[InitialVignette] Vignetta chiusa");
+
+            // Controlla GameManager
+            if (GameManager.Instance != null)
+            {
+                Debug.Log("[InitialVignette] ? GameManager trovato, salvo lo stato...");
+                GameManager.Instance.CompleteTask("VignetteShown");
+                Debug.Log("[InitialVignette] ? Task 'VignetteShown' completato!");
+
+                // Verifica immediatamente
+                bool check = GameManager.Instance.IsTaskCompleted("VignetteShown");
+                Debug.Log($"[InitialVignette] Verifica immediata: IsTaskCompleted = {check}");
+
+                GameManager.Instance.PrintCurrentState();
+            }
+            else
+            {
+                Debug.LogError("[InitialVignette] ? GAMEMANAGER È NULL!");
+            }
+
+            Time.timeScale = 1f;
 
             if (lockCursorAfterClose)
             {
@@ -85,6 +127,16 @@ public class InitialVignette : MonoBehaviour
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
             }
+
+            gameObject.SetActive(false);
+            Debug.Log("[InitialVignette] GameObject disattivato");
         }
     }
 }
+
+// === AGGIUNGI ANCHE QUESTO DEBUG AL GAMEMANAGER ===
+// Nel tuo GameManager.cs, modifica il metodo Awake così:
+
+/*
+
+*/
