@@ -13,7 +13,7 @@ public class RecipeManager : MonoBehaviour
     private List<string> selectedIngredients = new List<string>();
 
     [Header("Minigame Settings")]
-    public string fridgeMinigameScene = "Fridge";
+    public string kitchenScene = "Kitchen2";
     public string pantryMinigameScene = "MemoryGame";
 
     // Riferimento a tutti gli ingredienti nella scena
@@ -268,7 +268,7 @@ public class RecipeManager : MonoBehaviour
         // Controlla il nome della scena (puoi personalizzare questi nomi)
         if (currentSceneName.ToLower().Contains("fridge"))
         {
-            minigameToLoad = fridgeMinigameScene;
+            minigameToLoad = kitchenScene;
             Debug.Log($"[RecipeManager] Rilevato FRIGO -> Carico {minigameToLoad}");
         }
         else if (currentSceneName.ToLower().Contains("pantry"))
@@ -279,7 +279,7 @@ public class RecipeManager : MonoBehaviour
         else
         {
             Debug.LogWarning($"[RecipeManager] Scena '{currentSceneName}' non riconosciuta! Carico minigioco di default.");
-            minigameToLoad = fridgeMinigameScene; // Default
+            minigameToLoad = kitchenScene; // Default
         }
 
         // Carica il minigioco dopo un breve delay

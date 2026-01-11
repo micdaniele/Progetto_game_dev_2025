@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement; 
 using System.Collections;
 using System.Collections.Generic;
 
@@ -8,12 +9,13 @@ public class FridgeDefrostGame : MonoBehaviour
     [Header("Riferimenti UI")]
     public Text timerValueText;
     public Text resultText;
-    public GameObject minigamePanel; // Panel attivo durante il minigioco
-    public GameObject gameCompletePanel; // Panel "Minigioco completato!"
+    public GameObject minigamePanel;
+    public GameObject gameCompletePanel;
     public GameObject winText;
     public GameObject ingredientPanel;
     private bool gameEnded = false;
     public GameObject gameOverText;
+
     [Header("Impostazioni Minigioco")]
     public float gameTime = 40f;
     public float highlightDuration = 0.35f;
@@ -24,8 +26,10 @@ public class FridgeDefrostGame : MonoBehaviour
     public List<FridgeIngredientButton> allIngredients;
 
     [Header("Recipe Manager")]
-    public GameObject recipeManagerObject; // Assegna nell'Inspector
+    public GameObject recipeManagerObject;
 
+    [Header("Scene Settings")]
+    public string fridgeSceneName = "Fridge"; 
     private float currentTime;
     private bool minigameActive = false;
     private List<FridgeIngredientButton> frozenIngredients;
@@ -43,7 +47,7 @@ public class FridgeDefrostGame : MonoBehaviour
     public void StartMinigame()
     {
         StopAllCoroutines();
-        
+
         gameEnded = false;
         minigameActive = true;
         currentTime = gameTime;
@@ -68,8 +72,8 @@ public class FridgeDefrostGame : MonoBehaviour
 
         StartCoroutine(HighlightRoutine());
 
-        if(winText != null) winText.SetActive(false);
-        if(gameOverText != null) gameOverText.SetActive(false);
+        if (winText != null) winText.SetActive(false);
+        if (gameOverText != null) gameOverText.SetActive(false);
     }
 
     void Update()
@@ -93,20 +97,20 @@ public class FridgeDefrostGame : MonoBehaviour
     IEnumerator HighlightRoutine()
     {
         while (minigameActive && frozenIngredients.Count > 0)
-    {
-        // scegli un ingrediente NON scongelato
-        FridgeIngredientButton current = frozenIngredients[Random.Range(0, frozenIngredients.Count)];
-
-        // lampeggia finché non viene rotto
-        while (minigameActive && !current.IsDefrosted())
         {
-            current.Highlight(highlightDuration);
-            yield return new WaitForSeconds(highlightDuration);
-        }
+            // Scegli un ingrediente NON scongelato
+            FridgeIngredientButton current = frozenIngredients[Random.Range(0, frozenIngredients.Count)];
 
-        // piccola pausa prima di passare al prossimo
-        yield return new WaitForSeconds(timeBetweenHighlights);
-    }
+            // Lampeggia finché non viene rotto
+            while (minigameActive && !current.IsDefrosted())
+            {
+                current.Highlight(highlightDuration);
+                yield return new WaitForSeconds(highlightDuration);
+            }
+
+            // Piccola pausa prima di passare al prossimo
+            yield return new WaitForSeconds(timeBetweenHighlights);
+        }
     }
 
     public void OnIngredientClicked(FridgeIngredientButton ingredient)
@@ -131,100 +135,55 @@ public class FridgeDefrostGame : MonoBehaviour
 
     void Victory()
     {
-        if (gameEnded) return;    //evita doppie chiamate
+        if (gameEnded) return; // Evita doppie chiamate
 
         gameEnded = true;
         minigameActive = false;
         StopAllCoroutines();
 
-        if(winText!= null)
-           winText.SetActive(true);
+        Debug.Log("[FridgeDefrost] VITTORIA!");
 
-        // Aspetta prima di uscire dal minigioco
-        StartCoroutine(ExitMinigameAfterDelay(2f));
-    }
 
-    IEnumerator ExitMinigameAfterDelay(float delay)
-    {
-        Debug.Log($"[FridgeDefrost] Uscita dal minigioco tra {delay} secondi...");
-
-        yield return new WaitForSeconds(delay);
-
-        Debug.Log("[FridgeDefrost] Uscita dal minigioco!");
-
-        // Nascondi i panel del minigioco
-        if (minigamePanel != null)
-            minigamePanel.SetActive(false);
-        
-        // mostra panello ingredienti 
-        if(ingredientPanel != null)
-           ingredientPanel.SetActive(true);
-
-        if (gameCompletePanel != null)
-            gameCompletePanel.SetActive(false);
-
-        // Nascondi il ghiaccio su TUTTI gli ingredienti
-        foreach (var ingredient in allIngredients)
+        if (GameManager.Instance != null)
         {
-            if (ingredient != null && ingredient.iceOverlay != null)
-            {
-                ingredient.iceOverlay.gameObject.SetActive(false);
-            }
-        }
-
-        // Disattiva i FridgeIngredientButton
-        foreach (var ingredient in allIngredients)
-        {
-            FridgeIngredientButton fridgeBtn = ingredient.GetComponent<FridgeIngredientButton>();
-            if (fridgeBtn != null)
-            {
-                fridgeBtn.enabled = false;
-                Debug.Log($"[FridgeDefrost] Disattivato FridgeIngredientButton su {ingredient.gameObject.name}");
-            }
-        }
-
-        // Attiva gli Ingredient per la selezione
-        foreach (var ingredient in allIngredients)
-        {
-            Ingredient ing = ingredient.GetComponent<Ingredient>();
-            if (ing != null)
-            {
-                ing.enabled = true;
-                Debug.Log($"[FridgeDefrost] Attivato Ingredient su {ingredient.gameObject.name}");
-            }
-        }
-
-        // RIATTIVA RecipeManager GameObject
-        if (recipeManagerObject != null)
-        {
-            recipeManagerObject.SetActive(true);
-            Debug.Log("[FridgeDefrost] RecipeManager GameObject riattivato!");
-
-            // Verifica che il componente RecipeManager sia presente e attivo
-            RecipeManager rm = recipeManagerObject.GetComponent<RecipeManager>();
-            if (rm != null)
-            {
-                rm.enabled = true;
-                Debug.Log("[FridgeDefrost] RecipeManager componente attivato!");
-            }
+            GameManager.Instance.CompleteTask("FridgeMinigame");
+            Debug.Log("[FridgeDefrost] Task 'FridgeMinigame' completato!");
         }
         else
         {
-            Debug.LogError("[FridgeDefrost] RecipeManager GameObject NON assegnato nell'Inspector!");
+            Debug.LogWarning("[FridgeDefrost] GameManager non trovato!");
         }
+  
 
-        // Disattiva questo script PER ULTIMO
-        this.enabled = false;
-        Debug.Log("[FridgeDefrost] FridgeDefrostGame disattivato!");
+        if (winText != null)
+            winText.SetActive(true);
+
+        // Aspetta e poi torna alla scena frigo
+        StartCoroutine(LoadFridgeSceneAfterDelay(2f));
     }
+
+    IEnumerator LoadFridgeSceneAfterDelay(float delay)
+    {
+        Debug.Log($"[FridgeDefrost] Caricamento scena frigo tra {delay} secondi...");
+
+        yield return new WaitForSeconds(delay);
+
+        Debug.Log($"[FridgeDefrost] Carico scena: {fridgeSceneName}");
+
+        // Carica la scena del frigo
+        SceneManager.LoadScene(fridgeSceneName);
+    }
+  
 
     void GameOver()
     {
         minigameActive = false;
         StopAllCoroutines();
 
-        if(gameOverText != null)
-           gameOverText.SetActive(true);
+        Debug.Log("[FridgeDefrost] Tempo scaduto!");
+
+        if (gameOverText != null)
+            gameOverText.SetActive(true);
 
         // Riavvia il minigioco
         StartCoroutine(RestartAfterDelay(2f));
@@ -233,11 +192,13 @@ public class FridgeDefrostGame : MonoBehaviour
     IEnumerator RestartAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        if(gameOverText != null)
-           gameOverText.SetActive(false);
-        
+
+        if (gameOverText != null)
+            gameOverText.SetActive(false);
+
         RestartMinigame();
     }
+
     void RestartMinigame()
     {
         StartMinigame();

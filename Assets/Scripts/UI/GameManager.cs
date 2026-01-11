@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
 
     // Salva la posizione del player
     private Dictionary<string, bool> kitchenObjectsState = new Dictionary<string, bool>();
-    private List<string> completedTasks = new List<string>();
+    public List<string> completedTasks = new List<string>();
     private Vector3 playerPosition;
     private bool hasPlayerPosition = false;
 

@@ -11,7 +11,7 @@ public class FridgeInteraction : MonoBehaviour
     public string playerTag = "Player";
 
     [Header("Scene")]
-    public string pantrySceneName = "Fridge";
+    public string fridgeMinigameScene = "FridgeMinigame";
 
     private bool playerInside = false;
 
@@ -61,7 +61,7 @@ public class FridgeInteraction : MonoBehaviour
             }
 
             Debug.Log("[PantryInteraction] Vado nel frigo...");
-            SceneManager.LoadScene(pantrySceneName);
+            SceneManager.LoadScene(fridgeMinigameScene);
         }
         else
         {
