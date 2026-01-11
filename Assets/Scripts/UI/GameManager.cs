@@ -18,6 +18,11 @@ public class GameManager : MonoBehaviour
     private Vector3 playerPosition;
     private bool hasPlayerPosition = false;
 
+    [SerializeField] private Dialogue memoryCompletedDialogue;
+    [SerializeField] private Dialogue fridgeCompletedDialogue;
+    [SerializeField] private Dialogue postMinigameRobotDialogue;
+
+
 
     void Awake()
     {
@@ -53,14 +58,39 @@ public class GameManager : MonoBehaviour
 
 
     //Vede se il minigioco è stato completato
+
     public void CompleteTask(string taskName)
     {
-        if (!completedTasks.Contains(taskName))
+        if (completedTasks.Contains(taskName)) return;
+
+        completedTasks.Add(taskName);
+        Debug.Log($"[GameManager] Task completato: {taskName}");
+
+        // TRIGGER DIALOGHI
+        if (DialogueManager.Instance == null) return;
+
+        switch (taskName)
         {
-            completedTasks.Add(taskName);
-            Debug.Log($"[GameManager] Task completato: {taskName}");
+            case "Memory":
+                if (memoryCompletedDialogue != null)
+                    DialogueManager.Instance.StartDialogue(memoryCompletedDialogue);
+                break;
+
+            case "FridgeMinigame":
+                if (fridgeCompletedDialogue != null)
+                    DialogueManager.Instance.StartDialogue(fridgeCompletedDialogue);
+                break;
+        }
+
+        if (IsTaskCompleted("memory") && IsTaskCompleted("fridgeminigame"))
+        {
+            if (postMinigameRobotDialogue != null)
+            {
+                DialogueManager.Instance.StartDialogue(postMinigameRobotDialogue);
+            }
         }
     }
+
 
     public bool IsTaskCompleted(string taskName)
     {

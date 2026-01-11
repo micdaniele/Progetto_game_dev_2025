@@ -21,6 +21,9 @@ public class UI_MoodWindow : MonoBehaviour
     public GameObject fridgePrompt;
     public GameObject pantryPrompt;
 
+    [Header("Dialogues")]
+    public Dialogue recipeSelectedDialogue;
+
     private int selectedMood = -1;
     private string selectedRecipe = "";
 
@@ -94,6 +97,12 @@ public class UI_MoodWindow : MonoBehaviour
         // 2. Aggiorna la UI (mostra ingredienti necessari nel pannello)
         HideAllRecipePanels();
         ShowIngredientsPanel(recipeName);
+
+        // 3. Dialogo dopo selezione ricetta
+        if (DialogueManager.Instance != null && recipeSelectedDialogue != null)
+        {
+            DialogueManager.Instance.StartDialogue(recipeSelectedDialogue);
+        }
     }
 
     void ShowIngredientsPanel(string recipeName)

@@ -2779,7 +2779,7 @@ MonoBehaviour:
   winText: {fileID: 479436105}
   ingredientPanel: {fileID: 0}
   gameOverText: {fileID: 312565465}
-  gameTime: 40
+  gameTime: 45
   highlightDuration: 1.5
   timeBetweenHighlights: 0.5
   clicksToDefrost: 3
@@ -2802,6 +2802,7 @@ MonoBehaviour:
   - {fileID: 1785003555}
   - {fileID: 2007616234}
   recipeManagerObject: {fileID: 0}
+  fridgeSceneName: Fridge
 --- !u!4 &1312956933
 Transform:
   m_ObjectHideFlags: 0
