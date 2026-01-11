@@ -27,7 +27,7 @@ public class MoodInteraction2D : MonoBehaviour
         if (other.CompareTag(playerTag))
         {
             playerInside = true;
-            promptUI.SetActive(true); // SOLO Press E
+            promptUI.SetActive(true);
         }
     }
 

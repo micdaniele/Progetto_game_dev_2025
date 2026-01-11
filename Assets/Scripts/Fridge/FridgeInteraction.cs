@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PantryInteraction : MonoBehaviour
+public class FridgeInteraction : MonoBehaviour
 {
     [Header("UI")]
     public GameObject promptUI;
@@ -11,7 +11,7 @@ public class PantryInteraction : MonoBehaviour
     public string playerTag = "Player";
 
     [Header("Scene")]
-    public string pantrySceneName = "Pantry";
+    public string pantrySceneName = "Fridge";
 
     private bool playerInside = false;
 
@@ -26,7 +26,7 @@ public class PantryInteraction : MonoBehaviour
         if (other.CompareTag(playerTag))
         {
             playerInside = true;
-            Debug.Log("[PantryInteraction] Il player Ã¨ entrato nella zona della dispensa");
+            Debug.Log("[PantryInteraction] Il player è entrato nella zona della dispensa");
             promptUI.SetActive(true);
         }
     }
@@ -60,7 +60,7 @@ public class PantryInteraction : MonoBehaviour
                 GameManager.Instance.SavePlayerPosition(player.transform.position);
             }
 
-            Debug.Log("[PantryInteraction] Vado in dispensa...");
+            Debug.Log("[PantryInteraction] Vado nel frigo...");
             SceneManager.LoadScene(pantrySceneName);
         }
         else
