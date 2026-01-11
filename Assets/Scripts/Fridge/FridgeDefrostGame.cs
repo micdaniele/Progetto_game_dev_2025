@@ -7,6 +7,7 @@ public class FridgeDefrostGame : MonoBehaviour
 {
     [Header("Riferimenti UI")]
     public Text timerValueText;
+    public Text resultText;
     public GameObject minigamePanel; // Panel attivo durante il minigioco
     public GameObject gameCompletePanel; // Panel "Minigioco completato!"
 
@@ -18,6 +19,10 @@ public class FridgeDefrostGame : MonoBehaviour
 
     [Header("Ingredienti")]
     public List<FridgeIngredientButton> allIngredients;
+
+    [Header("Messaggi")]
+    public GameObject winText;
+    public GameObject gameOverText;
 
     [Header("Recipe Manager")]
     public GameObject recipeManagerObject; // Assegna nell'Inspector
@@ -60,6 +65,9 @@ public class FridgeDefrostGame : MonoBehaviour
             gameCompletePanel.SetActive(false);
 
         StartCoroutine(HighlightRoutine());
+
+        if(winText != null) winText.SetActive(false);
+        if(gameOverText != null) gameOverText.SetActive(false);
     }
 
     void Update()
@@ -125,18 +133,8 @@ public class FridgeDefrostGame : MonoBehaviour
         minigameActive = false;
         StopAllCoroutines();
 
-        Debug.Log("[FridgeDefrost] VITTORIA! Tutti gli ingredienti scongelati!");
-
-        // Mostra il tempo finale
-        if (timerValueText != null)
-        {
-            int finalTime = Mathf.CeilToInt(currentTime);
-            timerValueText.text = finalTime.ToString();
-        }
-
-        // Mostra il panel di vittoria
-        if (gameCompletePanel != null)
-            gameCompletePanel.SetActive(true);
+        if(winText!= null)
+           winText.SetActive(true);
 
         // Aspetta prima di uscire dal minigioco
         StartCoroutine(ExitMinigameAfterDelay(2f));
@@ -217,12 +215,21 @@ public class FridgeDefrostGame : MonoBehaviour
         minigameActive = false;
         StopAllCoroutines();
 
-        Debug.Log("[FridgeDefrost] Tempo scaduto! Riprovo...");
+        if(gameOverText != null)
+           gameOverText.SetActive(true);
 
         // Riavvia il minigioco
-        Invoke("RestartMinigame", 3f);
+        StartCoroutine(RestartAfterDelay(2f));
     }
 
+    IEnumerator RestartAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        if(gameOverText != null)
+           gameOverText.SetActive(false);
+        
+        RestartMinigame();
+    }
     void RestartMinigame()
     {
         StartMinigame();

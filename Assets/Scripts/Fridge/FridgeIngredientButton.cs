@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using JetBrains.Annotations;
 
 public class FridgeIngredientButton : MonoBehaviour
 {
@@ -56,6 +57,8 @@ public class FridgeIngredientButton : MonoBehaviour
 
     public void InitializeForMinigame(int clicks)
     {
+        StopAllCoroutines();
+
         maxClicks = clicks;
         clicksRemaining = clicks;
         isDefrosted = false;
@@ -65,7 +68,17 @@ public class FridgeIngredientButton : MonoBehaviour
         {
             iceOverlay.gameObject.SetActive(true);
             iceOverlay.color = iceColor;
+            iceOverlay.transform.localScale = Vector3.one;
+
+            //reset sprite ghiaccio
+            if(useSpriteChange && iceSprites != null && iceSprites.Length > 0)
+            {
+                iceOverlay.sprite = iceSprites[0];  //sprite integro 
+            }
         }
+
+        if(highlightEffect != null)
+           highlightEffect.SetActive(false);
 
         // Il bottone è sempre cliccabile
         if (button != null)
@@ -76,6 +89,7 @@ public class FridgeIngredientButton : MonoBehaviour
     {
         if (isDefrosted) return;
 
+        isHighlighted = true;
         StartCoroutine(HighlightCoroutine(duration));
     }
 
@@ -143,16 +157,8 @@ public class FridgeIngredientButton : MonoBehaviour
 
     public bool OnClick()
     {
-        if(!isHighlighted)
-        {
-            Debug.Log($"[{gameObject.name}] Click ignorato: NON lampeggia");
-            return false;
-        }
-        if (isDefrosted)
-        {
-            Debug.Log($"[{gameObject.name}] Click ignorato: GIÀ scongelato");
-            return false;
-        }
+        if(isDefrosted || !isHighlighted)
+           return false;
 
         // ACCETTA SEMPRE I CLICK - nessun controllo su highlight
         clicksRemaining--;
