@@ -10,7 +10,10 @@ public class FridgeDefrostGame : MonoBehaviour
     public Text resultText;
     public GameObject minigamePanel; // Panel attivo durante il minigioco
     public GameObject gameCompletePanel; // Panel "Minigioco completato!"
-
+    public GameObject winText;
+    public GameObject ingredientPanel;
+    private bool gameEnded = false;
+    public GameObject gameOverText;
     [Header("Impostazioni Minigioco")]
     public float gameTime = 40f;
     public float highlightDuration = 0.35f;
@@ -19,10 +22,6 @@ public class FridgeDefrostGame : MonoBehaviour
 
     [Header("Ingredienti")]
     public List<FridgeIngredientButton> allIngredients;
-
-    [Header("Messaggi")]
-    public GameObject winText;
-    public GameObject gameOverText;
 
     [Header("Recipe Manager")]
     public GameObject recipeManagerObject; // Assegna nell'Inspector
@@ -43,6 +42,9 @@ public class FridgeDefrostGame : MonoBehaviour
 
     public void StartMinigame()
     {
+        StopAllCoroutines();
+        
+        gameEnded = false;
         minigameActive = true;
         currentTime = gameTime;
 
@@ -72,7 +74,7 @@ public class FridgeDefrostGame : MonoBehaviour
 
     void Update()
     {
-        if (!minigameActive) return;
+        if (!minigameActive || gameEnded) return;
 
         currentTime -= Time.deltaTime;
 
@@ -93,8 +95,7 @@ public class FridgeDefrostGame : MonoBehaviour
         while (minigameActive && frozenIngredients.Count > 0)
     {
         // scegli un ingrediente NON scongelato
-        FridgeIngredientButton current =
-            frozenIngredients[Random.Range(0, frozenIngredients.Count)];
+        FridgeIngredientButton current = frozenIngredients[Random.Range(0, frozenIngredients.Count)];
 
         // lampeggia finché non viene rotto
         while (minigameActive && !current.IsDefrosted())
@@ -130,6 +131,9 @@ public class FridgeDefrostGame : MonoBehaviour
 
     void Victory()
     {
+        if (gameEnded) return;    //evita doppie chiamate
+
+        gameEnded = true;
         minigameActive = false;
         StopAllCoroutines();
 
@@ -151,6 +155,10 @@ public class FridgeDefrostGame : MonoBehaviour
         // Nascondi i panel del minigioco
         if (minigamePanel != null)
             minigamePanel.SetActive(false);
+        
+        // mostra panello ingredienti 
+        if(ingredientPanel != null)
+           ingredientPanel.SetActive(true);
 
         if (gameCompletePanel != null)
             gameCompletePanel.SetActive(false);
