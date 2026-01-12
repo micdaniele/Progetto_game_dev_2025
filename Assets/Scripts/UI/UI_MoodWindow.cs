@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 
@@ -18,8 +19,7 @@ public class UI_MoodWindow : MonoBehaviour
     [Header("Ingredients Panel Elements")]
     public Transform ingredientsContent;
     public TextMeshProUGUI ingredientsTitleText;
-    public GameObject fridgePrompt;
-    public GameObject pantryPrompt;
+
 
     [Header("Dialogues")]
     public Dialogue recipeSelectedDialogue;
@@ -94,11 +94,22 @@ public class UI_MoodWindow : MonoBehaviour
             Debug.LogError("ERRORE: GameManager non trovato nella scena!");
         }
 
-        // 2. Aggiorna la UI (mostra ingredienti necessari nel pannello)
+        // 2. Nascondi i pannelli delle ricette
         HideAllRecipePanels();
+
+        // 3. Mostra ingredienti
         ShowIngredientsPanel(recipeName);
 
-        // 3. Dialogo dopo selezione ricetta
+        // 4. MOSTRA IL DIALOGO DOPO CHE è STATA SCELTA LA RICETTA
+        StartCoroutine(ShowDialogueAfterPanelClose());
+    }
+
+    IEnumerator ShowDialogueAfterPanelClose()
+    {
+        // Aspetta un frame per assicurarsi che i pannelli siano chiusi
+        yield return null;
+
+        // Mostra il dialogo
         if (DialogueManager.Instance != null && recipeSelectedDialogue != null)
         {
             DialogueManager.Instance.StartDialogue(recipeSelectedDialogue);
@@ -116,7 +127,7 @@ public class UI_MoodWindow : MonoBehaviour
             }
         }
 
-        // POLIMORFISMO: usa il metodo GetRecipes() della classe figlia corretta
+        // POLIMORFISMO: usa il metodo GetRecipes() della classe figlia
         if (selectedMood >= 0 && selectedMood < recipeDatabases.Length)
         {
             Dictionary<string, List<string>> recipes = recipeDatabases[selectedMood].GetRecipes();
@@ -139,12 +150,7 @@ public class UI_MoodWindow : MonoBehaviour
         if (ingredientsPanel != null)
             ingredientsPanel.SetActive(true);
 
-        // Mostra i prompt
-        if (fridgePrompt != null)
-            fridgePrompt.SetActive(true);
-
-        if (pantryPrompt != null)
-            pantryPrompt.SetActive(true);
+       
 
         // Sblocca il gioco 
         ResumeGame();
@@ -173,15 +179,6 @@ public class UI_MoodWindow : MonoBehaviour
         if (angryRecipesPanel != null) angryRecipesPanel.SetActive(false);
         if (sadRecipesPanel != null) sadRecipesPanel.SetActive(false);
         if (sickRecipesPanel != null) sickRecipesPanel.SetActive(false);
-    }
-
-    void CloseAllPanels()
-    {
-        if (moodWindowPanel != null) moodWindowPanel.SetActive(false);
-        HideAllRecipePanels();
-        if (ingredientsPanel != null) ingredientsPanel.SetActive(false);
-        if (fridgePrompt != null) fridgePrompt.SetActive(false);
-        if (pantryPrompt != null) pantryPrompt.SetActive(false);
     }
 
     void ResumeGame()

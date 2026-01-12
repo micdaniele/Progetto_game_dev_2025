@@ -10,18 +10,13 @@ public class GameManager : MonoBehaviour
 
     // Zaino ingredienti
     public List<string> ingredientiPresi = new List<string>();
-    
+
 
     // Salva la posizione del player
     private Dictionary<string, bool> kitchenObjectsState = new Dictionary<string, bool>();
     public List<string> completedTasks = new List<string>();
     private Vector3 playerPosition;
     private bool hasPlayerPosition = false;
-
-    [SerializeField] private Dialogue memoryCompletedDialogue;
-    [SerializeField] private Dialogue fridgeCompletedDialogue;
-    [SerializeField] private Dialogue postMinigameRobotDialogue;
-
 
 
     void Awake()
@@ -58,39 +53,14 @@ public class GameManager : MonoBehaviour
 
 
     //Vede se il minigioco è stato completato
-
     public void CompleteTask(string taskName)
     {
-        if (completedTasks.Contains(taskName)) return;
-
-        completedTasks.Add(taskName);
-        Debug.Log($"[GameManager] Task completato: {taskName}");
-
-        // TRIGGER DIALOGHI
-        if (DialogueManager.Instance == null) return;
-
-        switch (taskName)
+        if (!completedTasks.Contains(taskName))
         {
-            case "Memory":
-                if (memoryCompletedDialogue != null)
-                    DialogueManager.Instance.StartDialogue(memoryCompletedDialogue);
-                break;
-
-            case "FridgeMinigame":
-                if (fridgeCompletedDialogue != null)
-                    DialogueManager.Instance.StartDialogue(fridgeCompletedDialogue);
-                break;
-        }
-
-        if (IsTaskCompleted("memory") && IsTaskCompleted("fridgeminigame"))
-        {
-            if (postMinigameRobotDialogue != null)
-            {
-                DialogueManager.Instance.StartDialogue(postMinigameRobotDialogue);
-            }
+            completedTasks.Add(taskName);
+            Debug.Log($"[GameManager] Task completato: {taskName}");
         }
     }
-
 
     public bool IsTaskCompleted(string taskName)
     {
@@ -104,7 +74,7 @@ public class GameManager : MonoBehaviour
         Debug.Log($"[GameManager] Posizione player salvata: {position}");
     }
 
-   
+
     public bool HasSavedPlayerPosition() => hasPlayerPosition;
 
     public void ResetKitchenState()

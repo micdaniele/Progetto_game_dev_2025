@@ -7,7 +7,7 @@ public class InitialVignette : MonoBehaviour
 {
     [Header("Vignette Settings")]
     public GameObject vignettePanel;
-    public KeyCode closeKey = KeyCode.Escape;
+    public KeyCode closeKey = KeyCode.Space;
 
     [Header("Player Control")]
     public bool freezePlayer = true;
@@ -133,10 +133,3 @@ public class InitialVignette : MonoBehaviour
         }
     }
 }
-
-// === AGGIUNGI ANCHE QUESTO DEBUG AL GAMEMANAGER ===
-// Nel tuo GameManager.cs, modifica il metodo Awake così:
-
-/*
-
-*/
