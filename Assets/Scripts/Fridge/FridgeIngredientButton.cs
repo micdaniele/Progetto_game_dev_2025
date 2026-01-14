@@ -17,13 +17,19 @@ public class FridgeIngredientButton : MonoBehaviour
     [Header("Impostazioni Ghiaccio")]
     public Color iceColor = new Color(0.7f, 0.9f, 1f, 0.85f);
 
+    [Header("Audio")]
+    public AudioClip iceClickSound;
+    public AudioClip iceBreakSound;
+
     private int clicksRemaining;
     private int maxClicks;
     private bool isDefrosted = false;
     private bool isHighlighted = false;
     private Button button;
     private FridgeDefrostGame gameManager;
-    
+    private AudioSource audioSource;
+
+
 
     void Awake()
     {
@@ -53,6 +59,15 @@ public class FridgeIngredientButton : MonoBehaviour
 
         if (highlightEffect != null)
             highlightEffect.SetActive(false);
+
+        audioSource = GetComponent<AudioSource>();
+
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource.playOnAwake = false;
+        }
+
     }
 
     public void InitializeForMinigame(int clicks)
@@ -162,6 +177,12 @@ public class FridgeIngredientButton : MonoBehaviour
 
         // ACCETTA SEMPRE I CLICK - nessun controllo su highlight
         clicksRemaining--;
+        
+        if (iceClickSound != null)
+        {
+            audioSource.PlayOneShot(iceClickSound);
+        }
+
         Debug.Log($"[{gameObject.name}]Click registrato! Click rimanenti: {clicksRemaining}/{maxClicks}");
 
         UpdateIceOpacity();
@@ -170,6 +191,10 @@ public class FridgeIngredientButton : MonoBehaviour
         {
             Debug.Log($"[{gameObject.name}] Ghiaccio completamente scongelato!");
             isDefrosted = true;
+            if (iceBreakSound != null)
+            {
+                audioSource.PlayOneShot(iceBreakSound);
+            }
             StartCoroutine(DefrostEffect());
         }
 
@@ -210,6 +235,11 @@ public class FridgeIngredientButton : MonoBehaviour
 
     IEnumerator DefrostEffect()
     {
+        if (iceBreakSound != null)
+        {
+            audioSource.PlayOneShot(iceBreakSound);
+        }
+
         // Effetto di "rottura" del ghiaccio
         if (iceOverlay != null)
         {
