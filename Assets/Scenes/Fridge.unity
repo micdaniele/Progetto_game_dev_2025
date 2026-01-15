@@ -257,6 +257,7 @@ MonoBehaviour:
   selectableColor: {r: 0, g: 1, b: 0, a: 1}
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  ingredient_click: {fileID: 8300000, guid: 5c166014e12be4bffbb067f41053c42d, type: 3}
 --- !u!1 &80928375
 GameObject:
   m_ObjectHideFlags: 0
@@ -482,6 +483,7 @@ MonoBehaviour:
   selectableColor: {r: 0, g: 1, b: 0, a: 1}
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  ingredient_click: {fileID: 8300000, guid: 5c166014e12be4bffbb067f41053c42d, type: 3}
 --- !u!1 &124269030
 GameObject:
   m_ObjectHideFlags: 0
@@ -667,6 +669,7 @@ MonoBehaviour:
   selectableColor: {r: 0, g: 1, b: 0, a: 1}
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  ingredient_click: {fileID: 8300000, guid: 5c166014e12be4bffbb067f41053c42d, type: 3}
 --- !u!1 &430208570
 GameObject:
   m_ObjectHideFlags: 0
@@ -805,6 +808,7 @@ MonoBehaviour:
   selectableColor: {r: 0, g: 1, b: 0, a: 1}
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  ingredient_click: {fileID: 8300000, guid: 5c166014e12be4bffbb067f41053c42d, type: 3}
 --- !u!1 &539400938
 GameObject:
   m_ObjectHideFlags: 0
@@ -943,6 +947,7 @@ MonoBehaviour:
   selectableColor: {r: 0, g: 1, b: 0, a: 1}
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  ingredient_click: {fileID: 8300000, guid: 5c166014e12be4bffbb067f41053c42d, type: 3}
 --- !u!1 &561195523
 GameObject:
   m_ObjectHideFlags: 0
@@ -1081,6 +1086,7 @@ MonoBehaviour:
   selectableColor: {r: 0, g: 1, b: 0, a: 1}
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  ingredient_click: {fileID: 8300000, guid: 5c166014e12be4bffbb067f41053c42d, type: 3}
 --- !u!1 &759243747
 GameObject:
   m_ObjectHideFlags: 0
@@ -1298,6 +1304,7 @@ MonoBehaviour:
   selectableColor: {r: 0, g: 1, b: 0, a: 1}
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  ingredient_click: {fileID: 8300000, guid: 5c166014e12be4bffbb067f41053c42d, type: 3}
 --- !u!1 &1241979088
 GameObject:
   m_ObjectHideFlags: 0
@@ -1436,6 +1443,7 @@ MonoBehaviour:
   selectableColor: {r: 0, g: 1, b: 0, a: 1}
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  ingredient_click: {fileID: 8300000, guid: 5c166014e12be4bffbb067f41053c42d, type: 3}
 --- !u!1 &1385548272
 GameObject:
   m_ObjectHideFlags: 0
@@ -1574,6 +1582,7 @@ MonoBehaviour:
   selectableColor: {r: 0, g: 1, b: 0, a: 1}
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  ingredient_click: {fileID: 8300000, guid: 5c166014e12be4bffbb067f41053c42d, type: 3}
 --- !u!1 &1398216677
 GameObject:
   m_ObjectHideFlags: 0
@@ -1712,6 +1721,7 @@ MonoBehaviour:
   selectableColor: {r: 0, g: 1, b: 0, a: 1}
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  ingredient_click: {fileID: 8300000, guid: 5c166014e12be4bffbb067f41053c42d, type: 3}
 --- !u!1 &1401223416 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7828956123348248212, guid: 4836706ab3c0544cabb440c60afcf7c7, type: 3}
@@ -1730,6 +1740,104 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kitchenSceneName: Kitchen2
+  button_click: {fileID: 8300000, guid: 036117dd8bdce43f1bbdad47222764e8, type: 3}
+--- !u!82 &1401223423
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1401223416}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1663968347
 GameObject:
   m_ObjectHideFlags: 0
@@ -1868,6 +1976,7 @@ MonoBehaviour:
   selectableColor: {r: 0, g: 1, b: 0, a: 1}
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  ingredient_click: {fileID: 8300000, guid: 5c166014e12be4bffbb067f41053c42d, type: 3}
 --- !u!1 &1745644568
 GameObject:
   m_ObjectHideFlags: 0
@@ -2006,6 +2115,7 @@ MonoBehaviour:
   selectableColor: {r: 0, g: 1, b: 0, a: 1}
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  ingredient_click: {fileID: 8300000, guid: 5c166014e12be4bffbb067f41053c42d, type: 3}
 --- !u!1 &1785003550
 GameObject:
   m_ObjectHideFlags: 0
@@ -2144,6 +2254,7 @@ MonoBehaviour:
   selectableColor: {r: 0, g: 1, b: 0, a: 1}
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  ingredient_click: {fileID: 8300000, guid: 5c166014e12be4bffbb067f41053c42d, type: 3}
 --- !u!1 &1808534718
 GameObject:
   m_ObjectHideFlags: 0
@@ -2282,6 +2393,7 @@ MonoBehaviour:
   selectableColor: {r: 0, g: 1, b: 0, a: 1}
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  ingredient_click: {fileID: 8300000, guid: 5c166014e12be4bffbb067f41053c42d, type: 3}
 --- !u!1 &1809427026
 GameObject:
   m_ObjectHideFlags: 0
@@ -2420,6 +2532,7 @@ MonoBehaviour:
   selectableColor: {r: 0, g: 1, b: 0, a: 1}
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  ingredient_click: {fileID: 8300000, guid: 5c166014e12be4bffbb067f41053c42d, type: 3}
 --- !u!1 &1941965487
 GameObject:
   m_ObjectHideFlags: 0
@@ -2558,6 +2671,7 @@ MonoBehaviour:
   selectableColor: {r: 0, g: 1, b: 0, a: 1}
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  ingredient_click: {fileID: 8300000, guid: 5c166014e12be4bffbb067f41053c42d, type: 3}
 --- !u!1 &2000252114
 GameObject:
   m_ObjectHideFlags: 0
@@ -2833,6 +2947,7 @@ MonoBehaviour:
   selectableColor: {r: 0, g: 1, b: 0, a: 1}
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  ingredient_click: {fileID: 8300000, guid: 5c166014e12be4bffbb067f41053c42d, type: 3}
 --- !u!1001 &7161030456336248336
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3057,6 +3172,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7828956123348248212, guid: 4836706ab3c0544cabb440c60afcf7c7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1401223421}
+    - targetCorrespondingSourceObject: {fileID: 7828956123348248212, guid: 4836706ab3c0544cabb440c60afcf7c7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1401223423}
   m_SourcePrefab: {fileID: 100100000, guid: 4836706ab3c0544cabb440c60afcf7c7, type: 3}
 --- !u!224 &7161030456336248337 stripped
 RectTransform:

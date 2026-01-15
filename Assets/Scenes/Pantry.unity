@@ -395,6 +395,7 @@ MonoBehaviour:
   selectableColor: {r: 0, g: 1, b: 0, a: 1}
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  ingredient_click: {fileID: 8300000, guid: 5c166014e12be4bffbb067f41053c42d, type: 3}
 --- !u!61 &460292493
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -855,6 +856,7 @@ MonoBehaviour:
   selectableColor: {r: 0, g: 1, b: 0, a: 1}
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  ingredient_click: {fileID: 8300000, guid: 5c166014e12be4bffbb067f41053c42d, type: 3}
 --- !u!61 &793384558
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1040,6 +1042,7 @@ MonoBehaviour:
   selectableColor: {r: 0, g: 1, b: 0, a: 1}
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  ingredient_click: {fileID: 8300000, guid: 5c166014e12be4bffbb067f41053c42d, type: 3}
 --- !u!61 &803081054
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1392,7 +1395,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentRecipeName: 
-  fridgeMinigameScene: FridgeGame
+  kitchenScene: Kitchen2
   pantryMinigameScene: MemoryGame
 --- !u!4 &987077690
 Transform:
@@ -1911,6 +1914,7 @@ MonoBehaviour:
   selectableColor: {r: 0, g: 1, b: 0, a: 1}
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  ingredient_click: {fileID: 8300000, guid: 5c166014e12be4bffbb067f41053c42d, type: 3}
 --- !u!61 &1343186705
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2097,6 +2101,7 @@ MonoBehaviour:
   selectableColor: {r: 0, g: 1, b: 0, a: 1}
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  ingredient_click: {fileID: 8300000, guid: 5c166014e12be4bffbb067f41053c42d, type: 3}
 --- !u!61 &1366626112
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2419,6 +2424,7 @@ MonoBehaviour:
   selectableColor: {r: 0, g: 1, b: 0, a: 1}
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  ingredient_click: {fileID: 8300000, guid: 5c166014e12be4bffbb067f41053c42d, type: 3}
 --- !u!61 &1468790162
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2605,6 +2611,7 @@ MonoBehaviour:
   selectableColor: {r: 0, g: 1, b: 0, a: 1}
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  ingredient_click: {fileID: 8300000, guid: 5c166014e12be4bffbb067f41053c42d, type: 3}
 --- !u!61 &1524098520
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2927,6 +2934,7 @@ MonoBehaviour:
   selectableColor: {r: 0, g: 1, b: 0, a: 1}
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  ingredient_click: {fileID: 8300000, guid: 5c166014e12be4bffbb067f41053c42d, type: 3}
 --- !u!61 &1598423119
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3113,6 +3121,7 @@ MonoBehaviour:
   selectableColor: {r: 0, g: 1, b: 0, a: 1}
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  ingredient_click: {fileID: 8300000, guid: 5c166014e12be4bffbb067f41053c42d, type: 3}
 --- !u!61 &1739819379
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3378,6 +3387,7 @@ MonoBehaviour:
   selectableColor: {r: 0, g: 1, b: 0, a: 1}
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  ingredient_click: {fileID: 8300000, guid: 5c166014e12be4bffbb067f41053c42d, type: 3}
 --- !u!61 &1827512499
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3738,6 +3748,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1211372442468441460, guid: 1512f17d9ace9444bab3907791fb2db3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1881313149}
+    - targetCorrespondingSourceObject: {fileID: 1211372442468441460, guid: 1512f17d9ace9444bab3907791fb2db3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1881313154}
   m_SourcePrefab: {fileID: 100100000, guid: 1512f17d9ace9444bab3907791fb2db3, type: 3}
 --- !u!224 &1881313147 stripped
 RectTransform:
@@ -3762,6 +3775,104 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kitchenSceneName: Kitchen2
+  button_click: {fileID: 8300000, guid: 036117dd8bdce43f1bbdad47222764e8, type: 3}
+--- !u!82 &1881313154
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1881313148}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

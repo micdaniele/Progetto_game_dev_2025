@@ -12,6 +12,9 @@ public class Ingredient : MonoBehaviour
     public Color selectedColor = Color.yellow; //Preso
     public Color disabledColor = Color.gray; //Non serve
 
+    [Header("Audio")]
+    public AudioClip ingredient_click;      // suono quando prendi l’ingrediente
+
     private Image btnImage;
     private Button btn;
     private RecipeManager recipeManager;
@@ -33,6 +36,7 @@ public class Ingredient : MonoBehaviour
 
         //Ripristina lo stato
         RestoreState();
+       
     }
 
     void OnDisable()
@@ -81,7 +85,11 @@ public class Ingredient : MonoBehaviour
 
     public void OnClick()
     {
-        if (isSelected) { Debug.Log($"[Ingredient] {ingredientName} già preso!"); return; }
+        if (ingredient_click != null)
+        {
+            AudioSource.PlayClipAtPoint(ingredient_click, Camera.main.transform.position);
+        }
+        if (isSelected) { Debug.Log($"[Ingredient] {ingredientName} già preso!"); return;}
         if (!isSelectable) { Debug.Log($"[Ingredient] {ingredientName} non serve!"); return; }
 
         if (recipeManager != null && recipeManager.TrySelectIngredient(ingredientName))

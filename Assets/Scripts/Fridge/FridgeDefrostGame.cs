@@ -10,10 +10,15 @@ public class FridgeDefrostGame : MonoBehaviour
     public Text timerValueText;
     public Text resultText;
     public GameObject minigamePanel;
+    public GameObject rulesPanel;
+
     public GameObject gameCompletePanel;
     public GameObject winText;
     public GameObject ingredientPanel;
     private bool gameEnded = false;
+    private bool waitingForStart = true;
+
+
     public GameObject gameOverText;
 
     [Header("Impostazioni Minigioco")]
@@ -36,12 +41,21 @@ public class FridgeDefrostGame : MonoBehaviour
 
     void Start()
     {
+        if (rulesPanel != null)
+        rulesPanel.SetActive(true);
+
         // Mouse libero
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         Time.timeScale = 1f;
 
-        StartMinigame();
+        waitingForStart = true;
+
+        if (minigamePanel != null)
+            minigamePanel.SetActive(false);
+
+        if (gameCompletePanel != null)
+            gameCompletePanel.SetActive(false);
     }
 
     public void StartMinigame()
@@ -78,6 +92,19 @@ public class FridgeDefrostGame : MonoBehaviour
 
     void Update()
     {
+        // Aspetta SPACE per iniziare
+        if (waitingForStart)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                waitingForStart = false;
+                if (rulesPanel != null)
+                    rulesPanel.SetActive(false);
+                StartMinigame();
+            }
+            return;
+        }
+
         if (!minigameActive || gameEnded) return;
 
         currentTime -= Time.deltaTime;
