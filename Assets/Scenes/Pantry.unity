@@ -3775,10 +3775,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kitchenSceneName: Kitchen2
-  button_click: {fileID: 8300000, guid: 036117dd8bdce43f1bbdad47222764e8, type: 3}
-  door_close: {fileID: 8300000, guid: 1a9f796d4cbed5647912e7252e6eae4f, type: 3}
-  audioSource: {fileID: 1881313154}
-  delaySecondAudio: 0
+  buttonClickSound: {fileID: 8300000, guid: 036117dd8bdce43f1bbdad47222764e8, type: 3}
+  closeSound: {fileID: 8300000, guid: 1a9f796d4cbed5647912e7252e6eae4f, type: 3}
+  waitForSounds: 1
+  delayBetweenSounds: 0.1
 --- !u!82 &1881313154
 AudioSource:
   m_ObjectHideFlags: 0

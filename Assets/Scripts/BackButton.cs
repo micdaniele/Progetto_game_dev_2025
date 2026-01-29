@@ -1,44 +1,69 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class BackButton : MonoBehaviour
 {
+    [Header("Scene")]
     public string kitchenSceneName = "Kitchen2";
-    public AudioClip button_click;
-    public AudioClip door_close;
 
+    [Header("Audio")]
+    public AudioClip buttonClickSound;
+    public AudioClip closeSound;
 
-    // Aggiungiamo un riferimento all'AudioSource
-    public AudioSource audioSource;
-    // Variabile per personalizzare il delay dall'inspector
-    public float delaySecondAudio = 1.5f;
+    [Header("Settings")]
+    [Tooltip("Aspetta che finiscano i suoni prima di caricare la scena?")]
+    public bool waitForSounds = true;
 
-    public void OnButtonClick()
-    {
-        // Avvia la Coroutine per gestire la sequenza
-        StartCoroutine(PlayAudioSequence());
-    }
-
-    System.Collections.IEnumerator PlayAudioSequence()
-    {
-        // 1. Riproduce il primo suono immediatamente
-        audioSource.PlayOneShot(button_click);
-
-        // 2. Attende il tempo stabilito
-        yield return new WaitForSeconds(delaySecondAudio);
-
-        // 3. Riproduce il secondo suono
-        audioSource.PlayOneShot(door_close);
-
-        Debug.Log("Secondo audio riprodotto dopo " + delaySecondAudio + " secondi.");
-    }
+    [Tooltip("Delay tra click e frigo (secondi)")]
+    public float delayBetweenSounds = 0.1f;
 
     public void GoBackToKitchen()
     {
-        if (button_click != null)
-            AudioSource.PlayClipAtPoint(button_click, Camera.main.transform.position);
-            
         Debug.Log("[BackButton] Torno alla cucina");
+
+        // Avvia la sequenza audio
+        StartCoroutine(PlaySoundsAndLoadScene());
+    }
+
+    IEnumerator PlaySoundsAndLoadScene()
+    {
+        float totalDelay = 0f;
+
+        // 1. Suono del click del bottone
+        if (buttonClickSound != null)
+        {
+            AudioSource.PlayClipAtPoint(buttonClickSound, Camera.main.transform.position);
+            Debug.Log("[BackButton] Click");
+
+            if (waitForSounds)
+            {
+                totalDelay += buttonClickSound.length + delayBetweenSounds;
+            }
+            else
+            {
+                totalDelay += delayBetweenSounds;
+            }
+        }
+
+        // Aspetta prima di riprodurre il suono 
+        yield return new WaitForSeconds(totalDelay);
+
+        // 2. Suono frigo/dispenza che si chiude
+        if (closeSound != null)
+        {
+            AudioSource.PlayClipAtPoint(closeSound, Camera.main.transform.position);
+            Debug.Log("[BackButton] Scena chiusa");
+
+            if (waitForSounds)
+            {
+                // Aspetta che finisca il suono
+                yield return new WaitForSeconds(closeSound.length);
+            }
+        }
+
+        // 3. Carica la scena
+        Debug.Log("[BackButton] Carico Kitchen2");
         SceneManager.LoadScene(kitchenSceneName);
     }
 }
