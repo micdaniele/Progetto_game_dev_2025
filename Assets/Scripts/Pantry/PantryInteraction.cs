@@ -13,11 +13,14 @@ public class PantryInteraction : MonoBehaviour
     [Header("Scene")]
     public string pantrySceneName = "Pantry";
 
+    [Header("Audio")]
+    public AudioSource audioSource; // Trascina qui l'AudioSource
+    public AudioClip openSound;    // Il suono della dispensa
+
     private bool playerInside = false;
 
     void Start()
     {
-        // FORZIAMO lo stato iniziale corretto
         if (promptUI != null) promptUI.SetActive(false);
     }
 
@@ -26,7 +29,6 @@ public class PantryInteraction : MonoBehaviour
         if (other.CompareTag(playerTag))
         {
             playerInside = true;
-            Debug.Log("[PantryInteraction] Il player è entrato nella zona della dispensa");
             promptUI.SetActive(true);
         }
     }
@@ -36,7 +38,6 @@ public class PantryInteraction : MonoBehaviour
         if (other.CompareTag(playerTag))
         {
             playerInside = false;
-            Debug.Log("[PantryInteraction] Il player ha lasciato la zona della dispensa");
             promptUI.SetActive(false);
         }
     }
@@ -53,19 +54,25 @@ public class PantryInteraction : MonoBehaviour
     {
         if (GameManager.Instance != null && GameManager.Instance.HasValidSelection())
         {
-            // Salva la posizione prima di cambiare scena
+            // --- GESTIONE AUDIO ---
+            if (audioSource != null && openSound != null)
+            {
+                // Riproduce il suono
+                audioSource.PlayOneShot(openSound);
+
+                // TRUCCO: Sposta l'AudioSource fuori dalla gerarchia 
+                // così non viene distrutto quando cambia la scena
+                DontDestroyOnLoad(audioSource.gameObject);
+            }
+            // ----------------------
+
             GameObject player = GameObject.FindGameObjectWithTag(playerTag);
             if (player != null)
             {
                 GameManager.Instance.SavePlayerPosition(player.transform.position);
             }
 
-            Debug.Log("[PantryInteraction] Vado in dispensa...");
             SceneManager.LoadScene(pantrySceneName);
-        }
-        else
-        {
-            Debug.Log("[PantryInteraction] NON PUOI ENTRARE: Devi prima scegliere una ricetta!");
         }
     }
 }

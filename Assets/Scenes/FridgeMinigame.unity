@@ -4229,7 +4229,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kitchenSceneName: Kitchen2
-  button_click: {fileID: 0}
+  button_click: {fileID: 8300000, guid: 036117dd8bdce43f1bbdad47222764e8, type: 3}
+  door_close: {fileID: 0}
+  audioSource: {fileID: 0}
+  delaySecondAudio: 1.5
 --- !u!1 &1521254864
 GameObject:
   m_ObjectHideFlags: 0
