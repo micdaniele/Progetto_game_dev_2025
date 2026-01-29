@@ -11,17 +11,16 @@ public class GameManager : MonoBehaviour
     // Zaino ingredienti
     public List<string> ingredientiPresi = new List<string>();
 
-
     // Salva la posizione del player
     private Dictionary<string, bool> kitchenObjectsState = new Dictionary<string, bool>();
+    private Dictionary<string, bool> uiObjectsState = new Dictionary<string, bool>(); // NUOVO: per UI persistenti
     public List<string> completedTasks = new List<string>();
     private Vector3 playerPosition;
     private bool hasPlayerPosition = false;
 
-
     void Awake()
     {
-        // Singelton
+        // Singleton
         if (Instance != null && Instance != this)
         {
             // Se esiste già un'istanza diversa da questa, distruggi QUESTO oggetto
@@ -33,13 +32,11 @@ public class GameManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        Debug.Log($"[GameManager]Inizializzato come persistente");
+        Debug.Log($"[GameManager] Inizializzato come persistente");
         Debug.Log($"[GameManager] Nome: {gameObject.name}");
     }
 
-
     // Salva se l'ingrediente è stato già preso
-
     public void SaveObjectState(string objectId, bool isActive)
     {
         if (kitchenObjectsState.ContainsKey(objectId))
@@ -50,9 +47,18 @@ public class GameManager : MonoBehaviour
         Debug.Log($"[GameManager] Stato salvato -> {objectId}: {isActive}");
     }
 
+    //Salva lo stato di oggetti UI che non devono essere resettati
+    public void SaveUIObjectState(string objectId, bool isActive)
+    {
+        if (uiObjectsState.ContainsKey(objectId))
+            uiObjectsState[objectId] = isActive;
+        else
+            uiObjectsState.Add(objectId, isActive);
 
+        Debug.Log($"[GameManager] Stato UI salvato -> {objectId}: {isActive}");
+    }
 
-    //Vede se il minigioco è stato completato
+    // Vede se il minigioco è stato completato
     public void CompleteTask(string taskName)
     {
         if (!completedTasks.Contains(taskName))
@@ -74,7 +80,6 @@ public class GameManager : MonoBehaviour
         Debug.Log($"[GameManager] Posizione player salvata: {position}");
     }
 
-
     public bool HasSavedPlayerPosition() => hasPlayerPosition;
 
     public void ResetKitchenState()
@@ -82,19 +87,7 @@ public class GameManager : MonoBehaviour
         kitchenObjectsState.Clear();
         hasPlayerPosition = false;
 
-        Debug.Log("[GameManager] RESET STATO CUCINA (senza resettare tasks)");
-    }
-
-
-    public void ResetAllGameState()
-    {
-        selectedMood = -1;
-        selectedRecipe = "";
-        ingredientiPresi.Clear();
-        kitchenObjectsState.Clear();
-        hasPlayerPosition = false;
-
-        Debug.Log("[GameManager] RESET COMPLETO (tasks mantenuti)");
+        Debug.Log("[GameManager] RESET STATO CUCINA (senza resettare tasks e UI)");
     }
 
 
@@ -104,13 +97,14 @@ public class GameManager : MonoBehaviour
         Debug.Log($"Mood: {selectedMood}");
         Debug.Log($"Recipe: {selectedRecipe}");
         Debug.Log($"Ingredienti Presi: {ingredientiPresi.Count}");
-        Debug.Log($"Oggetti Salvati: {kitchenObjectsState.Count}");
+        Debug.Log($"Oggetti Cucina Salvati: {kitchenObjectsState.Count}");
+        Debug.Log($"Oggetti UI Salvati: {uiObjectsState.Count}");
         Debug.Log($"Tasks Completati: {completedTasks.Count}");
         Debug.Log($"Ha Posizione Player: {hasPlayerPosition}");
         Debug.Log("========================");
     }
 
-    //Set
+    // Set
     public void SetSelection(int mood, string recipe)
     {
         selectedMood = mood;
@@ -126,7 +120,6 @@ public class GameManager : MonoBehaviour
         Debug.Log("[GameManager] Inventario svuotato.");
     }
 
-
     public void SetMood(int mood)
     {
         selectedMood = mood;
@@ -140,8 +133,7 @@ public class GameManager : MonoBehaviour
         Debug.Log($"[GameManager] Ricetta impostata: {recipe}");
     }
 
-
-    //Get
+    // Get
     public int GetCurrentMood() => selectedMood;
     public string GetCurrentRecipe() => selectedRecipe;
 
@@ -152,11 +144,19 @@ public class GameManager : MonoBehaviour
 
     public Vector3 GetPlayerPosition() => playerPosition;
 
-    // Legge se è già stato raccolto e sin caso lo disattiva nella scena frigo/dispenza
+    // Legge se è già stato raccolto e in caso lo disattiva nella scena frigo/dispensa
     public bool GetObjectState(string objectId, bool defaultState = true)
     {
         if (kitchenObjectsState.ContainsKey(objectId))
             return kitchenObjectsState[objectId];
+        return defaultState;
+    }
+
+    // Legge lo stato degli oggetti UI
+    public bool GetUIObjectState(string objectId, bool defaultState = true)
+    {
+        if (uiObjectsState.ContainsKey(objectId))
+            return uiObjectsState[objectId];
         return defaultState;
     }
 

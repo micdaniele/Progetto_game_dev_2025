@@ -99,7 +99,7 @@ public class FridgeDefrostGame : MonoBehaviour
 
                 RestartMinigame();
             }
-            return; // Importante: esci dall'Update durante l'attesa
+            return; // esci dall'Update durante l'attesa
         }
 
         if (!minigameActive || gameEnded) return;
