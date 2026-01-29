@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 342d2e8ec811c114bba03a4d7f35c282
+guid: 0e3802e018d8d442c8d8e49e4e2feb3a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2613643999577277792
-    second: FurnitureZoom2_0
+      213: -8558434609319130766
+    second: Robot_2_0
+  - first:
+      213: 2245912550109740034
+    second: Robot_2_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +103,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: FurnitureZoom2_0
+      name: Robot_2_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1376
-        height: 768
+        width: 515
+        height: 484
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +118,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0658224be57854420800000000000000
-      internalID: 2613643999577277792
+      spriteID: 279cf1e31155a3980800000000000000
+      internalID: -8558434609319130766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Robot_2_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 455
+        height: 375
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20cf1e1a0951b2f10800000000000000
+      internalID: 2245912550109740034
       vertices: []
       indices: 
       edges: []
@@ -134,8 +159,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      FurnitureZoom2_0: 2613643999577277792
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
