@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement; 
+using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -8,17 +8,8 @@ public class FridgeDefrostGame : MonoBehaviour
 {
     [Header("Riferimenti UI")]
     public Text timerValueText;
-    public Text resultText;
-    public GameObject minigamePanel;
     public GameObject rulesPanel;
-
-    public GameObject gameCompletePanel;
     public GameObject winText;
-    public GameObject ingredientPanel;
-    private bool gameEnded = false;
-    private bool waitingForStart = true;
-
-
     public GameObject gameOverText;
 
     [Header("Impostazioni Minigioco")]
@@ -34,7 +25,11 @@ public class FridgeDefrostGame : MonoBehaviour
     public GameObject recipeManagerObject;
 
     [Header("Scene Settings")]
-    public string fridgeSceneName = "Fridge"; 
+    public string fridgeSceneName = "Fridge";
+
+    private bool gameEnded = false;
+    private bool waitingForStart = true;
+    private bool waitingForRestart = false;
     private float currentTime;
     private bool minigameActive = false;
     private List<FridgeIngredientButton> frozenIngredients;
@@ -42,7 +37,7 @@ public class FridgeDefrostGame : MonoBehaviour
     void Start()
     {
         if (rulesPanel != null)
-        rulesPanel.SetActive(true);
+            rulesPanel.SetActive(true);
 
         // Mouse libero
         Cursor.lockState = CursorLockMode.None;
@@ -50,12 +45,6 @@ public class FridgeDefrostGame : MonoBehaviour
         Time.timeScale = 1f;
 
         waitingForStart = true;
-
-        if (minigamePanel != null)
-            minigamePanel.SetActive(false);
-
-        if (gameCompletePanel != null)
-            gameCompletePanel.SetActive(false);
     }
 
     public void StartMinigame()
@@ -63,6 +52,7 @@ public class FridgeDefrostGame : MonoBehaviour
         StopAllCoroutines();
 
         gameEnded = false;
+        waitingForRestart = false;
         minigameActive = true;
         currentTime = gameTime;
 
@@ -77,12 +67,6 @@ public class FridgeDefrostGame : MonoBehaviour
             if (ing != null)
                 ing.enabled = false;
         }
-
-        if (minigamePanel != null)
-            minigamePanel.SetActive(true);
-
-        if (gameCompletePanel != null)
-            gameCompletePanel.SetActive(false);
 
         StartCoroutine(HighlightRoutine());
 
@@ -103,6 +87,19 @@ public class FridgeDefrostGame : MonoBehaviour
                 StartMinigame();
             }
             return;
+        }
+
+        // Attendi R per ricominciare dopo Game Over
+        if (waitingForRestart)
+        {
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                if (gameOverText != null)
+                    gameOverText.SetActive(false);
+
+                RestartMinigame();
+            }
+            return; // Importante: esci dall'Update durante l'attesa
         }
 
         if (!minigameActive || gameEnded) return;
@@ -170,7 +167,6 @@ public class FridgeDefrostGame : MonoBehaviour
 
         Debug.Log("[FridgeDefrost] VITTORIA!");
 
-
         if (GameManager.Instance != null)
         {
             GameManager.Instance.CompleteTask("FridgeMinigame");
@@ -180,7 +176,6 @@ public class FridgeDefrostGame : MonoBehaviour
         {
             Debug.LogWarning("[FridgeDefrost] GameManager non trovato!");
         }
-  
 
         if (winText != null)
             winText.SetActive(true);
@@ -192,38 +187,25 @@ public class FridgeDefrostGame : MonoBehaviour
     IEnumerator LoadFridgeSceneAfterDelay(float delay)
     {
         Debug.Log($"[FridgeDefrost] Caricamento scena frigo tra {delay} secondi...");
-
         yield return new WaitForSeconds(delay);
-
         Debug.Log($"[FridgeDefrost] Carico scena: {fridgeSceneName}");
-
-        // Carica la scena del frigo
         SceneManager.LoadScene(fridgeSceneName);
     }
-  
 
     void GameOver()
     {
+        if (gameEnded) return;
+
+        gameEnded = true;
         minigameActive = false;
+        waitingForRestart = true;
+
         StopAllCoroutines();
 
         Debug.Log("[FridgeDefrost] Tempo scaduto!");
 
         if (gameOverText != null)
             gameOverText.SetActive(true);
-
-        // Riavvia il minigioco
-        StartCoroutine(RestartAfterDelay(2f));
-    }
-
-    IEnumerator RestartAfterDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-
-        if (gameOverText != null)
-            gameOverText.SetActive(false);
-
-        RestartMinigame();
     }
 
     void RestartMinigame()
