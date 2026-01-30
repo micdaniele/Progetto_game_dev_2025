@@ -91,18 +91,18 @@ public class GameManager : MonoBehaviour
     }
 
     //metodo per debug
-    //public void PrintCurrentState()
-    //{
-    //    Debug.Log("=== GAMEMANAGER STATE ===");
-    //    Debug.Log($"Mood: {selectedMood}");
-    //    Debug.Log($"Recipe: {selectedRecipe}");
-    //    Debug.Log($"Ingredienti Presi: {ingredientiPresi.Count}");
-    //    Debug.Log($"Oggetti Cucina Salvati: {kitchenObjectsState.Count}");
-    //    Debug.Log($"Oggetti UI Salvati: {uiObjectsState.Count}");
-    //    Debug.Log($"Tasks Completati: {completedTasks.Count}");
-    //    Debug.Log($"Ha Posizione Player: {hasPlayerPosition}");
-    //    Debug.Log("========================");
-    //}
+    public void PrintCurrentState()
+    {
+        Debug.Log("=== GAMEMANAGER STATE ===");
+        Debug.Log($"Mood: {selectedMood}");
+        Debug.Log($"Recipe: {selectedRecipe}");
+        Debug.Log($"Ingredienti Presi: {ingredientiPresi.Count}");
+        Debug.Log($"Oggetti Cucina Salvati: {kitchenObjectsState.Count}");
+        Debug.Log($"Oggetti UI Salvati: {uiObjectsState.Count}");
+        Debug.Log($"Tasks Completati: {completedTasks.Count}");
+        Debug.Log($"Ha Posizione Player: {hasPlayerPosition}");
+        Debug.Log("========================");
+    }
 
     // Set
     public void SetSelection(int mood, string recipe)

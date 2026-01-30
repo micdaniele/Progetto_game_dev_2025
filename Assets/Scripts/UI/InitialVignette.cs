@@ -1,6 +1,3 @@
-// === VERSIONE DEBUG DI InitialVignette ===
-// Usa questa temporaneamente per capire cosa succede
-
 using UnityEngine;
 
 public class InitialVignette : MonoBehaviour
