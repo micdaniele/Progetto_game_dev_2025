@@ -31,14 +31,6 @@ public class DialogueTrigger : MonoBehaviour
     private bool dialogueTriggered = false;
     private bool isWaitingForDialogueEnd = false;
 
-    public enum TriggerType
-    {
-        OnStart,
-        OnInteract,
-        OnCollision,
-        Manual
-    }
-
     void Start()
     {
         // forza lo stato iniziale corretto
@@ -128,7 +120,7 @@ public class DialogueTrigger : MonoBehaviour
             }
             else
             {
-                // Task NON completate mostra dialogo alternativo
+                // Task non completate mostra dialogo alternativo
                 if (tasksNotCompletedDialogue != null)
                 {
                     Debug.Log("[DialogueTrigger] Task non completate, mostro dialogo alternativo");
@@ -139,7 +131,7 @@ public class DialogueTrigger : MonoBehaviour
                     Debug.LogWarning("[DialogueTrigger] tasksNotCompletedDialogue non assegnato!");
                 }
 
-                // NON segna come completato se le task non sono finite
+                // non segna come completato se le task non sono finite
                 return;
             }
 
@@ -163,17 +155,7 @@ public class DialogueTrigger : MonoBehaviour
         // Controlla se il DialogueManager ha finito di mostrare il dialogo
         if (DialogueManager.Instance != null)
         {
-            // NOTA: Questa parte dipende dal tuo DialogueManager
-            // Potresti dover aggiungere un metodo pubblico tipo IsDialogueActive()
-            // Per ora assumo che ci sia un pannello che si disattiva quando il dialogo finisce
-
-            // Opzione 1: Se DialogueManager ha un metodo IsDialogueActive()
-            // if (!DialogueManager.Instance.IsDialogueActive())
-
-            // Opzione 2: Se DialogueManager ha un pannello pubblico
-            // if (DialogueManager.Instance.dialoguePanel != null && !DialogueManager.Instance.dialoguePanel.activeSelf)
-
-            // Opzione 3: Usa una coroutine con un delay fisso (soluzione temporanea)
+            // Usa una coroutine con un delay fisso
             StartCoroutine(LoadSceneAfterDelay());
             isWaitingForDialogueEnd = false;
         }
@@ -181,15 +163,12 @@ public class DialogueTrigger : MonoBehaviour
 
     private IEnumerator LoadSceneAfterDelay()
     {
-        // Aspetta che il dialogo finisca (puoi modificare questa logica)
+        // Aspetta che il dialogo finisca
         yield return new WaitForSeconds(delayBeforeSceneLoad);
-
-        // Verifica che il dialogo sia effettivamente finito
-        // Se il tuo DialogueManager ha un modo per controllarlo, usalo qui
 
         Debug.Log($"[DialogueTrigger] Caricamento scena '{robotScene}'...");
 
-        // Salva la posizione del player se necessario
+        // Salva la posizione del player
         if (GameManager.Instance != null)
         {
             GameObject player = GameObject.FindGameObjectWithTag(playerTag);
@@ -201,16 +180,6 @@ public class DialogueTrigger : MonoBehaviour
 
         // Carica la scena
         SceneManager.LoadScene(robotScene);
-    }
-
-    // METODO PUBBLICO: Chiamalo dal DialogueManager quando il dialogo finisce
-    public void OnDialogueEnd()
-    {
-        if (isWaitingForDialogueEnd && loadSceneAfterTasksCompleted)
-        {
-            StartCoroutine(LoadSceneAfterDelay());
-            isWaitingForDialogueEnd = false;
-        }
     }
 
     // Controlla se tutte le task richieste sono state completate
@@ -241,21 +210,21 @@ public class DialogueTrigger : MonoBehaviour
         return true;
     }
 
-    // Metodo pubblico per debug
-    public void CheckTaskStatus()
-    {
-        if (!requireTaskCompletion)
-        {
-            Debug.Log("[DialogueTrigger] Controllo task disabilitato");
-            return;
-        }
+    // Metodo per debug
+    //public void CheckTaskStatus()
+    //{
+    //    if (!requireTaskCompletion)
+    //    {
+    //        Debug.Log("[DialogueTrigger] Controllo task disabilitato");
+    //        return;
+    //    }
 
-        Debug.Log("=== TASK STATUS ===");
-        foreach (string taskName in requiredTasks)
-        {
-            bool completed = GameManager.Instance != null && GameManager.Instance.IsTaskCompleted(taskName);
-            Debug.Log($"Task '{taskName}': {(completed ? " Completata" : " Non completata")}");
-        }
-        Debug.Log("==================");
-    }
+    //    Debug.Log("=== TASK STATUS ===");
+    //    foreach (string taskName in requiredTasks)
+    //    {
+    //        bool completed = GameManager.Instance != null && GameManager.Instance.IsTaskCompleted(taskName);
+    //        Debug.Log($"Task '{taskName}': {(completed ? " Completata" : " Non completata")}");
+    //    }
+    //    Debug.Log("==================");
+    //}
 }

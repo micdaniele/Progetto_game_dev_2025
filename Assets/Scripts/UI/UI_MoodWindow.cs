@@ -134,7 +134,7 @@ public class UI_MoodWindow : MonoBehaviour
             }
         }
 
-        // Polimorfismo: usa il metodo GetRecipes() della classe figlia
+        // Usa il metodo GetRecipes() della classe figlia
         if (selectedMood >= 0 && selectedMood < recipeDatabases.Length)
         {
             Dictionary<string, List<string>> recipes = recipeDatabases[selectedMood].GetRecipes();

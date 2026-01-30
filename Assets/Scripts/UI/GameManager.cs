@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
 
     // Salva la posizione del player
     private Dictionary<string, bool> kitchenObjectsState = new Dictionary<string, bool>();
-    private Dictionary<string, bool> uiObjectsState = new Dictionary<string, bool>(); // NUOVO: per UI persistenti
+    private Dictionary<string, bool> uiObjectsState = new Dictionary<string, bool>(); //UI persistenti
     public List<string> completedTasks = new List<string>();
     private Vector3 playerPosition;
     private bool hasPlayerPosition = false;
@@ -90,19 +90,19 @@ public class GameManager : MonoBehaviour
         Debug.Log("[GameManager] RESET STATO CUCINA (senza resettare tasks e UI)");
     }
 
-
-    public void PrintCurrentState()
-    {
-        Debug.Log("=== GAMEMANAGER STATE ===");
-        Debug.Log($"Mood: {selectedMood}");
-        Debug.Log($"Recipe: {selectedRecipe}");
-        Debug.Log($"Ingredienti Presi: {ingredientiPresi.Count}");
-        Debug.Log($"Oggetti Cucina Salvati: {kitchenObjectsState.Count}");
-        Debug.Log($"Oggetti UI Salvati: {uiObjectsState.Count}");
-        Debug.Log($"Tasks Completati: {completedTasks.Count}");
-        Debug.Log($"Ha Posizione Player: {hasPlayerPosition}");
-        Debug.Log("========================");
-    }
+    //metodo per debug
+    //public void PrintCurrentState()
+    //{
+    //    Debug.Log("=== GAMEMANAGER STATE ===");
+    //    Debug.Log($"Mood: {selectedMood}");
+    //    Debug.Log($"Recipe: {selectedRecipe}");
+    //    Debug.Log($"Ingredienti Presi: {ingredientiPresi.Count}");
+    //    Debug.Log($"Oggetti Cucina Salvati: {kitchenObjectsState.Count}");
+    //    Debug.Log($"Oggetti UI Salvati: {uiObjectsState.Count}");
+    //    Debug.Log($"Tasks Completati: {completedTasks.Count}");
+    //    Debug.Log($"Ha Posizione Player: {hasPlayerPosition}");
+    //    Debug.Log("========================");
+    //}
 
     // Set
     public void SetSelection(int mood, string recipe)
