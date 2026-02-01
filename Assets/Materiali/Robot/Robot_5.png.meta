@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 75
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -103,12 +103,12 @@ TextureImporter:
       name: Robot_5_0
       rect:
         serializedVersion: 2
-        x: 5
-        y: 0
-        width: 220
-        height: 219
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 5
+        width: 233
+        height: 210
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3846454}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: de96941dd4b311441bb461e7c07171a1
     internalID: 0
     vertices: []
     indices: 
@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Robot_5_0: 4700665213289682776
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
