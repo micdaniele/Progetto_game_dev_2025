@@ -5,9 +5,6 @@ TextureImporter:
   - first:
       213: -8558434609319130766
     second: Robot_2_0
-  - first:
-      213: 2245912550109740034
-    second: Robot_2_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -106,10 +103,10 @@ TextureImporter:
       name: Robot_2_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 1
         y: 0
-        width: 515
-        height: 484
+        width: 232
+        height: 219
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -120,28 +117,6 @@ TextureImporter:
       bones: []
       spriteID: 279cf1e31155a3980800000000000000
       internalID: -8558434609319130766
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Robot_2_1
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 455
-        height: 375
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 20cf1e1a0951b2f10800000000000000
-      internalID: 2245912550109740034
       vertices: []
       indices: 
       edges: []
@@ -159,9 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Robot_2_0: -8558434609319130766
-      Robot_2_1: 2245912550109740034
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

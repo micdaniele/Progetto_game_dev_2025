@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 99245282ca53b409d800719d4e74edfa
+guid: 8acca8e1ce8694c7f8388eee9730c16b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1454398783904938662
-    second: Robot_6_0
+      213: -7568673234201418803
+    second: pannello_start_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Robot_6_0
+      name: pannello_start_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 585
-        height: 427
+        width: 500
+        height: 500
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a5506930300f0dbe0800000000000000
-      internalID: -1454398783904938662
+      spriteID: dc3ea664bcba6f690800000000000000
+      internalID: -7568673234201418803
       vertices: []
       indices: 
       edges: []
@@ -134,8 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Robot_6_0: -1454398783904938662
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

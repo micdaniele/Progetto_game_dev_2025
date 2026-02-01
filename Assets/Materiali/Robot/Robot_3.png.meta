@@ -103,10 +103,10 @@ TextureImporter:
       name: Robot_3_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 2
         y: 0
-        width: 515
-        height: 484
+        width: 231
+        height: 219
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -134,8 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Robot_3_0: -8053765748741006230
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

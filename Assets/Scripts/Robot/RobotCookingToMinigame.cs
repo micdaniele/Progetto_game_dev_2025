@@ -3,16 +3,68 @@ using UnityEngine.SceneManagement;
 
 public class RobotCookingToMinigame : MonoBehaviour
 {
-    [SerializeField] private float waitTime = 5f; // deve combaciare con la durata dell'animazione
+    public Sprite[] robotSprites;        // sprite robot in ordine
+    public AudioClip clickSound;         // suono al cambio
+    public GameObject[] startPanels;     // pannelli iniziali
 
-    private void Start()
+    private SpriteRenderer spriteRenderer;
+    private AudioSource audioSource;
+    private int currentIndex = 0;
+    private bool hasStarted = false;
+
+    void Start()
     {
-        StartCoroutine(GoToMinigame());
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
+
+        // sprite iniziale
+        spriteRenderer.sprite = robotSprites[0];
+
+        // pannelli visibili all'inizio
+        foreach (GameObject panel in startPanels)
+        {
+            if (panel != null)
+                panel.SetActive(true);
+        }
     }
 
-    private System.Collections.IEnumerator GoToMinigame()
+    void Update()
     {
-        yield return new WaitForSeconds(waitTime);
-        SceneManager.LoadScene("FlappyFood");
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            // primo spazio: chiude pannelli
+            if (!hasStarted)
+            {
+                hasStarted = true;
+
+                foreach (GameObject panel in startPanels)
+                {
+                    if (panel != null)
+                        panel.SetActive(false);
+                }
+
+                return; // IMPORTANTISSIMO
+            }
+
+            // spazi successivi: cambia sprite
+            CambiaSprite();
+        }
+    }
+
+    void CambiaSprite()
+    {
+        currentIndex++;
+
+        if (currentIndex < robotSprites.Length)
+        {
+            spriteRenderer.sprite = robotSprites[currentIndex];
+
+            if (clickSound != null && audioSource != null)
+                audioSource.PlayOneShot(clickSound);
+        }
+        else
+        {
+            SceneManager.LoadScene("FlappyFood");
+        }
     }
 }

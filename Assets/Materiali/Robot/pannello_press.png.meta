@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: 8ced0e86911824dbfb2af58252437599
+guid: cd56a31e6821b4042b2ae3ead33b7901
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1339682970686775488
-    second: Robot_7_0
-  - first:
-      213: -8598588579242764732
-    second: Robot_7_1
+      213: 4366402468545854998
+    second: pannello_press_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -103,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Robot_7_0
+      name: pannello_press_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 515
-        height: 484
+        width: 500
+        height: 500
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -118,30 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0c0ec6b5092879210800000000000000
-      internalID: 1339682970686775488
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Robot_7_1
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 455
-        height: 376
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 44611849e3daba880800000000000000
-      internalID: -8598588579242764732
+      spriteID: 61e701439e3989c30800000000000000
+      internalID: 4366402468545854998
       vertices: []
       indices: 
       edges: []
@@ -159,9 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Robot_7_0: 1339682970686775488
-      Robot_7_1: -8598588579242764732
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
