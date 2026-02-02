@@ -13,10 +13,8 @@ public class GameManagerFlappyFood : MonoBehaviour
     [Header("Interfaccia Utente (UI)")]
     [SerializeField] private Text scoreText;
 
-    // TRASCINA QUI IL BOTTONE NORMALE (TRIANGOLO)
     [SerializeField] private GameObject playButton;
 
-    // NUOVO: TRASCINA QUI IL BOTTONE CON LA "X"
     [SerializeField] private GameObject winButton;
 
     [SerializeField] private GameObject gameOver;
@@ -96,10 +94,10 @@ public class GameManagerFlappyFood : MonoBehaviour
 
     public void Victory()
     {
-        // SE VINCI: Nascondi il bottone Play normale...
+        // Se vinci nasconde il bottone Play normale
         if (playButton != null) playButton.SetActive(false);
 
-        // ...e MOSTRA IL BOTTONE X!
+        // e mostra il bottone per la vittoria
         if (winButton != null) winButton.SetActive(true);
 
         if (youWon != null) youWon.SetActive(true);

@@ -7271,8 +7271,10 @@ MonoBehaviour:
     dialogueID: incomplete task
     showOnlyOnce: 0
     lines:
-    - text: Not all the ingredients have been taken, go get them from the fridge
-        or the pantry.
+    - text: Not all the ingredients have been taken
+      speakerName: Emotino
+      autoAdvanceDelay: 0
+    - text: go get them from the fridge or the pantry
       speakerName: Emotino
       autoAdvanceDelay: 0
   loadSceneAfterTasksCompleted: 1
@@ -7959,7 +7961,6 @@ GameObject:
   - component: {fileID: 1650392829}
   - component: {fileID: 1650392831}
   - component: {fileID: 1650392830}
-  - component: {fileID: 1650392832}
   m_Layer: 0
   m_Name: FridgeInteractionPrompt
   m_TagString: Untagged
@@ -8025,18 +8026,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1650392828}
   m_CullTransparentMesh: 1
---- !u!114 &1650392832
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1650392828}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1a526870ad904f35afeaa16ce0e3149, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1658850932
 GameObject:
   m_ObjectHideFlags: 0
@@ -9206,7 +9195,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -9.8}
+  m_AnchoredPosition: {x: 0, y: -4.7}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1804640209

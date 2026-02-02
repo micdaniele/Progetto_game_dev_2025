@@ -7,7 +7,6 @@ public class SoundManager : MonoBehaviour
 {
     [SerializeField] Slider volumeSlider;
 
-    // Start is called before the first frame update
     void Start()
     {
         if (!PlayerPrefs.HasKey("musicVolume"))

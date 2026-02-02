@@ -9,7 +9,6 @@ public class Ingredient : MonoBehaviour
     [Header("Colori")]
     public Color normalColor = Color.white;
     public Color selectableColor = Color.green; //Serve
-    public Color selectedColor = Color.yellow; //Preso
     public Color disabledColor = Color.gray; //Non serve
 
     [Header("Audio")]
@@ -59,7 +58,7 @@ public class Ingredient : MonoBehaviour
         {
             // Se già raccolto, nascondi l'oggetto
             gameObject.SetActive(false);
-            Debug.Log($"[Ingredient] {ingredientName} già raccolto, nascosto");
+            //Debug.Log($"[Ingredient] {ingredientName} già raccolto, nascosto");
         }
     }
 
@@ -89,8 +88,8 @@ public class Ingredient : MonoBehaviour
         {
             AudioSource.PlayClipAtPoint(ingredient_click, Camera.main.transform.position);
         }
-        if (isSelected) { Debug.Log($"[Ingredient] {ingredientName} già preso!"); return;}
-        if (!isSelectable) { Debug.Log($"[Ingredient] {ingredientName} non serve!"); return; }
+        //if (isSelected) { Debug.Log($"[Ingredient] {ingredientName} già preso!"); return;}
+        //if (!isSelectable) { Debug.Log($"[Ingredient] {ingredientName} non serve!"); return; }
 
         if (recipeManager != null && recipeManager.TrySelectIngredient(ingredientName))
         {
@@ -105,12 +104,7 @@ public class Ingredient : MonoBehaviour
     {
         if (btnImage == null) return;
 
-        if (isSelected)
-        {
-            btnImage.color = selectedColor;
-            if (btn != null) btn.interactable = false;
-        }
-        else if (isSelectable)
+        if (isSelectable)
         {
             btnImage.color = selectableColor;
             if (btn != null) btn.interactable = true;
@@ -121,7 +115,5 @@ public class Ingredient : MonoBehaviour
             if (btn != null) btn.interactable = false;
         }
     }
-
-    public bool IsSelected() => isSelected;
     public bool IsSelectable() => isSelectable;
 }

@@ -9,7 +9,7 @@ public class MoodWindow : MonoBehaviour
     // Metodo chiamato quando viene selezionato un mood
     public void SelectMood(int mood)
     {
-        Debug.Log($"[MoodWindow] Mood selezionato: {mood}");
+        //Debug.Log($"[MoodWindow] Mood selezionato: {mood}");
 
         if (GameManager.Instance != null)
         {
@@ -22,10 +22,10 @@ public class MoodWindow : MonoBehaviour
             if (recipeContent != null)
                 recipeContent.SetActive(true);
         }
-        else
-        {
-            Debug.LogError("[MoodWindow] GameManager.Instance è NULL!");
-        }
+        //else
+        //{
+        //    Debug.LogError("[MoodWindow] GameManager.Instance è NULL!");
+        //}
     }
 
     // Metodo chiamato quando viene selezionata una ricetta
@@ -38,7 +38,7 @@ public class MoodWindow : MonoBehaviour
             GameManager.Instance.SetRecipe(recipe);
 
             // Debug: stampa lo stato del GameManager
-            GameManager.Instance.PrintCurrentState();
+            //GameManager.Instance.PrintCurrentState();
 
             // Nascondi la finestra
             Hide();
@@ -48,10 +48,10 @@ public class MoodWindow : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
-        else
-        {
-            Debug.LogError("[MoodWindow] GameManager.Instance è NULL!");
-        }
+        //else
+        //{
+        //    Debug.LogError("[MoodWindow] GameManager.Instance è NULL!");
+        //}
     }
 
     // Metodo per nascondere la finestra

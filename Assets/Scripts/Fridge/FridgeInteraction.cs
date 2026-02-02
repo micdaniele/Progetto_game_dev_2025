@@ -33,7 +33,7 @@ public class FridgeInteraction : MonoBehaviour
         if (other.CompareTag(playerTag))
         {
             playerInside = true;
-            Debug.Log("[PantryInteraction] Il player è entrato nella zona del frigo");
+            //Debug.Log("[PantryInteraction] Il player è entrato nella zona del frigo");
             promptUI.SetActive(true);
         }
     }
@@ -43,7 +43,7 @@ public class FridgeInteraction : MonoBehaviour
         if (other.CompareTag(playerTag))
         {
             playerInside = false;
-            Debug.Log("[PantryInteraction] Il player ha lasciato la zona del frigo");
+            //Debug.Log("[PantryInteraction] Il player ha lasciato la zona del frigo");
             promptUI.SetActive(false);
         }
     }
@@ -61,14 +61,14 @@ public class FridgeInteraction : MonoBehaviour
         // Controllo ricetta selezionata
         if (GameManager.Instance == null || !GameManager.Instance.HasValidSelection())
         {
-            Debug.Log("[PantryInteraction] Devi prima scegliere una ricetta!");
+            //Debug.Log("[PantryInteraction] Devi prima scegliere una ricetta!");
             return;
         }
 
         isOpening = true;
         soundPlaying = true;
 
-        Debug.Log("[PantryInteraction] Apertura dispensa");
+        //Debug.Log("[PantryInteraction] Apertura dispensa");
 
         // Nascondi il prompt
         if (promptUI != null)
@@ -94,14 +94,14 @@ public class FridgeInteraction : MonoBehaviour
 
     IEnumerator PlaySoundAndLoadScene()
     {
-        Debug.Log("[PantryInteraction]  Riproduco suono dispensa");
+        //Debug.Log("[PantryInteraction]  Riproduco suono dispensa");
 
         AudioSource.PlayClipAtPoint(openSound, Camera.main.transform.position, 1.0f);
 
         // Aspetta che il suono sia completo
         float waitTime = openSound.length;
 
-        Debug.Log($"[PantryInteraction] Aspetto {waitTime} secondi");
+        //Debug.Log($"[PantryInteraction] Aspetto {waitTime} secondi");
         yield return new WaitForSeconds(waitTime);
 
         // Carica la scena
@@ -110,7 +110,7 @@ public class FridgeInteraction : MonoBehaviour
 
     void LoadFridgeMinigameScene()
     {
-        Debug.Log("[PantryInteraction] Caricamento scena Pantry");
+        //Debug.Log("[PantryInteraction] Caricamento scena Pantry");
 
         // Reset del flag prima di cambiare scena
         soundPlaying = false;

@@ -11,8 +11,7 @@ public class DialogueTriggerWrongInteraction : MonoBehaviour
     public string playerTag = "Player";
 
     [Header("Recipe Check")]
-    [Tooltip("Se true, il dialogo appare SOLO se NON è stata ancora scelta una ricetta")]
-    public bool requiresNoRecipeSelected = false;
+    public bool requiresNoRecipeSelected = false; //il dialogo appare SOLO se NON è stata ancora scelta una ricetta
 
     private bool playerNearby = false;
 
@@ -62,7 +61,7 @@ public class DialogueTriggerWrongInteraction : MonoBehaviour
         {
             if (GameManager.Instance != null && GameManager.Instance.HasValidSelection())
             {
-                Debug.Log($"[DialogueTrigger] Dialogo '{dialogue.dialogueID}' NON mostrato perché è già stata scelta una ricetta");
+                //Debug.Log($"[DialogueTrigger] Dialogo '{dialogue.dialogueID}' NON mostrato perché è già stata scelta una ricetta");
                 return; // Non mostrare il dialogo se c'è già una ricetta selezionata
             }
         }

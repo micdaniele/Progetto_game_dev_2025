@@ -71,6 +71,6 @@ public class MoodInteraction2D : MonoBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
 
-        Debug.Log("[MoodInteraction2D] Press E ? MoodWindow aperta");
+        //Debug.Log("[MoodInteraction2D] Press E ? MoodWindow aperta");
     }
 }

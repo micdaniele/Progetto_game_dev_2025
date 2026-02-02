@@ -61,11 +61,6 @@ public class FridgeDefrostGame : MonoBehaviour
         foreach (var ingredient in allIngredients)
         {
             ingredient.InitializeForMinigame(clicksToDefrost);
-
-            // BLOCCA Ingredient durante il minigioco
-            Ingredient ing = ingredient.GetComponent<Ingredient>();
-            if (ing != null)
-                ing.enabled = false;
         }
 
         StartCoroutine(HighlightRoutine());
@@ -146,7 +141,7 @@ public class FridgeDefrostGame : MonoBehaviour
             if (ingredient.IsDefrosted())
             {
                 frozenIngredients.Remove(ingredient);
-                Debug.Log($"[FridgeDefrost] Ingrediente scongelato! Rimanenti: {frozenIngredients.Count}");
+                //Debug.Log($"[FridgeDefrost] Ingrediente scongelato! Rimanenti: {frozenIngredients.Count}");
 
                 // CONTROLLA SE HAI VINTO
                 if (frozenIngredients.Count == 0)
@@ -165,17 +160,17 @@ public class FridgeDefrostGame : MonoBehaviour
         minigameActive = false;
         StopAllCoroutines();
 
-        Debug.Log("[FridgeDefrost] VITTORIA!");
+        //Debug.Log("[FridgeDefrost] VITTORIA!");
 
         if (GameManager.Instance != null)
         {
             GameManager.Instance.CompleteTask("FridgeMinigame");
-            Debug.Log("[FridgeDefrost] Task 'FridgeMinigame' completato!");
+            //Debug.Log("[FridgeDefrost] Task 'FridgeMinigame' completato!");
         }
-        else
-        {
-            Debug.LogWarning("[FridgeDefrost] GameManager non trovato!");
-        }
+        //else
+        //{
+        //    Debug.LogWarning("[FridgeDefrost] GameManager non trovato!");
+        //}
 
         if (winText != null)
             winText.SetActive(true);
@@ -186,9 +181,9 @@ public class FridgeDefrostGame : MonoBehaviour
 
     IEnumerator LoadFridgeSceneAfterDelay(float delay)
     {
-        Debug.Log($"[FridgeDefrost] Caricamento scena frigo tra {delay} secondi...");
+        //Debug.Log($"[FridgeDefrost] Caricamento scena frigo tra {delay} secondi...");
         yield return new WaitForSeconds(delay);
-        Debug.Log($"[FridgeDefrost] Carico scena: {fridgeSceneName}");
+        //Debug.Log($"[FridgeDefrost] Carico scena: {fridgeSceneName}");
         SceneManager.LoadScene(fridgeSceneName);
     }
 

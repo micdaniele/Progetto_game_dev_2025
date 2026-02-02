@@ -25,7 +25,6 @@ public class RecipeManager : MonoBehaviour
         FridgeDefrostGame fridgeGame = FindFirstObjectByType<FridgeDefrostGame>();
         if (fridgeGame != null)
         {
-            Debug.Log("[RecipeManager] FridgeDefrostGame trovato, resto disattivato");
             return; // Esce dal metodo Start senza fare nulla
         }
 
@@ -37,22 +36,22 @@ public class RecipeManager : MonoBehaviour
 
         // Trova SOLO gli ingredienti fisicamente presenti in QUESTA scena
         allIngredients = Object.FindObjectsByType<Ingredient>(FindObjectsSortMode.None);
-        Debug.Log($"[RecipeManager] Trovati {allIngredients.Length} ingredienti FISICI nella scena");
+        //Debug.Log($"[RecipeManager] Trovati {allIngredients.Length} ingredienti FISICI nella scena");
 
         // Carica la ricetta scelta
         LoadSavedSelection();
 
-        // Sincronizza con gli ingredienti gi� presi
+        // Sincronizza con gli ingredienti già presi
         if (GameManager.Instance != null)
         {
             selectedIngredients = new List<string>(GameManager.Instance.ingredientiPresi);
-            Debug.Log($"[RecipeManager] === ZAINO ===");
-            Debug.Log($"[RecipeManager] Ingredienti gi� presi: {selectedIngredients.Count}");
-            foreach (string ing in selectedIngredients)
-            {
-                Debug.Log($"[RecipeManager]   - {ing}");
-            }
-            Debug.Log($"[RecipeManager] ===============");
+            //Debug.Log($"[RecipeManager] === ZAINO ===");
+            //Debug.Log($"[RecipeManager] Ingredienti gi� presi: {selectedIngredients.Count}");
+            //foreach (string ing in selectedIngredients)
+            //{
+            //    Debug.Log($"[RecipeManager]   - {ing}");
+            //}
+            //Debug.Log($"[RecipeManager] ===============");
         }
 
         // Aggiorna i colori
@@ -61,26 +60,26 @@ public class RecipeManager : MonoBehaviour
 
     private void LoadSavedSelection()
     {
-        if (GameManager.Instance == null)
-        {
-            Debug.LogError("[RecipeManager] GameManager.Instance e NULL!");
-            return;
-        }
+        //if (GameManager.Instance == null)
+        //{
+        //    Debug.LogError("[RecipeManager] GameManager.Instance e NULL!");
+        //    return;
+        //}
 
         if (GameManager.Instance.HasValidSelection())
         {
             int savedMood = GameManager.Instance.GetCurrentMood();
             string savedRecipe = GameManager.Instance.GetCurrentRecipe();
 
-            Debug.Log($"[RecipeManager] Ricetta caricata: {savedRecipe}");
+            //Debug.Log($"[RecipeManager] Ricetta caricata: {savedRecipe}");
 
             SetMood(savedMood);
             SelectRecipe(savedRecipe);
         }
-        else
-        {
-            Debug.LogWarning("[RecipeManager] Nessuna selezione salvata!");
-        }
+        //else
+        //{
+        //    Debug.LogWarning("[RecipeManager] Nessuna selezione salvata!");
+        //}
     }
 
     public void SetMood(int mood)
@@ -91,21 +90,18 @@ public class RecipeManager : MonoBehaviour
             case 1: currentDatabase = new AngryRecipes(); break;
             case 2: currentDatabase = new SadRecipes(); break;
             case 3: currentDatabase = new SickRecipes(); break;
-            default:
-                Debug.LogError("Mood non riconosciuto!");
-                return;
         }
 
-        Debug.Log($"[RecipeManager] Mood: {currentDatabase.GetMoodDescription()}");
+        //Debug.Log($"[RecipeManager] Mood: {currentDatabase.GetMoodDescription()}");
     }
 
     public void SelectRecipe(string recipeName)
     {
-        if (currentDatabase == null)
-        {
-            Debug.LogError("Nessun database selezionato!");
-            return;
-        }
+        //if (currentDatabase == null)
+        //{
+        //    Debug.LogError("Nessun database selezionato!");
+        //    return;
+        //}
 
         var recipes = currentDatabase.GetRecipes();
 
@@ -114,13 +110,13 @@ public class RecipeManager : MonoBehaviour
             currentRecipeName = recipeName;
             requiredIngredients = recipes[recipeName];
 
-            Debug.Log($"[RecipeManager] Ricetta: {recipeName}");
-            Debug.Log($"[RecipeManager] Ingredienti totali richiesti: {string.Join(", ", requiredIngredients)}");
+            //Debug.Log($"[RecipeManager] Ricetta: {recipeName}");
+            //Debug.Log($"[RecipeManager] Ingredienti totali richiesti: {string.Join(", ", requiredIngredients)}");
         }
-        else
-        {
-            Debug.LogError($"Ricetta '{recipeName}' non trovata!");
-        }
+        //else
+        //{
+        //    Debug.LogError($"Ricetta '{recipeName}' non trovata!");
+        //}
     }
 
     public bool IsIngredientRequired(string ingredientName)
@@ -130,13 +126,13 @@ public class RecipeManager : MonoBehaviour
 
         string cleanInput = ingredientName.Trim().ToLower();
 
-        // Controlla se � nella lista della ricetta
+        // Controlla se è nella lista della ricetta
         bool inRecipe = requiredIngredients.Any(req => {
             string cleanReq = req.Replace("-", "").Replace("_", "").Trim().ToLower();
             return cleanReq == cleanInput;
         });
 
-        // Se � nella ricetta, verifica anche che NON sia gi� stato preso
+        // Se è nella ricetta, verifica anche che NON sia gi� stato preso
         if (inRecipe)
         {
             bool alreadyTaken = selectedIngredients.Contains(ingredientName);
@@ -167,15 +163,15 @@ public class RecipeManager : MonoBehaviour
                     ing.SetSelected(true);
                 }
 
-                Debug.Log($"[OK] Preso: {ingredientName} ({selectedIngredients.Count}/{GetRequiredIngredientsInScene().Count})");
+                //Debug.Log($"[OK] Preso: {ingredientName} ({selectedIngredients.Count}/{GetRequiredIngredientsInScene().Count})");
                 CheckSceneCompletion();
                 return true;
             }
         }
-        else
-        {
-            Debug.Log($"[X] {ingredientName} non serve o e gia stato preso!");
-        }
+        //else
+        //{
+        //    Debug.Log($"[X] {ingredientName} non serve o e gia stato preso!");
+        //}
         return false;
     }
 
@@ -203,7 +199,7 @@ public class RecipeManager : MonoBehaviour
 
     private void UpdateIngredientsState()
     {
-        Debug.Log("[RecipeManager] Aggiornamento colori...");
+        //Debug.Log("[RecipeManager] Aggiornamento colori...");
 
         foreach (var ingredient in allIngredients)
         {
@@ -211,22 +207,22 @@ public class RecipeManager : MonoBehaviour
 
             if (alreadySelected)
             {
-                // GIA PRESO = GIALLO (non cliccabile)
+                // GIA PRESO
                 ingredient.SetSelected(true);
-                Debug.Log($"[RecipeManager] {ingredient.ingredientName} -> GIA PRESO (giallo)");
+                //Debug.Log($"[RecipeManager] {ingredient.ingredientName} -> GIA PRESO");
             }
             else
             {
                 // NON ANCORA PRESO
                 bool isRequired = IsIngredientRequired(ingredient.ingredientName);
                 ingredient.SetSelectable(isRequired);
-                Debug.Log($"[RecipeManager] {ingredient.ingredientName} -> {(isRequired ? "VERDE (da prendere)" : "GRIGIO (non serve)")}");
+                //Debug.Log($"[RecipeManager] {ingredient.ingredientName} -> {(isRequired ? "VERDE (da prendere)" : "GRIGIO (non serve)")}");
             }
         }
 
         // Stampa ingredienti presenti nella scena e richiesti
         var inSceneRequired = GetRequiredIngredientsInScene();
-        Debug.Log($"[RecipeManager] Ingredienti richiesti IN QUESTA SCENA: {string.Join(", ", inSceneRequired)}");
+        //Debug.Log($"[RecipeManager] Ingredienti richiesti IN QUESTA SCENA: {string.Join(", ", inSceneRequired)}");
     }
 
     private void CheckSceneCompletion()
@@ -244,12 +240,12 @@ public class RecipeManager : MonoBehaviour
             }
         }
 
-        Debug.Log($"[Progresso] {takenCount}/{requiredInScene.Count} ingredienti in questa scena");
+        //Debug.Log($"[Progresso] {takenCount}/{requiredInScene.Count} ingredienti in questa scena");
 
         // Se hai preso tutto quello che c'era qui, determina quale minigioco aprire
         if (requiredInScene.Count > 0 && takenCount >= requiredInScene.Count)
         {
-            Debug.Log("*** TUTTI GLI INGREDIENTI DI QUESTA SCENA RACCOLTI! ***");
+            //Debug.Log("TUTTI GLI INGREDIENTI DI QUESTA SCENA RACCOLTI!");
             DetermineAndLoadMinigame();
         }
     }
@@ -260,7 +256,7 @@ public class RecipeManager : MonoBehaviour
         // Ottieni il nome della scena corrente
         string currentSceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
 
-        Debug.Log($"[RecipeManager] Scena corrente: {currentSceneName}");
+        //Debug.Log($"[RecipeManager] Scena corrente: {currentSceneName}");
 
         // Determina quale minigioco caricare
         string minigameToLoad = "";
@@ -269,16 +265,16 @@ public class RecipeManager : MonoBehaviour
         if (currentSceneName.ToLower().Contains("fridge"))
         {
             minigameToLoad = kitchenScene;
-            Debug.Log($"[RecipeManager] Rilevato FRIGO -> Carico {minigameToLoad}");
+            //Debug.Log($"[RecipeManager] Rilevato FRIGO -> Carico {minigameToLoad}");
         }
         else if (currentSceneName.ToLower().Contains("pantry"))
         {
             minigameToLoad = pantryMinigameScene;
-            Debug.Log($"[RecipeManager] Rilevato DISPENSA -> Carico {minigameToLoad}");
+            //Debug.Log($"[RecipeManager] Rilevato DISPENSA -> Carico {minigameToLoad}");
         }
         else
         {
-            Debug.LogWarning($"[RecipeManager] Scena '{currentSceneName}' non riconosciuta! Carico minigioco di default.");
+            //Debug.LogWarning($"[RecipeManager] Scena '{currentSceneName}' non riconosciuta! Carico minigioco di default.");
             minigameToLoad = kitchenScene; // Default
         }
 
@@ -296,13 +292,13 @@ public class RecipeManager : MonoBehaviour
     {
         if (!string.IsNullOrEmpty(nextMinigameScene))
         {
-            Debug.Log($"[RecipeManager] Caricamento minigioco: {nextMinigameScene}");
+            //Debug.Log($"[RecipeManager] Caricamento minigioco: {nextMinigameScene}");
             UnityEngine.SceneManagement.SceneManager.LoadScene(nextMinigameScene);
         }
-        else
-        {
-            Debug.LogError("[RecipeManager] Errore: nessun minigioco da caricare!");
-        }
+        //else
+        //{
+        //    Debug.LogError("[RecipeManager] Errore: nessun minigioco da caricare!");
+        //}
     }
 
     public void ResetSelection()

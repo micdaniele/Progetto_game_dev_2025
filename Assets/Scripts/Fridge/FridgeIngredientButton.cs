@@ -33,29 +33,29 @@ public class FridgeIngredientButton : MonoBehaviour
 
     void Awake()
     {
-        Debug.Log($"[{gameObject.name}] Awake chiamato");
+        //Debug.Log($"[{gameObject.name}] Awake chiamato");
         button = GetComponent<Button>();
 
         if (button != null)
         {
             button.onClick.AddListener(OnButtonClick);
-            Debug.Log($"[{gameObject.name}] Button trovato e listener aggiunto");
+            //Debug.Log($"[{gameObject.name}] Button trovato e listener aggiunto");
         }
-        else
-        {
-            Debug.LogError($"[{gameObject.name}] BUTTON NON TROVATO!");
-        }
+        //else
+        //{
+        //    Debug.LogError($"[{gameObject.name}] BUTTON NON TROVATO!");
+        //}
 
         gameManager = FindFirstObjectByType<FridgeDefrostGame>();
 
-        if (gameManager != null)
-        {
-            Debug.Log($"[{gameObject.name}] GameManager trovato");
-        }
-        else
-        {
-            Debug.LogError($"[{gameObject.name}] GAMEMANAGER NON TROVATO!");
-        }
+        //if (gameManager != null)
+        //{
+        //    Debug.Log($"[{gameObject.name}] GameManager trovato");
+        //}
+        //else
+        //{
+        //    Debug.LogError($"[{gameObject.name}] GAMEMANAGER NON TROVATO!");
+        //}
 
         if (highlightEffect != null)
             highlightEffect.SetActive(false);
@@ -175,7 +175,6 @@ public class FridgeIngredientButton : MonoBehaviour
         if(isDefrosted || !isHighlighted)
            return false;
 
-        // ACCETTA SEMPRE I CLICK - nessun controllo su highlight
         clicksRemaining--;
         
         if (iceClickSound != null)
@@ -183,13 +182,13 @@ public class FridgeIngredientButton : MonoBehaviour
             audioSource.PlayOneShot(iceClickSound);
         }
 
-        Debug.Log($"[{gameObject.name}]Click registrato! Click rimanenti: {clicksRemaining}/{maxClicks}");
+        //Debug.Log($"[{gameObject.name}]Click registrato! Click rimanenti: {clicksRemaining}/{maxClicks}");
 
         UpdateIceOpacity();
 
         if (clicksRemaining <= 0)
         {
-            Debug.Log($"[{gameObject.name}] Ghiaccio completamente scongelato!");
+            //Debug.Log($"[{gameObject.name}] Ghiaccio completamente scongelato!");
             isDefrosted = true;
             if (iceBreakSound != null)
             {
@@ -205,7 +204,7 @@ public class FridgeIngredientButton : MonoBehaviour
     {
         if (iceOverlay == null)
         {
-            Debug.LogError($"[{gameObject.name}] IceOverlay è NULL!");
+            //Debug.LogError($"[{gameObject.name}] IceOverlay è NULL!");
             return;
         }
 
@@ -219,7 +218,7 @@ public class FridgeIngredientButton : MonoBehaviour
             if (spriteIndex >= 0 && spriteIndex < iceSprites.Length)
             {
                 iceOverlay.sprite = iceSprites[spriteIndex];
-                Debug.Log($"[{gameObject.name}] Cambio sprite: {iceSprites[spriteIndex].name} (click: {clicksRemaining}/{maxClicks})");
+                //Debug.Log($"[{gameObject.name}] Cambio sprite: {iceSprites[spriteIndex].name} (click: {clicksRemaining}/{maxClicks})");
             }
         }
         else
@@ -229,7 +228,7 @@ public class FridgeIngredientButton : MonoBehaviour
             newColor.a = progress;
             iceOverlay.color = newColor;
 
-            Debug.Log($"[{gameObject.name}] Alpha aggiornato: {newColor.a} (click: {clicksRemaining}/{maxClicks})");
+            //Debug.Log($"[{gameObject.name}] Alpha aggiornato: {newColor.a} (click: {clicksRemaining}/{maxClicks})");
         }
     }
 
@@ -243,7 +242,7 @@ public class FridgeIngredientButton : MonoBehaviour
         // Effetto di "rottura" del ghiaccio
         if (iceOverlay != null)
         {
-            Debug.Log($"[{gameObject.name}] Ghiaccio completamente rotto!");
+            //Debug.Log($"[{gameObject.name}] Ghiaccio completamente rotto!");
 
             float duration = 0.3f;
             float elapsed = 0f;

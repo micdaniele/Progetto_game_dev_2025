@@ -1,6 +1,7 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Collections;
+using static Unity.Collections.AllocatorManager;
 
 public class BackButton : MonoBehaviour
 {
@@ -12,15 +13,12 @@ public class BackButton : MonoBehaviour
     public AudioClip closeSound;
 
     [Header("Settings")]
-    [Tooltip("Aspetta che finiscano i suoni prima di caricare la scena?")]
-    public bool waitForSounds = true;
-
-    [Tooltip("Delay tra click e frigo (secondi)")]
-    public float delayBetweenSounds = 0.1f;
+    public bool waitForSounds = true;//Aspetta che finiscano i suoni prima di caricare la scena
+    public float delayBetweenSounds = 0.1f; //Delay tra il suono del click ed del ritorno in cucina
 
     public void GoBackToKitchen()
     {
-        Debug.Log("[BackButton] Torno alla cucina");
+        //Debug.Log("[BackButton] Torno alla cucina");
 
         // Avvia la sequenza audio
         StartCoroutine(PlaySoundsAndLoadScene());
@@ -30,11 +28,11 @@ public class BackButton : MonoBehaviour
     {
         float totalDelay = 0f;
 
-        // 1. Suono del click del bottone
+        // Suono del click del bottone
         if (buttonClickSound != null)
         {
             AudioSource.PlayClipAtPoint(buttonClickSound, Camera.main.transform.position);
-            Debug.Log("[BackButton] Click");
+            //Debug.Log("[BackButton] Click");
 
             if (waitForSounds)
             {
@@ -49,11 +47,10 @@ public class BackButton : MonoBehaviour
         // Aspetta prima di riprodurre il suono 
         yield return new WaitForSeconds(totalDelay);
 
-        // 2. Suono frigo/dispenza che si chiude
+        // Suono frigo/dispenza che si chiude
         if (closeSound != null)
         {
             AudioSource.PlayClipAtPoint(closeSound, Camera.main.transform.position);
-            Debug.Log("[BackButton] Scena chiusa");
 
             if (waitForSounds)
             {
@@ -62,8 +59,8 @@ public class BackButton : MonoBehaviour
             }
         }
 
-        // 3. Carica la scena
-        Debug.Log("[BackButton] Carico Kitchen2");
+        // Carica la scena
+        //Debug.Log("[BackButton] Carico Kitchen2");
         SceneManager.LoadScene(kitchenSceneName);
     }
 }

@@ -23,7 +23,7 @@ public class KitchenSceneDialogueTrigger : MonoBehaviour
     {
         if (GameManager.Instance == null || DialogueManager.Instance == null)
         {
-            Debug.LogWarning("[KitchenSceneDialogueTrigger] GameManager o DialogueManager non trovato!");
+            //Debug.LogWarning("[KitchenSceneDialogueTrigger] GameManager o DialogueManager non trovato!");
             return;
         }
 
@@ -35,7 +35,7 @@ public class KitchenSceneDialogueTrigger : MonoBehaviour
         {
             if (bothTasksCompletedDialogue != null)
             {
-                Debug.Log("[KitchenSceneDialogueTrigger] Mostrando dialogo per entrambe le task completate");
+                //Debug.Log("[KitchenSceneDialogueTrigger] Mostrando dialogo per entrambe le task completate");
                 DialogueManager.Instance.StartDialogue(bothTasksCompletedDialogue);
                 hasShownBothTasksDialogue = true;
             }
@@ -45,7 +45,7 @@ public class KitchenSceneDialogueTrigger : MonoBehaviour
         {
             if (memoryCompletedDialogue != null)
             {
-                Debug.Log("[KitchenSceneDialogueTrigger] Mostrando dialogo Memory completato (Frigo ancora da fare)");
+                //Debug.Log("[KitchenSceneDialogueTrigger] Mostrando dialogo Memory completato (Frigo ancora da fare)");
                 DialogueManager.Instance.StartDialogue(memoryCompletedDialogue);
                 hasShownMemoryDialogue = true;
             }
@@ -55,7 +55,7 @@ public class KitchenSceneDialogueTrigger : MonoBehaviour
         {
             if (fridgeCompletedDialogue != null)
             {
-                Debug.Log("[KitchenSceneDialogueTrigger] Mostrando dialogo Frigo completato (Memory ancora da fare)");
+                //Debug.Log("[KitchenSceneDialogueTrigger] Mostrando dialogo Frigo completato (Memory ancora da fare)");
                 DialogueManager.Instance.StartDialogue(fridgeCompletedDialogue);
                 hasShownFridgeDialogue = true;
             }
@@ -74,6 +74,6 @@ public class KitchenSceneDialogueTrigger : MonoBehaviour
         hasShownMemoryDialogue = false;
         hasShownFridgeDialogue = false;
         hasShownBothTasksDialogue = false;
-        Debug.Log("[KitchenSceneDialogueTrigger] Flag dialoghi resettati");
+        //Debug.Log("[KitchenSceneDialogueTrigger] Flag dialoghi resettati");
     }
 }

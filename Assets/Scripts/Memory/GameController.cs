@@ -42,7 +42,7 @@ public class GameController : MonoBehaviour
         gameGuesses = gamePuzzles.Count / 2;
         AddListeners();
 
-        Debug.Log("[Memory] Gioco iniziato");
+        //Debug.Log("[Memory] Gioco iniziato");
     }
 
     void Update()
@@ -119,18 +119,18 @@ public class GameController : MonoBehaviour
     {
         giocoFinito = true;
 
-        Debug.Log("[Memory] VITTORIA! ");
+        //Debug.Log("[Memory] VITTORIA! ");
 
         // Segna il memory come completato
         if (GameManager.Instance != null)
         {
             GameManager.Instance.CompleteTask("Memory");
-            Debug.Log("[Memory] Task 'Memory' completato nel GameManager!");
+            //Debug.Log("[Memory] Task 'Memory' completato nel GameManager!");
         }
-        else
-        {
-            Debug.LogWarning("[Memory] GameManager non trovato!");
-        }
+        //else
+        //{
+        //    Debug.LogWarning("[Memory] GameManager non trovato!");
+        //}
 
         if (pannelloVittoria != null)
         {
@@ -140,14 +140,14 @@ public class GameController : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         // Torna alla cucina
-        Debug.Log($"[Memory] Torno alla cucina: {cucina}");
+        //Debug.Log($"[Memory] Torno alla cucina: {cucina}");
         SceneManager.LoadScene(cucina);
     }
 
     void GameOver()
     {
         giocoFinito = true;
-        Debug.Log("[Memory] GAME OVER!");
+        //Debug.Log("[Memory] GAME OVER!");
 
         if (pannelloGameOver != null)
         {

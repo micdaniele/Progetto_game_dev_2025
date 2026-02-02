@@ -35,7 +35,7 @@ public class PantryInteraction : MonoBehaviour
             if (promptUI != null)
                 promptUI.SetActive(true);
 
-            Debug.Log("[PantryInteraction] Player vicino alla dispensa");
+            //Debug.Log("[PantryInteraction] Player vicino alla dispensa");
         }
     }
 
@@ -47,7 +47,7 @@ public class PantryInteraction : MonoBehaviour
             if (promptUI != null)
                 promptUI.SetActive(false);
 
-            Debug.Log("[PantryInteraction] Player lontano dalla dispensa");
+            //Debug.Log("[PantryInteraction] Player lontano dalla dispensa");
         }
     }
 
@@ -55,7 +55,7 @@ public class PantryInteraction : MonoBehaviour
     {
         if (playerInside && !isOpening && !soundPlaying && Input.GetKeyDown(interactKey))
         {
-            Debug.Log("[PantryInteraction] Apertura dispensa");
+            //Debug.Log("[PantryInteraction] Apertura dispensa");
             OpenPantry();
         }
     }
@@ -65,14 +65,14 @@ public class PantryInteraction : MonoBehaviour
         // Controllo ricetta selezionata
         if (GameManager.Instance == null || !GameManager.Instance.HasValidSelection())
         {
-            Debug.Log("[PantryInteraction] Devi prima scegliere una ricetta!");
+            //Debug.Log("[PantryInteraction] Devi prima scegliere una ricetta!");
             return;
         }
 
         isOpening = true;
         soundPlaying = true;
 
-        Debug.Log("[PantryInteraction] Apertura dispensa");
+        //Debug.Log("[PantryInteraction] Apertura dispensa");
 
         // Nascondi il prompt
         if (promptUI != null)
@@ -98,14 +98,14 @@ public class PantryInteraction : MonoBehaviour
 
     IEnumerator PlaySoundAndLoadScene()
     {
-        Debug.Log("[PantryInteraction]  Riproduco suono dispensa");
+        //Debug.Log("[PantryInteraction]  Riproduco suono dispensa");
 
         AudioSource.PlayClipAtPoint(openSound, Camera.main.transform.position, 1.0f);
 
         // Aspetta che il suono sia completo
         float waitTime = openSound.length;
 
-        Debug.Log($"[PantryInteraction] Aspetto {waitTime} secondi");
+        //Debug.Log($"[PantryInteraction] Aspetto {waitTime} secondi");
         yield return new WaitForSeconds(waitTime);
 
         // Carica la scena
@@ -114,7 +114,7 @@ public class PantryInteraction : MonoBehaviour
 
     void LoadPantryScene()
     {
-        Debug.Log("[PantryInteraction] Caricamento scena Pantry");
+        //Debug.Log("[PantryInteraction] Caricamento scena Pantry");
 
         // Reset del flag prima di cambiare scena
         soundPlaying = false;

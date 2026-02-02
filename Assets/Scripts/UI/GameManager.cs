@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
         if (Instance != null && Instance != this)
         {
             // Se esiste già un'istanza diversa da questa, distruggi QUESTO oggetto
-            Debug.Log($"[GameManager] Già esiste un GameManager, distruggo il duplicato dalla scena");
+            //Debug.Log($"[GameManager] Già esiste un GameManager, distruggo il duplicato dalla scena");
             Destroy(gameObject);
             return;
         }
@@ -32,8 +32,8 @@ public class GameManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        Debug.Log($"[GameManager] Inizializzato come persistente");
-        Debug.Log($"[GameManager] Nome: {gameObject.name}");
+        //Debug.Log($"[GameManager] Inizializzato come persistente");
+        //Debug.Log($"[GameManager] Nome: {gameObject.name}");
     }
 
     // Salva se l'ingrediente è stato già preso
@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
         else
             kitchenObjectsState.Add(objectId, isActive);
 
-        Debug.Log($"[GameManager] Stato salvato -> {objectId}: {isActive}");
+        //Debug.Log($"[GameManager] Stato salvato -> {objectId}: {isActive}");
     }
 
     //Salva lo stato di oggetti UI che non devono essere resettati
@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
         else
             uiObjectsState.Add(objectId, isActive);
 
-        Debug.Log($"[GameManager] Stato UI salvato -> {objectId}: {isActive}");
+        //Debug.Log($"[GameManager] Stato UI salvato -> {objectId}: {isActive}");
     }
 
     // Vede se il minigioco è stato completato
@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
         if (!completedTasks.Contains(taskName))
         {
             completedTasks.Add(taskName);
-            Debug.Log($"[GameManager] Task completato: {taskName}");
+            //Debug.Log($"[GameManager] Task completato: {taskName}");
         }
     }
 
@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviour
     {
         playerPosition = position;
         hasPlayerPosition = true;
-        Debug.Log($"[GameManager] Posizione player salvata: {position}");
+        //Debug.Log($"[GameManager] Posizione player salvata: {position}");
     }
 
     public bool HasSavedPlayerPosition() => hasPlayerPosition;
@@ -87,22 +87,22 @@ public class GameManager : MonoBehaviour
         kitchenObjectsState.Clear();
         hasPlayerPosition = false;
 
-        Debug.Log("[GameManager] RESET STATO CUCINA (senza resettare tasks e UI)");
+        //Debug.Log("[GameManager] RESET STATO CUCINA (senza resettare tasks e UI)");
     }
 
     //metodo per debug
-    public void PrintCurrentState()
-    {
-        Debug.Log("=== GAMEMANAGER STATE ===");
-        Debug.Log($"Mood: {selectedMood}");
-        Debug.Log($"Recipe: {selectedRecipe}");
-        Debug.Log($"Ingredienti Presi: {ingredientiPresi.Count}");
-        Debug.Log($"Oggetti Cucina Salvati: {kitchenObjectsState.Count}");
-        Debug.Log($"Oggetti UI Salvati: {uiObjectsState.Count}");
-        Debug.Log($"Tasks Completati: {completedTasks.Count}");
-        Debug.Log($"Ha Posizione Player: {hasPlayerPosition}");
-        Debug.Log("========================");
-    }
+    //public void PrintCurrentState()
+    //{
+        //Debug.Log("=== GAMEMANAGER STATE ===");
+        //Debug.Log($"Mood: {selectedMood}");
+        //Debug.Log($"Recipe: {selectedRecipe}");
+        //Debug.Log($"Ingredienti Presi: {ingredientiPresi.Count}");
+        //Debug.Log($"Oggetti Cucina Salvati: {kitchenObjectsState.Count}");
+        //Debug.Log($"Oggetti UI Salvati: {uiObjectsState.Count}");
+        //Debug.Log($"Tasks Completati: {completedTasks.Count}");
+        //Debug.Log($"Ha Posizione Player: {hasPlayerPosition}");
+        //Debug.Log("========================");
+    //}
 
     // Set
     public void SetSelection(int mood, string recipe)
@@ -116,21 +116,21 @@ public class GameManager : MonoBehaviour
         // Reset anche lo stato della cucina
         ResetKitchenState();
 
-        Debug.Log($"[GameManager] Nuova partita -> Mood: {mood}, Ricetta: {recipe}");
-        Debug.Log("[GameManager] Inventario svuotato.");
+        //Debug.Log($"[GameManager] Nuova partita -> Mood: {mood}, Ricetta: {recipe}");
+        //Debug.Log("[GameManager] Inventario svuotato.");
     }
 
     public void SetMood(int mood)
     {
         selectedMood = mood;
         ingredientiPresi.Clear();
-        Debug.Log($"[GameManager] Mood impostato: {mood}");
+        //Debug.Log($"[GameManager] Mood impostato: {mood}");
     }
 
     public void SetRecipe(string recipe)
     {
         selectedRecipe = recipe;
-        Debug.Log($"[GameManager] Ricetta impostata: {recipe}");
+        //Debug.Log($"[GameManager] Ricetta impostata: {recipe}");
     }
 
     // Get

@@ -59,7 +59,7 @@ public class HappyRecipes : RecipeDatabase
     // OVERRIDE del metodo virtuale - POLIMORFISMO
     public override string GetMoodDescription()
     {
-        return "😊 Happy mood recipes - Sweet and delightful!";
+        return "Happy mood recipes!";
     }
 }
 
@@ -87,7 +87,7 @@ public class AngryRecipes : RecipeDatabase
     
     public override string GetMoodDescription()
     {
-        return "😠 Angry mood recipes - Spicy and intense!";
+        return "Angry mood recipes";
     }
 }
 
@@ -114,7 +114,7 @@ public class SadRecipes : RecipeDatabase
     
     public override string GetMoodDescription()
     {
-        return "😢 Sad mood recipes - Comforting and warm!";
+        return "Sad mood recipes";
     }
 }
 
@@ -143,7 +143,7 @@ public class SickRecipes : RecipeDatabase
     
     public override string GetMoodDescription()
     {
-        return "🤒 Sick mood recipes - Healing and nutritious!";
+        return "Sick mood recipes!";
     }
 }
 

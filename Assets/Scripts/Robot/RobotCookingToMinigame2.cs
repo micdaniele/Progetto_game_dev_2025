@@ -34,9 +34,8 @@ public class RobotCookingToMinigame : MonoBehaviour
     private Vector3 baseScale;           // Memorizza la grandezza originale del robot
     private float timer = 0f;            // Timer per il cambio automatico
     private bool isPaused = false;       // Se è in pausa per un dialogo
-    private int currentDialogueIndex = -1; // Indice del dialogo corrente
     private bool hasStarted = false;     // Se la sequenza è iniziata
-    private bool waitingForFinalDialogue = false; // Se sta aspettando la fine del dialogo finale
+
 
     void Start()
     {

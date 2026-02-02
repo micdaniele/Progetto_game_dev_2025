@@ -91,7 +91,7 @@ public class DialogueTrigger : MonoBehaviour
     {
         if (DialogueManager.Instance == null)
         {
-            Debug.LogWarning("[DialogueTrigger] DialogueManager non trovato!");
+            //Debug.LogWarning("[DialogueTrigger] DialogueManager non trovato!");
             return;
         }
 
@@ -107,14 +107,14 @@ public class DialogueTrigger : MonoBehaviour
                 // Tutte le task completate mostra il dialogo principale
                 if (dialogue != null)
                 {
-                    Debug.Log("[DialogueTrigger] Tutte le task completate, mostro dialogo principale");
+                    //Debug.Log("[DialogueTrigger] Tutte le task completate, mostro dialogo principale");
                     DialogueManager.Instance.StartDialogue(dialogue);
 
                     // Se bisogna caricare una scena dopo, inizia a controllare quando il dialogo finisce
                     if (loadSceneAfterTasksCompleted && !string.IsNullOrEmpty(robotScene))
                     {
                         isWaitingForDialogueEnd = true;
-                        Debug.Log($"[DialogueTrigger] Aspetto la fine del dialogo per caricare '{robotScene}'");
+                        //Debug.Log($"[DialogueTrigger] Aspetto la fine del dialogo per caricare '{robotScene}'");
                     }
                 }
             }
@@ -123,13 +123,13 @@ public class DialogueTrigger : MonoBehaviour
                 // Task non completate mostra dialogo alternativo
                 if (tasksNotCompletedDialogue != null)
                 {
-                    Debug.Log("[DialogueTrigger] Task non completate, mostro dialogo alternativo");
+                    //Debug.Log("[DialogueTrigger] Task non completate, mostro dialogo alternativo");
                     DialogueManager.Instance.StartDialogue(tasksNotCompletedDialogue);
                 }
-                else
-                {
-                    Debug.LogWarning("[DialogueTrigger] tasksNotCompletedDialogue non assegnato!");
-                }
+                //else
+                //{
+                //    Debug.LogWarning("[DialogueTrigger] tasksNotCompletedDialogue non assegnato!");
+                //}
 
                 // non segna come completato se le task non sono finite
                 return;
@@ -145,7 +145,7 @@ public class DialogueTrigger : MonoBehaviour
                 GameManager.Instance.CompleteTask("Dialogue_" + dialogue.dialogueID);
             }
 
-            Debug.Log($"[DialogueTrigger] Dialogo '{dialogue.dialogueID}' completato (showOnlyOnce)");
+            //Debug.Log($"[DialogueTrigger] Dialogo '{dialogue.dialogueID}' completato");
         }
     }
 
@@ -166,7 +166,7 @@ public class DialogueTrigger : MonoBehaviour
         // Aspetta che il dialogo finisca
         yield return new WaitForSeconds(delayBeforeSceneLoad);
 
-        Debug.Log($"[DialogueTrigger] Caricamento scena '{robotScene}'...");
+        //Debug.Log($"[DialogueTrigger] Caricamento scena {robotScene}");
 
         // Salva la posizione del player
         if (GameManager.Instance != null)
@@ -187,13 +187,13 @@ public class DialogueTrigger : MonoBehaviour
     {
         if (GameManager.Instance == null)
         {
-            Debug.LogWarning("[DialogueTrigger] GameManager non trovato!");
+            //Debug.LogWarning("[DialogueTrigger] GameManager non trovato!");
             return false;
         }
 
         if (requiredTasks == null || requiredTasks.Length == 0)
         {
-            Debug.LogWarning("[DialogueTrigger] Nessuna task richiesta impostata!");
+            //Debug.LogWarning("[DialogueTrigger] Nessuna task richiesta impostata!");
             return false;
         }
 
@@ -201,12 +201,12 @@ public class DialogueTrigger : MonoBehaviour
         {
             if (!GameManager.Instance.IsTaskCompleted(taskName))
             {
-                Debug.Log($"[DialogueTrigger] Task '{taskName}' non ancora completata");
+                //Debug.Log($"[DialogueTrigger] Task '{taskName}' non ancora completata");
                 return false;
             }
         }
 
-        Debug.Log("[DialogueTrigger] Tutte le task richieste sono completate!");
+        //Debug.Log("[DialogueTrigger] Tutte le task richieste sono completate!");
         return true;
     }
 

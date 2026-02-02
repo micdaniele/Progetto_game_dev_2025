@@ -46,10 +46,10 @@ public class UI_MoodWindow : MonoBehaviour
         };
 
         // Log per dimostrare il polimorfismo
-        foreach (RecipeDatabase db in recipeDatabases)
-        {
-            Debug.Log(db.GetMoodDescription());
-        }
+        //foreach (RecipeDatabase db in recipeDatabases)
+        //{
+        //    Debug.Log(db.GetMoodDescription());
+        //}
 
         // ripristina lo stato salvato quando torni nella scena
         RestoreGameObjectStates();
@@ -63,7 +63,7 @@ public class UI_MoodWindow : MonoBehaviour
         if (moodIndex >= 0 && moodIndex < recipeDatabases.Length)
         {
             RecipeDatabase selectedDatabase = recipeDatabases[moodIndex];
-            Debug.Log($"[MoodWindow] Selected: {selectedDatabase.GetMoodDescription()}");
+            //Debug.Log($"[MoodWindow] Selected: {selectedDatabase.GetMoodDescription()}");
         }
 
         if (moodWindowPanel != null)
@@ -89,25 +89,25 @@ public class UI_MoodWindow : MonoBehaviour
     public void OnRecipeSelected(string recipeName)
     {
         selectedRecipe = recipeName;
-        Debug.Log($"[MoodWindow] Hai scelto: {recipeName}");
+        //Debug.Log($"[MoodWindow] Hai scelto: {recipeName}");
 
         // salva nel gamemanager
         if (GameManager.Instance != null)
         {
             GameManager.Instance.SetSelection(selectedMood, recipeName);
         }
-        else
-        {
-            Debug.LogError("ERRORE: GameManager non trovato nella scena!");
-        }
+        //else
+        //{
+        //    Debug.LogError("ERRORE: GameManager non trovato nella scena!");
+        //}
 
-        // 2. Nascondi i pannelli delle ricette
+        // Nascondi i pannelli delle ricette
         HideAllRecipePanels();
 
-        // 3. Mostra ingredienti
+        // Mostra ingredienti
         ShowIngredientsPanel(recipeName);
 
-        // 4. Mostra il dialogo dopo aver scelto la ricetta
+        // Mostra il dialogo dopo aver scelto la ricetta
         StartCoroutine(ShowDialogueAfterPanelClose());
     }
 
@@ -148,10 +148,10 @@ public class UI_MoodWindow : MonoBehaviour
                     CreateIngredientText(ingredient);
                 }
             }
-            else
-            {
-                Debug.LogWarning($"[MoodWindow] Recipe '{recipeName}' not found!");
-            }
+            //else
+            //{
+            //    Debug.LogWarning($"[MoodWindow] Recipe '{recipeName}' not found!");
+            //}
         }
 
         if (ingredientsPanel != null)
@@ -203,7 +203,7 @@ public class UI_MoodWindow : MonoBehaviour
         if (nextDialogueTrigger != null)
         {
             nextDialogueTrigger.SetActive(true);
-            Debug.Log($"[MoodWindow] Attivato DialogueTrigger: {nextDialogueTrigger.name}");
+            //Debug.Log($"[MoodWindow] Attivato DialogueTrigger: {nextDialogueTrigger.name}");
 
             // Salva che il DialogueTrigger è attivo usando SaveUIObjectState
             if (GameManager.Instance != null)
@@ -211,16 +211,16 @@ public class UI_MoodWindow : MonoBehaviour
                 GameManager.Instance.SaveUIObjectState(moodInteractionID + "_NextDialogue", true);
             }
         }
-        else
-        {
-            Debug.LogWarning("[MoodWindow] nextDialogueTrigger non assegnato nell'Inspector!");
-        }
+        //else
+        //{
+        //    Debug.LogWarning("[MoodWindow] nextDialogueTrigger non assegnato nell'Inspector!");
+        //}
 
         // Disattiva il GameObject corrente (MoodInteraction)
         if (currentMoodInteraction != null)
         {
             currentMoodInteraction.SetActive(false);
-            Debug.Log($"[MoodWindow] Disattivato MoodInteraction: {currentMoodInteraction.name}");
+            //Debug.Log($"[MoodWindow] Disattivato MoodInteraction: {currentMoodInteraction.name}");
 
             // Salva che il MoodInteraction è disattivo
             if (GameManager.Instance != null)
@@ -228,10 +228,10 @@ public class UI_MoodWindow : MonoBehaviour
                 GameManager.Instance.SaveUIObjectState(moodInteractionID, false);
             }
         }
-        else
-        {
-            Debug.LogWarning("[MoodWindow] currentMoodInteraction non assegnato nell'Inspector!");
-        }
+        //else
+        //{
+        //    Debug.LogWarning("[MoodWindow] currentMoodInteraction non assegnato nell'Inspector!");
+        //}
     }
 
     //Ripristina lo stato dei GameObject quando torni nella scena
@@ -239,7 +239,7 @@ public class UI_MoodWindow : MonoBehaviour
     {
         if (GameManager.Instance == null)
         {
-            Debug.LogWarning("[MoodWindow] GameManager non trovato, impossibile ripristinare stati");
+            //Debug.LogWarning("[MoodWindow] GameManager non trovato, impossibile ripristinare stati");
             return;
         }
 
@@ -248,7 +248,7 @@ public class UI_MoodWindow : MonoBehaviour
         if (currentMoodInteraction != null)
         {
             currentMoodInteraction.SetActive(moodInteractionActive);
-            Debug.Log($"[MoodWindow] Ripristinato stato MoodInteraction: {moodInteractionActive}");
+            //Debug.Log($"[MoodWindow] Ripristinato stato MoodInteraction: {moodInteractionActive}");
         }
 
         // Controlla se il DialogueTrigger deve essere attivo
@@ -256,7 +256,7 @@ public class UI_MoodWindow : MonoBehaviour
         if (nextDialogueTrigger != null)
         {
             nextDialogueTrigger.SetActive(nextDialogueActive);
-            Debug.Log($"[MoodWindow] Ripristinato stato NextDialogue: {nextDialogueActive}");
+            //Debug.Log($"[MoodWindow] Ripristinato stato NextDialogue: {nextDialogueActive}");
         }
     }
 }

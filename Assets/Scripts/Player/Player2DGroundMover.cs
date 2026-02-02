@@ -34,30 +34,30 @@ public class Player2DGroundMover : MonoBehaviour
         if (GameManager.Instance != null && GameManager.Instance.HasSavedPlayerPosition())
         {
             transform.position = GameManager.Instance.GetPlayerPosition();
-            Debug.Log("[Player] Posizione ripristinata!");
+            //Debug.Log("[Player] Posizione ripristinata!");
         }
     }
 
     void Update()
     {
-        // 1. Legge l'input
+        // Legge l'input
         _inputMovement = _moveAction.ReadValue<Vector2>();
 
         if (_animator != null)
         {
-            // 2. GESTIONE STATO FERMO/CAMMINA
+            // GESTIONE DELLO STATO (FERMO/CAMMINA)
             // Usiamo la magnitudine per dire all'Animator se il cuoco è fermo o si muove
             // Uso anche un parametro Float chiamato "Speed" nell'Animator
             _animator.SetFloat("Speed", _inputMovement.magnitude);
 
-            // 3. AGGIORNA DIREZIONE SOLO SE C'E' MOVIMENTO
+            // AGGIORNA DIREZIONE SOLO SE C'E' MOVIMENTO
             if (_inputMovement.magnitude > 0.01f)
             {
                 // Aggiorna i valori Move x e Move y nel Blend Tree
                 _animator.SetFloat("Move x", _inputMovement.x);
                 _animator.SetFloat("Move y", _inputMovement.y);
 
-                // 4. LOGICA DI ROTAZIONE (FLIP)
+                // LOGICA DI ROTAZIONE (FLIP)
                 // Se vai a sinistra (x negativo), specchia la scala
                 if (_inputMovement.x < -0.01f)
                 {
@@ -98,7 +98,7 @@ public class Player2DGroundMover : MonoBehaviour
         if (GameManager.Instance != null)
         {
             GameManager.Instance.SavePlayerPosition(transform.position);
-            Debug.Log("[Player] Posizione salvata!");
+            //Debug.Log("[Player] Posizione salvata!");
         }
     }
 }

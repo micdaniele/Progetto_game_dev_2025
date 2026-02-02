@@ -13,28 +13,28 @@ public class InitialVignette : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("=== [InitialVignette] START CHIAMATO ===");
+        //Debug.Log("=== [InitialVignette] START CHIAMATO ===");
 
-        // 1. Controlla se il GameManager esiste
+        // Controlla se il GameManager esiste
         if (GameManager.Instance == null)
         {
-            Debug.LogError("[InitialVignette] ? GAMEMANAGER È NULL!");
+            //Debug.LogError("[InitialVignette] ? GAMEMANAGER È NULL!");
             ShowVignette(); // Mostra comunque
             return;
         }
 
-        Debug.Log("[InitialVignette] ? GameManager trovato");
+        //Debug.Log("[InitialVignette] ? GameManager trovato");
 
-        // 2. Controlla se la vignetta è stata vista
+        // Controlla se la vignetta è stata vista
         bool alreadySeen = GameManager.Instance.IsTaskCompleted("VignetteShown");
-        Debug.Log($"[InitialVignette] IsTaskCompleted('VignetteShown') = {alreadySeen}");
+        //Debug.Log($"[InitialVignette] IsTaskCompleted('VignetteShown') = {alreadySeen}");
 
-        // 3. Stampa tutti i task completati
-        GameManager.Instance.PrintCurrentState();
+        // Stampa tutti i task completati
+        //GameManager.Instance.PrintCurrentState();
 
         if (alreadySeen)
         {
-            Debug.Log("[InitialVignette] ? Vignetta già vista - la salto");
+            //Debug.Log("[InitialVignette] ? Vignetta già vista - la salto");
 
             if (vignettePanel != null)
                 vignettePanel.SetActive(false);
@@ -44,11 +44,11 @@ public class InitialVignette : MonoBehaviour
             Cursor.visible = true;
 
             gameObject.SetActive(false);
-            Debug.Log("[InitialVignette] GameObject disattivato");
+            //Debug.Log("[InitialVignette] GameObject disattivato");
             return;
         }
 
-        Debug.Log("[InitialVignette] ? Prima volta - mostro la vignetta");
+        //Debug.Log("[InitialVignette]  mostro la vignetta");
         ShowVignette();
     }
 
@@ -59,7 +59,7 @@ public class InitialVignette : MonoBehaviour
             vignettePanel.SetActive(true);
             vignetteShown = true;
 
-            Debug.Log("[InitialVignette] Vignetta mostrata");
+            //Debug.Log("[InitialVignette] Vignetta mostrata");
 
             if (freezePlayer)
             {
@@ -69,10 +69,10 @@ public class InitialVignette : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
-        else
-        {
-            Debug.LogWarning("[InitialVignette] ? vignettePanel non assegnato!");
-        }
+        //else
+        //{
+        //    Debug.LogWarning("[InitialVignette] ? vignettePanel non assegnato!");
+        //}
     }
 
     void Update()
@@ -85,32 +85,32 @@ public class InitialVignette : MonoBehaviour
 
     public void CloseVignette()
     {
-        Debug.Log("=== [InitialVignette] CLOSE VIGNETTE CHIAMATO ===");
+        //Debug.Log("[InitialVignette] close vignette è stato chiamato");
 
         if (vignettePanel != null && vignetteShown)
         {
             vignettePanel.SetActive(false);
             vignetteShown = false;
 
-            Debug.Log("[InitialVignette] Vignetta chiusa");
+            //Debug.Log("[InitialVignette] Vignetta chiusa");
 
             // Controlla GameManager
             if (GameManager.Instance != null)
             {
-                Debug.Log("[InitialVignette] ? GameManager trovato, salvo lo stato...");
+                //Debug.Log("[InitialVignette] ? GameManager trovato, salvo lo stato...");
                 GameManager.Instance.CompleteTask("VignetteShown");
-                Debug.Log("[InitialVignette] ? Task 'VignetteShown' completato!");
+                //Debug.Log("[InitialVignette] ? Task 'VignetteShown' completato!");
 
                 // Verifica immediatamente
                 bool check = GameManager.Instance.IsTaskCompleted("VignetteShown");
-                Debug.Log($"[InitialVignette] Verifica immediata: IsTaskCompleted = {check}");
+                //Debug.Log($"[InitialVignette] Verifica immediata: IsTaskCompleted = {check}");
 
-                GameManager.Instance.PrintCurrentState();
+                //GameManager.Instance.PrintCurrentState();
             }
-            else
-            {
-                Debug.LogError("[InitialVignette] ? GAMEMANAGER È NULL!");
-            }
+            //else
+            //{
+            //    Debug.LogError("[InitialVignette] ? GAMEMANAGER È NULL!");
+            //}
 
             Time.timeScale = 1f;
 
@@ -126,7 +126,7 @@ public class InitialVignette : MonoBehaviour
             }
 
             gameObject.SetActive(false);
-            Debug.Log("[InitialVignette] GameObject disattivato");
+            //Debug.Log("[InitialVignette] GameObject disattivato");
         }
     }
 }
