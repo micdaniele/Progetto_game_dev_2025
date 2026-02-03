@@ -1,4 +1,4 @@
-using System.Collections; // Necessario per le Coroutine (animazioni nel tempo)
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -15,7 +15,6 @@ public class RobotCookingToMinigame : MonoBehaviour
     public bool isFinalDialogue = false;
     public string flappyFood = "FlappyFood";
 
-
     [Header("Impostazioni Animazione Pop")]
     public float popScale = 1.2f;        // Quanto si ingrandisce (1.2 = 20% più grande)
     public float popDuration = 0.1f;     // Quanto dura l'animazione (in secondi)
@@ -23,6 +22,7 @@ public class RobotCookingToMinigame : MonoBehaviour
     [Header("Impostazioni Vibrazione")]
     public int vibrationFrameIndex = -1; // A quale sprite attivare la vibrazione (-1 = disattivato)
     public float vibrationIntensity = 1f; // Intensità della vibrazione
+    [SerializeField] private AudioClip vibrationSound; // Suono durante la vibrazione
 
     private Vector3 basePosition;        // Posizione originale del robot
     private bool isVibrating = false;    // Se sta vibrando
@@ -35,7 +35,6 @@ public class RobotCookingToMinigame : MonoBehaviour
     private float timer = 0f;            // Timer per il cambio automatico
     private bool isPaused = false;       // Se è in pausa per un dialogo
     private bool hasStarted = false;     // Se la sequenza è iniziata
-
 
     void Start()
     {
@@ -98,6 +97,12 @@ public class RobotCookingToMinigame : MonoBehaviour
                 // Fine vibrazione
                 isVibrating = false;
                 transform.position = basePosition;
+
+                // Reset del pitch
+                if (audioSource != null)
+                {
+                    audioSource.pitch = 1f;
+                }
             }
         }
 
@@ -134,6 +139,18 @@ public class RobotCookingToMinigame : MonoBehaviour
                 isVibrating = true;
                 vibrationTimer = 0f;
                 basePosition = transform.position; // Aggiorna la posizione base
+
+                // riproduce il suono del blender
+                if (vibrationSound != null && audioSource != null && currentIndex < spriteDurations.Length)
+                {
+                    // Calcola il pitch per far durare il suono quanto la vibrazione
+                    float vibrationDuration = spriteDurations[currentIndex];
+                    float originalDuration = vibrationSound.length;
+                    float pitchAdjustment = originalDuration / vibrationDuration;
+
+                    audioSource.pitch = pitchAdjustment;
+                    audioSource.PlayOneShot(vibrationSound);
+                }
             }
 
             // Avvia l'animazione di rimbalzo
@@ -163,12 +180,12 @@ public class RobotCookingToMinigame : MonoBehaviour
             {
                 yield return null;
             }
-        };
+        }
+        ;
 
         // Carica la scena del minigame
         SceneManager.LoadScene(flappyFood);
     }
-
 
     // Coroutine per l'effetto "molla"
     IEnumerator PopEffect()

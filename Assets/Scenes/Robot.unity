@@ -1074,6 +1074,7 @@ MonoBehaviour:
   popDuration: 0.1
   vibrationFrameIndex: 4
   vibrationIntensity: 0.1
+  vibrationSound: {fileID: 8300000, guid: 557e570c2f7fba5479fc3143c3932d8b, type: 3}
 --- !u!82 &1317931623
 AudioSource:
   m_ObjectHideFlags: 0

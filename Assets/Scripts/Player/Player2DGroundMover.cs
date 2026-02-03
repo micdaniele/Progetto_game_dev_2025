@@ -9,10 +9,10 @@ public class Player2DGroundMover : MonoBehaviour
     [Header("Animation Config")]
     [SerializeField] private Animator _animator;
 
-    [Header("Ground Check Config")]
-    [SerializeField] private LayerMask _whatIsGround;
-    [SerializeField] private Transform _groundChecker;
-    [SerializeField] private float _groundCheckRadius = 0.1f;
+    [Header("Audio Config")]
+    [SerializeField] private AudioClip[] _footstepSounds;
+    [SerializeField] private float _footstepInterval = 0.5f;
+    [SerializeField] private float _audioVolume = 1f; // Volume dei passi
 
     // Input
     private InputAction _moveAction;
@@ -20,12 +20,43 @@ public class Player2DGroundMover : MonoBehaviour
 
     // Componenti
     private Rigidbody2D _rb;
-    private bool _isGrounded;
+    private AudioSource _audioSource;
+
+    // Footstep timer
+    private float _footstepTimer;
 
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
         if (_animator == null) _animator = GetComponent<Animator>();
+
+        // Setup AudioSource
+        _audioSource = GetComponent<AudioSource>();
+        if (_audioSource == null)
+        {
+            _audioSource = gameObject.AddComponent<AudioSource>();
+            //Debug.Log("[Footsteps] AudioSource creato automaticamente");
+        }
+
+        // Configura l'AudioSource per i passi
+        _audioSource.loop = false;
+        _audioSource.playOnAwake = false;
+        _audioSource.volume = _audioVolume;
+        _audioSource.spatialBlend = 0f; // 2D audio
+
+        // DEBUG: Verifica configurazione
+        //Debug.Log($"[Footsteps] AudioClips configurati: {(_footstepSounds != null ? _footstepSounds.Length : 0)}");
+        //if (_footstepSounds != null)
+        //{
+        //    for (int i = 0; i < _footstepSounds.Length; i++)
+        //    {
+        //        if (_footstepSounds[i] == null)
+        //            Debug.LogWarning($"[Footsteps] AudioClip {i} è NULL!");
+        //        else
+        //            Debug.Log($"[Footsteps] AudioClip {i}: {_footstepSounds[i].name}");
+        //    }
+        //}
+
         _moveAction = InputSystem.actions.FindAction("Move");
         _rb.gravityScale = 0f;
         _rb.constraints = RigidbodyConstraints2D.FreezeRotation;
@@ -34,7 +65,6 @@ public class Player2DGroundMover : MonoBehaviour
         if (GameManager.Instance != null && GameManager.Instance.HasSavedPlayerPosition())
         {
             transform.position = GameManager.Instance.GetPlayerPosition();
-            //Debug.Log("[Player] Posizione ripristinata!");
         }
     }
 
@@ -45,60 +75,87 @@ public class Player2DGroundMover : MonoBehaviour
 
         if (_animator != null)
         {
-            // GESTIONE DELLO STATO (FERMO/CAMMINA)
-            // Usiamo la magnitudine per dire all'Animator se il cuoco è fermo o si muove
-            // Uso anche un parametro Float chiamato "Speed" nell'Animator
             _animator.SetFloat("Speed", _inputMovement.magnitude);
 
-            // AGGIORNA DIREZIONE SOLO SE C'E' MOVIMENTO
             if (_inputMovement.magnitude > 0.01f)
             {
-                // Aggiorna i valori Move x e Move y nel Blend Tree
                 _animator.SetFloat("Move x", _inputMovement.x);
                 _animator.SetFloat("Move y", _inputMovement.y);
 
-                // LOGICA DI ROTAZIONE (FLIP)
-                // Se vai a sinistra (x negativo), specchia la scala
                 if (_inputMovement.x < -0.01f)
                 {
                     transform.localScale = new Vector3(-1, 1, 1);
                 }
-                // Se vai a destra (x positivo), rimetti la scala normale
                 else if (_inputMovement.x > 0.01f)
                 {
                     transform.localScale = new Vector3(1, 1, 1);
                 }
             }
-            
         }
+
+        HandleFootsteps();
     }
 
     void FixedUpdate()
     {
-        // Check se è a terra
-        Collider2D groundCollider = Physics2D.OverlapCircle(_groundChecker.position, _groundCheckRadius, _whatIsGround);
-        _isGrounded = groundCollider != null;
-
-        // Applica il movimento fisico
-        _rb.linearVelocity = _inputMovement * _speed;
+         _rb.linearVelocity = _inputMovement * _speed;
     }
 
-    private void OnDrawGizmos()
+    private void HandleFootsteps()
     {
-        if (_groundChecker != null)
+        bool isMoving = _inputMovement.magnitude > 0.01f;
+
+        // Suona i passi solo se il personaggio si sta muovendo
+        if (isMoving && _footstepSounds != null && _footstepSounds.Length > 0)
         {
-            Gizmos.color = _isGrounded ? Color.green : Color.red;
-            Gizmos.DrawWireSphere(_groundChecker.position, _groundCheckRadius);
+            _footstepTimer -= Time.deltaTime;
+
+            if (_footstepTimer <= 0f)
+            {
+                PlayFootstepSound();
+                _footstepTimer = _footstepInterval;
+            }
+        }
+        else
+        {
+            _footstepTimer = 0f;
         }
     }
 
-    // Metodo per salvare la posizione
+    private void PlayFootstepSound()
+    {
+        if (_audioSource == null)
+        {
+            //Debug.LogError("[Footsteps] AudioSource è NULL!");
+            return;
+        }
+
+        if (_footstepSounds == null || _footstepSounds.Length == 0)
+        {
+            //Debug.LogError("[Footsteps] Nessun AudioClip configurato!");
+            return;
+        }
+
+        // Scegli un suono casuale dall'array
+        AudioClip clip = _footstepSounds[Random.Range(0, _footstepSounds.Length)];
+
+        if (clip == null)
+        {
+            //Debug.LogError("[Footsteps] AudioClip selezionato è NULL!");
+            return;
+        }
+
+        _audioSource.pitch = Random.Range(0.9f, 1.1f);
+        _audioSource.PlayOneShot(clip, _audioVolume);
+
+        //Debug.Log($"[Footsteps] Suono riprodotto: {clip.name}, Volume: {_audioVolume}");
+    }
+
     public void SavePosition()
     {
         if (GameManager.Instance != null)
         {
             GameManager.Instance.SavePlayerPosition(transform.position);
-            //Debug.Log("[Player] Posizione salvata!");
         }
     }
 }

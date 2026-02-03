@@ -15,6 +15,8 @@ public class GameController : MonoBehaviour
 
     [Header("AUDIO")]
     public AudioSource suonoDispensa; // Trascina qui l'Audio Source della dispensa
+    [SerializeField] private AudioClip suonoClick; // Suono quando clicchi una carta
+    private AudioSource audioSource;
 
     [Header("IMPOSTAZIONI SCENA")]
     public string cucina = "Kitchen2";
@@ -36,6 +38,14 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
+        // Setup AudioSource per i click
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+        audioSource.playOnAwake = false;
+
         if (pannelloGameOver != null) pannelloGameOver.SetActive(false);
         if (pannelloVittoria != null) pannelloVittoria.SetActive(false);
 
@@ -58,6 +68,12 @@ public class GameController : MonoBehaviour
     {
         if (giocoFinito) return;
         if (firstGuess && index == firstGuessIndex) return;
+
+        // RIPRODUCE IL SUONO DEL CLICK
+        if (suonoClick != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(suonoClick);
+        }
 
         if (!firstGuess)
         {

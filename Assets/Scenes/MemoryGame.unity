@@ -1094,6 +1094,7 @@ MonoBehaviour:
   pannelloGameOver: {fileID: 1878367749}
   pannelloVittoria: {fileID: 583929669}
   suonoDispensa: {fileID: 1684639053}
+  suonoClick: {fileID: 8300000, guid: aba67a21e0ffd474bb59da942380ebfb, type: 3}
   cucina: Kitchen2
   puzzles:
   - {fileID: 1775699024, guid: dd56ff6dd0cbda54d95491e622b49a25, type: 3}
