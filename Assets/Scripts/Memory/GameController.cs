@@ -13,6 +13,9 @@ public class GameController : MonoBehaviour
     public GameObject pannelloGameOver;
     public GameObject pannelloVittoria;
 
+    [Header("AUDIO")]
+    public AudioSource suonoDispensa; // Trascina qui l'Audio Source della dispensa
+
     [Header("IMPOSTAZIONI SCENA")]
     public string cucina = "Kitchen2";
 
@@ -41,8 +44,6 @@ public class GameController : MonoBehaviour
         Shuffle(gamePuzzles);
         gameGuesses = gamePuzzles.Count / 2;
         AddListeners();
-
-        //Debug.Log("[Memory] Gioco iniziato");
     }
 
     void Update()
@@ -114,41 +115,38 @@ public class GameController : MonoBehaviour
         firstGuess = secondGuess = false;
     }
 
-   
     IEnumerator SequenzaVittoria()
     {
         giocoFinito = true;
 
-        //Debug.Log("[Memory] VITTORIA! ");
-
-        // Segna il memory come completato
         if (GameManager.Instance != null)
         {
             GameManager.Instance.CompleteTask("Memory");
-            //Debug.Log("[Memory] Task 'Memory' completato nel GameManager!");
         }
-        //else
-        //{
-        //    Debug.LogWarning("[Memory] GameManager non trovato!");
-        //}
 
         if (pannelloVittoria != null)
         {
             pannelloVittoria.SetActive(true);
         }
 
+        // Aspetta che il giocatore veda il pannello vittoria
         yield return new WaitForSeconds(2f);
 
+        // RIPRODUZIONE SUONO DISPENSA
+        if (suonoDispensa != null)
+        {
+            suonoDispensa.Play();
+            // Aspettiamo un tempo pari alla durata del suono per non tagliarlo
+            yield return new WaitForSeconds(suonoDispensa.clip.length);
+        }
+
         // Torna alla cucina
-        //Debug.Log($"[Memory] Torno alla cucina: {cucina}");
         SceneManager.LoadScene(cucina);
     }
 
     void GameOver()
     {
         giocoFinito = true;
-        //Debug.Log("[Memory] GAME OVER!");
-
         if (pannelloGameOver != null)
         {
             pannelloGameOver.SetActive(true);
