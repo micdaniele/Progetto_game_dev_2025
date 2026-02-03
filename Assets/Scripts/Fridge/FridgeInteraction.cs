@@ -13,6 +13,7 @@ public class FridgeInteraction : MonoBehaviour
 
     [Header("Scene")]
     public string fridgeMinigameScene = "FridgeMinigame";
+    public string fridgeScene = "Fridge";
 
     [Header("Audio")]
     public AudioClip openSound;
@@ -114,8 +115,10 @@ public class FridgeInteraction : MonoBehaviour
 
         // Reset del flag prima di cambiare scena
         soundPlaying = false;
-
+        if(!GameManager.Instance.IsTaskCompleted("FridgeMinigame"))
         SceneManager.LoadScene(fridgeMinigameScene);
+        else
+            SceneManager.LoadScene(fridgeScene);
     }
 
     // reset quando viene disabilitato
