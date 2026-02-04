@@ -205,7 +205,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: ARRIVA A 15 PUNTI
+  m_Text: REACHES 15 POINTS
 --- !u!222 &65883067
 CanvasRenderer:
   m_ObjectHideFlags: 0

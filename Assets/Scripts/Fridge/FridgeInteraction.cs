@@ -19,14 +19,12 @@ public class FridgeInteraction : MonoBehaviour
     public AudioClip openSound;
 
     private bool playerInside = false;
-    private bool isOpening = false; // previene chiamate multiple
-    private static bool soundPlaying = false; // previene suoni multipli
-
+    private bool isOpening = false;
 
     void Start()
     {
-        // FORZIAMO lo stato iniziale corretto
-        if (promptUI != null) promptUI.SetActive(false);
+        if (promptUI != null)
+            promptUI.SetActive(false);
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -34,8 +32,8 @@ public class FridgeInteraction : MonoBehaviour
         if (other.CompareTag(playerTag))
         {
             playerInside = true;
-            //Debug.Log("[PantryInteraction] Il player è entrato nella zona del frigo");
-            promptUI.SetActive(true);
+            if (promptUI != null)
+                promptUI.SetActive(true);
         }
     }
 
@@ -44,14 +42,14 @@ public class FridgeInteraction : MonoBehaviour
         if (other.CompareTag(playerTag))
         {
             playerInside = false;
-            //Debug.Log("[PantryInteraction] Il player ha lasciato la zona del frigo");
-            promptUI.SetActive(false);
+            if (promptUI != null)
+                promptUI.SetActive(false);
         }
     }
 
     void Update()
     {
-        if (playerInside && !isOpening && !soundPlaying && Input.GetKeyDown(interactKey))
+        if (playerInside && !isOpening && Input.GetKeyDown(interactKey))
         {
             OpenFridge();
         }
@@ -67,9 +65,6 @@ public class FridgeInteraction : MonoBehaviour
         }
 
         isOpening = true;
-        soundPlaying = true;
-
-        //Debug.Log("[PantryInteraction] Apertura dispensa");
 
         // Nascondi il prompt
         if (promptUI != null)
@@ -95,15 +90,14 @@ public class FridgeInteraction : MonoBehaviour
 
     IEnumerator PlaySoundAndLoadScene()
     {
-        //Debug.Log("[PantryInteraction]  Riproduco suono dispensa");
+        // Salva la durata del suono prima di qualsiasi operazione
+        float soundDuration = openSound != null ? openSound.length : 0f;
 
-        AudioSource.PlayClipAtPoint(openSound, Camera.main.transform.position, 1.0f);
-
-        // Aspetta che il suono sia completo
-        float waitTime = openSound.length;
-
-        //Debug.Log($"[PantryInteraction] Aspetto {waitTime} secondi");
-        yield return new WaitForSeconds(waitTime);
+        if (openSound != null)
+        {
+            AudioSource.PlayClipAtPoint(openSound, Camera.main.transform.position, 1.0f);
+            yield return new WaitForSeconds(soundDuration);
+        }
 
         // Carica la scena
         LoadFridgeMinigameScene();
@@ -111,26 +105,20 @@ public class FridgeInteraction : MonoBehaviour
 
     void LoadFridgeMinigameScene()
     {
-        //Debug.Log("[PantryInteraction] Caricamento scena Pantry");
-
-        // Reset del flag prima di cambiare scena
-        soundPlaying = false;
-        if(!GameManager.Instance.IsTaskCompleted("FridgeMinigame"))
-        SceneManager.LoadScene(fridgeMinigameScene);
-        else
-            SceneManager.LoadScene(fridgeScene);
+        if (GameManager.Instance != null)
+        {
+            if (!GameManager.Instance.IsTaskCompleted("FridgeMinigame"))
+                SceneManager.LoadScene(fridgeMinigameScene);
+            else
+                SceneManager.LoadScene(fridgeScene);
+        }
     }
 
-    // reset quando viene disabilitato
     void OnDisable()
     {
         isOpening = false;
-        soundPlaying = false;
-    }
 
-    // reset quando viene distrutto
-    void OnDestroy()
-    {
-        soundPlaying = false;
+        // Ferma tutte le coroutine per evitare errori
+        StopAllCoroutines();
     }
 }

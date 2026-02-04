@@ -74,7 +74,8 @@ public class GameManagerFlappyFood : MonoBehaviour
         Time.timeScale = 1f;
         if (player != null) player.enabled = true;
 
-        Knife[] knife = FindObjectsOfType<Knife>();
+        //Knife[] knife = FindObjectsOfType<Knife>();
+        Knife[] knife = FindObjectsByType<Knife>(FindObjectsSortMode.None);
         for (int i = 0; i < knife.Length; i++)
         {
             Destroy(knife[i].gameObject);
