@@ -29,6 +29,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FlappyFood.unity
     guid: bbf06c289efd847f2b08eebe26daedbb
+  - enabled: 1
+    path: Assets/Scenes/Dish_scene.unity
+    guid: fe4ed3cecc90a714fb8aea97eae3f5c2
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
