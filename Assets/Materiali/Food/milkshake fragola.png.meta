@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      milkshake fragola_0: -2364351186375248299
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      cioccolata calda_0: -95548215481309176
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
