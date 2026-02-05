@@ -2027,7 +2027,7 @@ MonoBehaviour:
   - recipeName: Strawberry Milkshake
     imageObject: {fileID: 457029812}
   hideAllOnStart: 1
-  defaultImage: {fileID: 1707832012}
+  defaultImage: {fileID: 987273886}
   showDialogueOnStart: 1
   startDialogue:
     dialogueID: Dish_dialogue
