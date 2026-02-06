@@ -167,18 +167,16 @@ public class UI_MoodWindow : MonoBehaviour
     void CreateIngredientText(string ingredientText)
     {
         GameObject ingredientObj = new GameObject("Ingredient");
-        ingredientObj.transform.SetParent(ingredientsContent);
+        ingredientObj.transform.SetParent(ingredientsContent,false);
 
-        Text text = ingredientObj.AddComponent<Text>();
-        text.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-        text.fontSize = 16;
+        TextMeshProUGUI text = ingredientObj.AddComponent<TextMeshProUGUI>();
+        text.text = ingredientText;
+        text.fontSize = 40;
         text.color = Color.black;
-        text.alignment = TextAnchor.MiddleLeft;
+        text.alignment = TextAlignmentOptions.Left;
 
         RectTransform rt = ingredientObj.GetComponent<RectTransform>();
-        rt.sizeDelta = new Vector2(0, 30);
-
-        text.text = ingredientText;
+        rt.sizeDelta = new Vector2(0, 50);
     }
 
     void HideAllRecipePanels()
