@@ -507,8 +507,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 47.6, y: 16}
-  m_SizeDelta: {x: 46.15, y: 44.29}
+  m_AnchoredPosition: {x: 56.48, y: 18.13}
+  m_SizeDelta: {x: 51.83, y: 48.55}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &233311346
 MonoBehaviour:
@@ -6903,8 +6903,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 47.6, y: 16}
-  m_SizeDelta: {x: 46.15, y: 44.29}
+  m_AnchoredPosition: {x: 56.48, y: 18.13}
+  m_SizeDelta: {x: 51.83, y: 48.55}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!70 &1540453722
 CapsuleCollider2D:
@@ -8332,7 +8332,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96

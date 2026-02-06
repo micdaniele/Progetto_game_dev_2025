@@ -10,6 +10,7 @@ public class Parallax : MonoBehaviour
         meshRenderer = GetComponent<MeshRenderer>();
     }
 
+    //funzione che fa muovere il pavimento
     private void Update()
     {
         meshRenderer.material.mainTextureOffset += new Vector2(animationSpeed * Time.deltaTime, 0);
