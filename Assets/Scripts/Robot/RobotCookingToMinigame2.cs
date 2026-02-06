@@ -5,53 +5,54 @@ using UnityEngine.SceneManagement;
 public class RobotCookingToMinigame : MonoBehaviour
 {
     [Header("Impostazioni Robot")]
-    public Sprite[] robotSprites;        // Sprite del robot in ordine
+    public Sprite[] robotSprites;        // Array di sprite del robot
     public float[] spriteDurations;      // Durata di ogni sprite (in secondi)
     public AudioClip clickSound;         // Suono al cambio
-    public GameObject[] startPanels;     // Pannelli iniziali (tutorial/intro)
+    public GameObject[] startPanels;     // Dialogo iniziale
 
     [Header("Dialogo Finale")]
     public Dialogue finalDialogue;       // Dialogo da mostrare all'ultimo sprite
-    public bool isFinalDialogue = false;
-    public string flappyFood = "FlappyFood";
+    public bool isFinalDialogue = false; //variabile utile per segnare la fine dei dialoghi e passare al minigame
+    public string flappyFood = "FlappyFood"; //scena minigame
 
     [Header("Impostazioni Animazione Pop")]
-    public float popScale = 1.2f;        // Quanto si ingrandisce (1.2 = 20% più grande)
-    public float popDuration = 0.1f;     // Quanto dura l'animazione (in secondi)
+    public float popScale = 1.2f;        // Effetto ingrandimento (1.2 = 20% più grande)
+    public float popDuration = 0.1f;     // Durata dell'animazione (in secondi)
 
     [Header("Impostazioni Vibrazione")]
     public int vibrationFrameIndex = -1; // A quale sprite attivare la vibrazione (-1 = disattivato)
-    public float vibrationIntensity = 1f; // Intensità della vibrazione
-    [SerializeField] private AudioClip vibrationSound; // Suono durante la vibrazione
+    public float vibrationIntensity = 0.1f; // Intensità della vibrazione
+    [SerializeField] private AudioClip vibrationSound; // Suono della vibrazione
 
     private Vector3 basePosition;        // Posizione originale del robot
-    private bool isVibrating = false;    // Se sta vibrando
-    private float vibrationTimer = 0f;   // Timer per la vibrazione
+    private bool isVibrating = false;    // Variabile per segnare che sta vibrando
+    private float vibrationTimer = 0f;   // Durata della vibrazione
 
     private SpriteRenderer spriteRenderer;
     private AudioSource audioSource;
     private int currentIndex = 0;
     private Vector3 baseScale;           // Memorizza la grandezza originale del robot
-    private float timer = 0f;            // Timer per il cambio automatico
+    private float timer = 0f;            // Timer per il cambio automatico degli sprite
     private bool isPaused = false;       // Se è in pausa per un dialogo
     private bool hasStarted = false;     // Se la sequenza è iniziata
 
     void Start()
     {
+
         spriteRenderer = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
 
-        // Memorizziamo la grandezza iniziale che hai impostato nella scena
+        // Memorizza la grandezza iniziale che ha nella scena
         baseScale = transform.localScale;
 
-        // Memorizziamo la posizione iniziale
+        // Memorizza la posizione iniziale
         basePosition = transform.position;
 
-        // Imposta sprite iniziale
+        // Imposta lo sprite iniziale
         if (robotSprites.Length > 0)
             spriteRenderer.sprite = robotSprites[0];
 
-        // Mostra i pannelli iniziali
+        // Mostra il dialogo iniziale
         foreach (GameObject panel in startPanels)
         {
             if (panel != null)
@@ -61,12 +62,12 @@ public class RobotCookingToMinigame : MonoBehaviour
 
     void Update()
     {
-        //Nasconde i pannelli e fa partire la sequenza
+        //Nasconde il dialogo e fa partire la sequenza
         if (Input.GetKeyDown(KeyCode.Space) && !hasStarted && !isPaused)
         {
             hasStarted = true;
 
-            // Nascondi tutti i pannelli iniziali
+            // Nascondi il gialogo iniziale
             foreach (GameObject panel in startPanels)
             {
                 if (panel != null)
@@ -129,7 +130,7 @@ public class RobotCookingToMinigame : MonoBehaviour
             // Cambia l'immagine
             spriteRenderer.sprite = robotSprites[currentIndex];
 
-            // Suona l'audio
+            // Parte l'audio
             if (clickSound != null && audioSource != null)
                 audioSource.PlayOneShot(clickSound);
 
@@ -153,7 +154,7 @@ public class RobotCookingToMinigame : MonoBehaviour
                 }
             }
 
-            // Avvia l'animazione di rimbalzo
+            // Avvia l'animazione di ingrandimento
             StopAllCoroutines();
             StartCoroutine(PopEffect());
         }
@@ -164,7 +165,7 @@ public class RobotCookingToMinigame : MonoBehaviour
             {
                 DialogueManager.Instance.StartDialogue(finalDialogue);
                 isPaused = true;
-                // Avvia la coroutine che aspetta e poi permette di andare avanti
+                // Avvia la coroutine che aspetta lo spazio
                 StartCoroutine(WaitForDialogueEnd());
             }
         }

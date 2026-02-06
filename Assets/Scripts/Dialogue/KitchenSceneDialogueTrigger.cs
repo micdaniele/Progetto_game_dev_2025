@@ -2,13 +2,14 @@ using UnityEngine;
 
 public class KitchenSceneDialogueTrigger : MonoBehaviour
 {
-    [Header("Dialogues After Single Task")]
+    [Header("Dialogues After Single Task")] //ckeck se sono stati completati i minigame
     [SerializeField] private Dialogue memoryCompletedDialogue;
     [SerializeField] private Dialogue fridgeCompletedDialogue;
 
     [Header("Dialogues After Both Tasks")]
     [SerializeField] private Dialogue bothTasksCompletedDialogue;
 
+    //variabili per vedere quali dialoghi mostrare
     private bool hasShownMemoryDialogue = false;
     private bool hasShownFridgeDialogue = false;
     private bool hasShownBothTasksDialogue = false;
@@ -69,11 +70,11 @@ public class KitchenSceneDialogueTrigger : MonoBehaviour
     }
 
     // Flag utili per testare
-    public void ResetDialogueFlags()
-    {
-        hasShownMemoryDialogue = false;
-        hasShownFridgeDialogue = false;
-        hasShownBothTasksDialogue = false;
-        //Debug.Log("[KitchenSceneDialogueTrigger] Flag dialoghi resettati");
-    }
+    //public void ResetDialogueFlags()
+    //{
+    //    hasShownMemoryDialogue = false;
+    //    hasShownFridgeDialogue = false;
+    //    hasShownBothTasksDialogue = false;
+    //    Debug.Log("[KitchenSceneDialogueTrigger] Flag dialoghi resettati");
+    //}
 }

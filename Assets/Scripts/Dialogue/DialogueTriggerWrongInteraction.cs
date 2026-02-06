@@ -6,15 +6,17 @@ public class DialogueTriggerWrongInteraction : MonoBehaviour
     public Dialogue dialogue;
 
     [Header("Trigger Settings")]
-    public TriggerType triggerType = TriggerType.OnInteract;
-    public KeyCode interactKey = KeyCode.E;
-    public string playerTag = "Player";
+    public TriggerType triggerType = TriggerType.OnInteract; //tipo di trigger per interaggire con l'oggetto
+    public KeyCode interactKey = KeyCode.E; //tasto per interaggire con l'oggetto
+    public string playerTag = "Player"; //tag per chi può interagire con l'oggetto
 
     [Header("Recipe Check")]
-    public bool requiresNoRecipeSelected = false; //il dialogo appare SOLO se NON è stata ancora scelta una ricetta
+    public bool requiresNoRecipeSelected = false; //il dialogo appare solo se non è stata ancora scelta una ricetta
 
-    private bool playerNearby = false;
+    private bool playerNearby = false; //check per quando far apparire il promt
 
+
+    //enum utili per varie interazioni
     public enum TriggerType
     {
         OnStart,
@@ -23,12 +25,14 @@ public class DialogueTriggerWrongInteraction : MonoBehaviour
         Manual
     }
 
+    //dialogo parte appena parte la scena
     void Start()
     {
         if (triggerType == TriggerType.OnStart)
             TriggerDialogue();
     }
 
+    //dialogo partequando il player è nelle vicinanze ed interagisce
     void Update()
     {
         if (triggerType == TriggerType.OnInteract && playerNearby)
@@ -38,6 +42,7 @@ public class DialogueTriggerWrongInteraction : MonoBehaviour
         }
     }
 
+    //dialogo che appare se entri in un'area specifica
     void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.CompareTag(playerTag)) return;
@@ -48,15 +53,17 @@ public class DialogueTriggerWrongInteraction : MonoBehaviour
             playerNearby = true;
     }
 
+    //dialogo che appare se esci da un'area specifica
     void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag(playerTag))
             playerNearby = false;
     }
 
+    //dialogo che appare se interagisci con un oggetto
     public void TriggerDialogue()
     {
-        // Controlla se è richiesto che NON ci sia una ricetta selezionata
+        // Controlla se è richiesto che non ci sia una ricetta selezionata
         if (requiresNoRecipeSelected)
         {
             if (GameManager.Instance != null && GameManager.Instance.HasValidSelection())

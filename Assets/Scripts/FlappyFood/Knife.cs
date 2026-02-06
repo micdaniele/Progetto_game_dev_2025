@@ -1,17 +1,22 @@
 using UnityEngine;
+using static UnityEditor.ShaderData;
 
 public class Knife : MonoBehaviour
 {
-    public Transform top;
-    public Transform bottom;
-    public float speed = 5f;
-    public float gap = 1f;
+    public Transform top; //coltello alto
+    public Transform bottom; //coltello basso
+    public float speed = 5f; //velocità di avvicinamento
+    public float gap = 1f; //distanza tra i due coltelli
 
-    private float leftEdge;
+    private float leftEdge;// Bordo sinistro dello schermo
 
+    //
     private void Start()
     {
-        leftEdge = Camera.main.ScreenToWorldPoint(Vector3.zero).x - 1f;
+        //coordinate per l'angolo in basso a sinistra
+        //ScreenToWorldPoint() converte da screen space a world space
+        //ed aggiunge un margine per distruggere l'oggetto leggermente fuori schermo per evitare il pop visivo
+        leftEdge = Camera.main.ScreenToWorldPoint(Vector3.zero).x - 1f; 
         top.position += Vector3.up * gap / 2;
         bottom.position += Vector3.down * gap / 2;
     }

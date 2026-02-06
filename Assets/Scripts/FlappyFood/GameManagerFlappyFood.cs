@@ -44,27 +44,29 @@ public class GameManagerFlappyFood : MonoBehaviour
 
     private void Start()
     {
-        // All'inizio mostriamo il bottone Play normale
+        // All'inizio mostra il bottone play
         if (playButton != null) playButton.SetActive(true);
-        if (winButton != null) winButton.SetActive(false); // La X è nascosta
-
-        if (gameOver != null) gameOver.SetActive(false);
-        if (youWon != null) youWon.SetActive(false);
+        if (winButton != null) winButton.SetActive(false); // nascondiamo il pulsante di vittoria
+        
+        if (gameOver != null) gameOver.SetActive(false); // se muori mostra il bottone per riprovare
+        if (youWon != null) youWon.SetActive(false);// se vinci mostra il bottone per passare a vedere il piatto
         Pause();
     }
 
+    //ferma il minigame
     public void Pause()
     {
         Time.timeScale = 0f;
         if (player != null) player.enabled = false;
     }
 
+
     public void Play()
     {
         score = 0;
-        if (scoreText != null) scoreText.text = score.ToString();
+        if (scoreText != null) scoreText.text = score.ToString();//testo per lo score
 
-        // Quando giochi, nascondiamo TUTTI i bottoni
+        // Quando parte il gioco nasconde tutti i bottoni
         if (playButton != null) playButton.SetActive(false);
         if (winButton != null) winButton.SetActive(false);
 
@@ -74,7 +76,6 @@ public class GameManagerFlappyFood : MonoBehaviour
         Time.timeScale = 1f;
         if (player != null) player.enabled = true;
 
-        //Knife[] knife = FindObjectsOfType<Knife>();
         Knife[] knife = FindObjectsByType<Knife>(FindObjectsSortMode.None);
         for (int i = 0; i < knife.Length; i++)
         {
@@ -84,9 +85,9 @@ public class GameManagerFlappyFood : MonoBehaviour
 
     public void GameOver()
     {
-        // Se perdi, mostriamo il bottone Play normale
+        // Se perdi, mostra il bottone play per riprovare
         if (playButton != null) playButton.SetActive(true);
-        if (winButton != null) winButton.SetActive(false); // Assicuriamoci che la X sia spenta
+        if (winButton != null) winButton.SetActive(false);//ci assicuriamo che win sia spento
 
         if (gameOver != null) gameOver.SetActive(true);
 
@@ -95,7 +96,7 @@ public class GameManagerFlappyFood : MonoBehaviour
 
     public void Victory()
     {
-        // Se vinci nasconde il bottone Play normale
+        // Se vinci nasconde il bottone play
         if (playButton != null) playButton.SetActive(false);
 
         // e mostra il bottone per la vittoria
@@ -106,6 +107,7 @@ public class GameManagerFlappyFood : MonoBehaviour
         Pause();
     }
 
+    //funzione per mostrare l'incremento dello score
     public void IncreaseScore()
     {
         score++;

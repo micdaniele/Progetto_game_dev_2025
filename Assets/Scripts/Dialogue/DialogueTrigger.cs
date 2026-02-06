@@ -5,14 +5,14 @@ using System.Collections;
 public class DialogueTrigger : MonoBehaviour
 {
     [Header("Complete task Dialogue")]
-    public Dialogue dialogue;  // Dialogo di quando le task sono completate
+    public Dialogue dialogue;  // Dialogo per quando le task sono completate
 
     [Header("Task Requirements")]
     public bool requireTaskCompletion = true;
     public string[] requiredTasks;  // Lista delle task richieste
 
     [Header("Incomplete task Dialogue")]
-    public Dialogue tasksNotCompletedDialogue;  // Dialogo se le task non sono completate
+    public Dialogue tasksNotCompletedDialogue;  // Dialogo per quando le task non sono completate
 
     [Header("Scene Loading")]
     public bool loadSceneAfterTasksCompleted = false;  // Attiva il caricamento scena
@@ -20,16 +20,16 @@ public class DialogueTrigger : MonoBehaviour
     public float delayBeforeSceneLoad = 0.5f;  // Delay prima di caricare la scena
 
     [Header("UI")]
-    public GameObject promptUI;  
+    public GameObject promptUI;  //promt "press E"
 
     [Header("Interaction Settings")]
-    public KeyCode interactKey = KeyCode.E;
-    public string playerTag = "Player";
+    public KeyCode interactKey = KeyCode.E; //tasto per l'interazione
+    public string playerTag = "Player"; //tag per chi può eseguire l'interazione
 
 
-    private bool playerInside = false;
-    private bool dialogueTriggered = false;
-    private bool isWaitingForDialogueEnd = false;
+    private bool playerInside = false; //variabile per segnare se è all'interno del cast e far apparire il promt
+    private bool dialogueTriggered = false; //variabile che segna l'inizio di un dialogo
+    private bool isWaitingForDialogueEnd = false; //variabile che segna la fine di un dialogo
 
     void Start()
     {
@@ -47,10 +47,10 @@ public class DialogueTrigger : MonoBehaviour
             CheckDialogueEndAndLoadScene();
         }
 
-        // Se il player non è dentro o il dialogo è già partito, non fare nulla
+        // Se il player non è dentro il raycast o il dialogo è già partito, non fare nulla
         if (!playerInside) return;
 
-        // Se il dialogo è già stato mostrato e showOnlyOnce è attivo, non permettere di riattivarlo
+        // Se il dialogo è già stato mostrato e showOnlyOnce è attivo, non permettere di mostrarlo di nuovo
         if (dialogueTriggered && dialogue != null && dialogue.showOnlyOnce)
             return;
 
@@ -78,7 +78,7 @@ public class DialogueTrigger : MonoBehaviour
     {
         if (!other.CompareTag(playerTag)) return;
 
-        // Se il dialogo è già stato mostrato, non nascondere il prompt
+        // Se il dialogo è già stato mostrato, non nascondi il prompt
         if (dialogueTriggered && dialogue != null && dialogue.showOnlyOnce)
             return;
 
@@ -99,18 +99,18 @@ public class DialogueTrigger : MonoBehaviour
         if (promptUI != null)
             promptUI.SetActive(false);
 
-        // controllo le task
+        // controllo delle task completate
             bool allTasksCompleted = AreAllTasksCompleted();
 
             if (allTasksCompleted)
             {
-                // Tutte le task completate mostra il dialogo principale
+                // Se tutte le task sono state completate mostra il dialogo principale
                 if (dialogue != null)
                 {
                     //Debug.Log("[DialogueTrigger] Tutte le task completate, mostro dialogo principale");
                     DialogueManager.Instance.StartDialogue(dialogue);
 
-                    // Se bisogna caricare una scena dopo, inizia a controllare quando il dialogo finisce
+                    // Controlla quando il dialogo finisce e se bisogna caricare una scena
                     if (loadSceneAfterTasksCompleted && !string.IsNullOrEmpty(robotScene))
                     {
                         isWaitingForDialogueEnd = true;
@@ -120,7 +120,7 @@ public class DialogueTrigger : MonoBehaviour
             }
             else
             {
-                // Task non completate mostra dialogo alternativo
+                // Se le task non sono completate mostra dialogo alternativo
                 if (tasksNotCompletedDialogue != null)
                 {
                     //Debug.Log("[DialogueTrigger] Task non completate, mostro dialogo alternativo");
