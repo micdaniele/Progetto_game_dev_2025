@@ -36,7 +36,7 @@ public class UI_MoodWindow : MonoBehaviour
 
     void Start()
     {
-        // Inizializza l'array con le classi FIGLIE
+        // Inizializza l'array con le classi figlie
         recipeDatabases = new RecipeDatabase[]
         {
             new HappyRecipes(),
@@ -59,16 +59,18 @@ public class UI_MoodWindow : MonoBehaviour
     public void OnMoodSelected(int moodIndex)
     {
         selectedMood = moodIndex;
-
+        //Nasconde la finestra principale dei mood
         if (moodIndex >= 0 && moodIndex < recipeDatabases.Length)
         {
             RecipeDatabase selectedDatabase = recipeDatabases[moodIndex];
             //Debug.Log($"[MoodWindow] Selected: {selectedDatabase.GetMoodDescription()}");
         }
 
+
         if (moodWindowPanel != null)
             moodWindowPanel.SetActive(false);
 
+        //Mostra il pannello delle ricette del mood selezionato
         ShowRecipePanel(moodIndex);
     }
 
@@ -76,6 +78,7 @@ public class UI_MoodWindow : MonoBehaviour
     {
         HideAllRecipePanels();
 
+        //attiva il pannello giusto in base alla ricetta
         switch (moodIndex)
         {
             case 0: if (happyRecipesPanel != null) happyRecipesPanel.SetActive(true); break;
@@ -125,9 +128,10 @@ public class UI_MoodWindow : MonoBehaviour
 
     void ShowIngredientsPanel(string recipeName)
     {
-        // Pulisci ingredienti precedenti
+        
         if (ingredientsContent != null)
         {
+            //Crea oggetti UI TextMeshProUGUI dinamicamente per ogni ingrediente
             foreach (Transform child in ingredientsContent)
             {
                 Destroy(child.gameObject);
@@ -179,6 +183,7 @@ public class UI_MoodWindow : MonoBehaviour
         rt.sizeDelta = new Vector2(0, 50);
     }
 
+    //nasconde i pannelli attivati
     void HideAllRecipePanels()
     {
         if (happyRecipesPanel != null) happyRecipesPanel.SetActive(false);
@@ -194,7 +199,7 @@ public class UI_MoodWindow : MonoBehaviour
         Cursor.visible = false;
     }
 
-    // Cambia GameObject e SALVA lo stato usando SaveUIObjectState
+    // Cambia GameObject e salva lo stato usando SaveUIObjectState
     void SwitchToNextDialogue()
     {
         // Attiva il GameObject con DialogueTrigger

@@ -12,18 +12,16 @@ public abstract class RecipeDatabase
         moodType = mood;
     }   
     
-    // Metodo ASTRATTO - POLIMORFISMO
-    // Ogni classe figlia DEVE implementare questo metodo
+    // Metodo astratto da implementare in ogni codice
     public abstract Dictionary<string, List<string>> GetRecipes();
     
-    // Metodo VIRTUALE - POLIMORFISMO
-    // Può essere sovrascritto dalle classi figlie
+    // Metodo virtuale può essere sovrascritto dalle classi figlie
     public virtual string GetMoodDescription()
     {
         return $"Recipe database for {moodType} mood";
     }
     
-    // Metodo normale - ereditato da tutte le classi figlie
+    // Metodo ereditato da tutte le classi figlie
     public string GetMoodType()
     {
         return moodType;
@@ -37,7 +35,7 @@ public class HappyRecipes : RecipeDatabase
     // Costruttore che chiama il costruttore della classe base
     public HappyRecipes() : base("Happy") { }
     
-    // OVERRIDE del metodo astratto - POLIMORFISMO
+    // override del metodo astratto
     public override Dictionary<string, List<string>> GetRecipes()
     {
         return new Dictionary<string, List<string>>()
@@ -56,7 +54,7 @@ public class HappyRecipes : RecipeDatabase
         };
     }
     
-    // OVERRIDE del metodo virtuale - POLIMORFISMO
+    // override del metodo virtuale 
     public override string GetMoodDescription()
     {
         return "Happy mood recipes!";

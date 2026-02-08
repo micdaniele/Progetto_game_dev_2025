@@ -23,6 +23,7 @@ public class Knife : MonoBehaviour
 
     private void Update()
     {
+        //velocità di avvicinamento dei coltelli
         transform.position += speed * Time.deltaTime * Vector3.left;
 
         if (transform.position.x < leftEdge)

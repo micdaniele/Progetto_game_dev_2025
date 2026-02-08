@@ -2,20 +2,22 @@ using UnityEngine;
 
 public class VibrationUI : MonoBehaviour
 {
-    public float intensity = 1f;
-    public float duration = 0.3f;
+    //variabili per l'intensità e la durata della vibrazione
+    public float intensity = 0.3f;
+    public float duration = 5.0f;
 
     [Header("Audio")]
     [SerializeField] private AudioClip clickSound; // Suono quando clicchi
 
-    private RectTransform rectTransform;
-    private Vector2 startPos;
-    private float timer;
-    private bool isVibrating;
-    private AudioSource audioSource;
+    private RectTransform rectTransform;//riferimento alla UI che vibra
+    private Vector2 startPos;//posizione originale, per ripristinarla
+    private float timer;//per contare il tempo trascorso
+    private bool isVibrating;//flag che indica se la vibrazione è attiva
+    private AudioSource audioSource;//per riprodurre il suono
 
     void Awake()
     {
+        //Salva la posizione originale
         rectTransform = GetComponent<RectTransform>();
         startPos = rectTransform.anchoredPosition;
 
@@ -25,15 +27,17 @@ public class VibrationUI : MonoBehaviour
         {
             audioSource = gameObject.AddComponent<AudioSource>();
         }
+        //Disabilita la riproduzione automatica del suono
         audioSource.playOnAwake = false;
     }
 
     void Update()
     {
-        if (!isVibrating) return;
+        if (!isVibrating) return;//Se non vibra esce
 
-        timer += Time.deltaTime;
+        timer += Time.deltaTime;//Aggiorna il timer
 
+        //Fino a duration, muove il robot casualmente nelle x e nelle y entro i limiti di intensity
         if (timer < duration)
         {
             float x = Random.Range(-1f, 1f) * intensity; // spostamento sulle x 
@@ -52,7 +56,7 @@ public class VibrationUI : MonoBehaviour
         isVibrating = true;
         timer = 0f;
 
-        // RIPRODUCE IL SUONO con la durata specificata
+        // riproduce il suono con la durata specificata
         if (clickSound != null && audioSource != null)
         {
             // Calcola il pitch per far durare il suono esattamente quanto duration

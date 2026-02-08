@@ -1,5 +1,7 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEditor.ShaderData;
 
 public class Player2DGroundMover : MonoBehaviour
 {
@@ -42,9 +44,9 @@ public class Player2DGroundMover : MonoBehaviour
         _audioSource.loop = false;
         _audioSource.playOnAwake = false;
         _audioSource.volume = _audioVolume;
-        _audioSource.spatialBlend = 0f; // 2D audio
+        _audioSource.spatialBlend = 0f;
 
-        // DEBUG: Verifica configurazione
+        // DEBUG
         //Debug.Log($"[Footsteps] AudioClips configurati: {(_footstepSounds != null ? _footstepSounds.Length : 0)}");
         //if (_footstepSounds != null)
         //{
@@ -57,6 +59,7 @@ public class Player2DGroundMover : MonoBehaviour
         //    }
         //}
 
+        //azione di movimento
         _moveAction = InputSystem.actions.FindAction("Move");
         _rb.gravityScale = 0f;
         _rb.constraints = RigidbodyConstraints2D.FreezeRotation;
@@ -73,12 +76,15 @@ public class Player2DGroundMover : MonoBehaviour
         // Legge l'input
         _inputMovement = _moveAction.ReadValue<Vector2>();
 
+        //aggiorna l'animator
         if (_animator != null)
         {
+            //imposta l'intensità del movimento
             _animator.SetFloat("Speed", _inputMovement.magnitude);
 
             if (_inputMovement.magnitude > 0.01f)
             {
+                //direzione movimento
                 _animator.SetFloat("Move x", _inputMovement.x);
                 _animator.SetFloat("Move y", _inputMovement.y);
 
@@ -92,10 +98,11 @@ public class Player2DGroundMover : MonoBehaviour
                 }
             }
         }
-
+        //gestione del suono dei passi
         HandleFootsteps();
     }
 
+    //applica il movimento al rigid body
     void FixedUpdate()
     {
          _rb.linearVelocity = _inputMovement * _speed;
@@ -105,11 +112,13 @@ public class Player2DGroundMover : MonoBehaviour
     {
         bool isMoving = _inputMovement.magnitude > 0.01f;
 
-        // Suona i passi solo se il personaggio si sta muovendo
+        // fa partire il suono dei passi solo se il personaggio si sta muovendo
         if (isMoving && _footstepSounds != null && _footstepSounds.Length > 0)
         {
+            //timer per i passi per far in modo che non suonano ad ogni frame ma a intervalli regolari
             _footstepTimer -= Time.deltaTime;
 
+            //Simula il ritmo naturale dei passi.
             if (_footstepTimer <= 0f)
             {
                 PlayFootstepSound();
@@ -118,12 +127,14 @@ public class Player2DGroundMover : MonoBehaviour
         }
         else
         {
-            _footstepTimer = 0f;
+            //il timer si resetta il prossimo passo parte subito quando riprendi a muoverti
+                        _footstepTimer = 0f;
         }
     }
 
     private void PlayFootstepSound()
     {
+        //controlli di sicurezza
         if (_audioSource == null)
         {
             //Debug.LogError("[Footsteps] AudioSource è NULL!");
@@ -145,12 +156,14 @@ public class Player2DGroundMover : MonoBehaviour
             return;
         }
 
+        //piccola variazione nel suono dei passi per suono più realistico 
         _audioSource.pitch = Random.Range(0.9f, 1.1f);
         _audioSource.PlayOneShot(clip, _audioVolume);
 
         //Debug.Log($"[Footsteps] Suono riprodotto: {clip.name}, Volume: {_audioVolume}");
     }
 
+    //alva la posizione del player quando cambi scena e quando entri in un minigioco
     public void SavePosition()
     {
         if (GameManager.Instance != null)

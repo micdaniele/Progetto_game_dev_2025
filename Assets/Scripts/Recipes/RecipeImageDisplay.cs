@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class RecipeImageDisplay : MonoBehaviour
 {
     [System.Serializable]
+    //Permette di associare ogni nome di ricetta a un GameObject
     public class RecipeImage
     {
         public string recipeName;
@@ -13,98 +14,112 @@ public class RecipeImageDisplay : MonoBehaviour
     }
 
     [Header("Recipe Images")]
-    public List<RecipeImage> recipeImages = new List<RecipeImage>();
+    public List<RecipeImage> recipeImages = new List<RecipeImage>();//lista delle ricette e dei rispettivi GameObject
 
     [Header("Settings")]
-    public bool hideAllOnStart = true;  // Nascondi tutte le immagini all'inizio
-    public GameObject defaultImage;     // Immagine di default se la ricetta non è trovata
+    public bool hideAllOnStart = true;//se true, tutte le immagini saranno nascoste all’inizio
+    public GameObject defaultImage;//immagine mostrata se la ricetta corrente non ha un’immagine associata
 
     [Header("Dialogue on Scene Start")]
-    public bool showDialogueOnStart = true;  // Attiva il dialogo all'inizio della scena
-    public Dialogue startDialogue;            // Dialogo da mostrare all'inizio
+    public bool showDialogueOnStart = true;//indica se mostrare un dialogo all’avvio della scena
+    public Dialogue startDialogue;
+
+    [Header("Exit Button")]
+    public GameObject exitButton;  // Riferimento al bottone
+    public bool showExitAfterDialogue = true;  // Attiva/disattiva funzionalità
 
     void Start()
     {
-        // Nascondi tutte le immagini all'inizio
+        // Nascondi il bottone all'inizio
+        if (exitButton != null)
+        {
+            exitButton.SetActive(false);
+        }
+
         if (hideAllOnStart)
         {
             HideAllImages();
         }
 
-        // Carica e mostra l'immagine della ricetta corrente
         DisplayCurrentRecipeImage();
 
-        // Mostra il dialogo se richiesto
         if (showDialogueOnStart && startDialogue != null)
         {
-            StartCoroutine(ShowDialogue());
+            StartCoroutine(ShowDialogue());//Avvia il dialogo se richiesto
         }
     }
 
-
+    //fa partire il dialogo.
     private IEnumerator ShowDialogue()
     {
-
-        // Controlla se il DialogueManager esiste
         if (DialogueManager.Instance == null)
         {
-            //Debug.LogWarning("[RecipeImageDisplay] DialogueManager non trovato!");
             yield break;
         }
 
         // Mostra il dialogo
-        //Debug.Log($"[RecipeImageDisplay] Mostro dialogo all'inizio della scena");
         DialogueManager.Instance.StartDialogue(startDialogue);
+
+        // Aspetta che il dialogo finisca
+        if (showExitAfterDialogue)
+        {
+            yield return StartCoroutine(WaitForDialogueEnd());
+
+            // Mostra il bottone quando il dialogo è terminato
+            if (exitButton != null)
+            {
+                exitButton.SetActive(true);
+            }
+        }
     }
 
+    // Coroutine che aspetta la fine del dialogo
+    private IEnumerator WaitForDialogueEnd()
+    {
+        // Aspetta finché il pannello del dialogo è attivo
+        if (DialogueManager.Instance != null && DialogueManager.Instance.dialoguePanel != null)
+        {
+            while (DialogueManager.Instance.dialoguePanel.activeSelf)
+            {
+                yield return null;
+            }
+        }
+    }
 
-    // Mostra l'immagine della ricetta corrente
+    //funzioni che assicurino che sia visualizzata almeno un'immagine
     public void DisplayCurrentRecipeImage()
     {
         if (GameManager.Instance == null)
         {
-            //Debug.LogWarning("[RecipeImageDisplay] GameManager non trovato!");
             ShowDefaultImage();
             return;
         }
 
-        // Ottieni la ricetta corrente dal GameManager
         string currentRecipe = GameManager.Instance.GetCurrentRecipe();
 
         if (string.IsNullOrEmpty(currentRecipe))
         {
-            //Debug.LogWarning("[RecipeImageDisplay] Nessuna ricetta selezionata!");
             ShowDefaultImage();
             return;
         }
 
-        // Cerca e mostra l'immagine corrispondente
         bool found = ShowRecipeImage(currentRecipe);
 
         if (!found)
         {
-            //Debug.LogWarning($"[RecipeImageDisplay] Immagine per ricetta '{currentRecipe}' non trovata!");
             ShowDefaultImage();
         }
-        //else
-        //{
-        //    Debug.Log($"[RecipeImageDisplay] Mostrata immagine per: {currentRecipe}");
-        //}
     }
 
-
-    // Mostra l'immagine di una ricetta specifica
+    //funzione che controlla l'immagine della ricetta da mostrare
     public bool ShowRecipeImage(string recipeName)
     {
-        // Nascondi tutte le immagini prima
         HideAllImages();
 
-        // Cerca la ricetta nella lista
         foreach (RecipeImage recipeImage in recipeImages)
         {
             if (recipeImage.recipeName == recipeName && recipeImage.imageObject != null)
             {
-                // Attiva l'immagine
                 recipeImage.imageObject.SetActive(true);
                 return true;
             }
@@ -113,7 +128,7 @@ public class RecipeImageDisplay : MonoBehaviour
         return false;
     }
 
-    // Forzo uno stato iniziale in cui tutte le immagini delle ricette sono disattivate
+    //funzione che nasconde tutte le immagini delle ricette
     public void HideAllImages()
     {
         foreach (RecipeImage recipeImage in recipeImages)
@@ -124,30 +139,19 @@ public class RecipeImageDisplay : MonoBehaviour
             }
         }
 
-        // Nascondi anche l'immagine di default
         if (defaultImage != null)
         {
             defaultImage.SetActive(false);
         }
     }
 
-    // Mostra l'immagine di default
+    //mostra un'immagine scelta precedentemente
     private void ShowDefaultImage()
     {
         if (defaultImage != null)
         {
             HideAllImages();
             defaultImage.SetActive(true);
-            //Debug.Log("[RecipeImageDisplay] Mostrata immagine di default");
         }
     }
-
-
-    // Metodo di debug per testare le immagini
-    //public void DebugShowRecipe(string recipeName)
-    //{
-    //    Debug.Log($"[RecipeImageDisplay] DEBUG: Provo a mostrare '{recipeName}'");
-    //    bool success = ShowRecipeImage(recipeName);
-    //    Debug.Log($"[RecipeImageDisplay] DEBUG: Risultato = {success}");
-    //}
 }

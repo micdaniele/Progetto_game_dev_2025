@@ -21,7 +21,7 @@ public class RecipeManager : MonoBehaviour
 
     void Start()
     {
-        // Se c'è un FridgeDefrostGame nella scena, non fare nulla
+        // Se è FridgeDefrostGame nella scena, non fa nulla
         FridgeDefrostGame fridgeGame = FindFirstObjectByType<FridgeDefrostGame>();
         if (fridgeGame != null)
         {
@@ -34,7 +34,7 @@ public class RecipeManager : MonoBehaviour
         Cursor.visible = true;
         Time.timeScale = 1f;
 
-        // Trova SOLO gli ingredienti fisicamente presenti in QUESTA scena
+        // Trova solo gli ingredienti fisicamente presenti in questa scena
         allIngredients = Object.FindObjectsByType<Ingredient>(FindObjectsSortMode.None);
         //Debug.Log($"[RecipeManager] Trovati {allIngredients.Length} ingredienti FISICI nella scena");
 
@@ -44,9 +44,10 @@ public class RecipeManager : MonoBehaviour
         // Sincronizza con gli ingredienti già presi
         if (GameManager.Instance != null)
         {
+            //salva gli ingredienti già presi nel game manager e fanno in modo che restino tali
             selectedIngredients = new List<string>(GameManager.Instance.ingredientiPresi);
             //Debug.Log($"[RecipeManager] === ZAINO ===");
-            //Debug.Log($"[RecipeManager] Ingredienti gi� presi: {selectedIngredients.Count}");
+            //Debug.Log($"[RecipeManager] Ingredienti gia' presi: {selectedIngredients.Count}");
             //foreach (string ing in selectedIngredients)
             //{
             //    Debug.Log($"[RecipeManager]   - {ing}");
@@ -66,6 +67,7 @@ public class RecipeManager : MonoBehaviour
         //    return;
         //}
 
+        //se il giocatore ha già selezionato un mood o ha già selezionato una ricetta carica quella selezionata
         if (GameManager.Instance.HasValidSelection())
         {
             int savedMood = GameManager.Instance.GetCurrentMood();
@@ -82,6 +84,7 @@ public class RecipeManager : MonoBehaviour
         //}
     }
 
+    //switch per la selezione del mood
     public void SetMood(int mood)
     {
         switch (mood)
@@ -95,6 +98,7 @@ public class RecipeManager : MonoBehaviour
         //Debug.Log($"[RecipeManager] Mood: {currentDatabase.GetMoodDescription()}");
     }
 
+
     public void SelectRecipe(string recipeName)
     {
         //if (currentDatabase == null)
@@ -103,7 +107,9 @@ public class RecipeManager : MonoBehaviour
         //    return;
         //}
 
-        var recipes = currentDatabase.GetRecipes();
+
+        //fissi una ricetta ed ottieni la lista ingredienti richiesta
+                var recipes = currentDatabase.GetRecipes();
 
         if (recipes.ContainsKey(recipeName))
         {
@@ -132,11 +138,11 @@ public class RecipeManager : MonoBehaviour
             return cleanReq == cleanInput;
         });
 
-        // Se è nella ricetta, verifica anche che NON sia gi� stato preso
+        // Se è nella ricetta, verifica anche che NON sia gia' stato preso
         if (inRecipe)
         {
             bool alreadyTaken = selectedIngredients.Contains(ingredientName);
-            return !alreadyTaken; // Selezionabile SOLO se non � gi� stato preso
+            return !alreadyTaken; // Selezionabile solo se non e' gia' stato preso
         }
 
         return false;
@@ -144,13 +150,14 @@ public class RecipeManager : MonoBehaviour
 
     public bool TrySelectIngredient(string ingredientName)
     {
+        //controlla se serve
         if (IsIngredientRequired(ingredientName))
         {
             if (!selectedIngredients.Contains(ingredientName))
             {
                 selectedIngredients.Add(ingredientName);
 
-                // Salva subito nel GameManager
+                // Salva nel GameManager
                 if (GameManager.Instance != null)
                 {
                     GameManager.Instance.ingredientiPresi.Add(ingredientName);
@@ -164,6 +171,8 @@ public class RecipeManager : MonoBehaviour
                 }
 
                 //Debug.Log($"[OK] Preso: {ingredientName} ({selectedIngredients.Count}/{GetRequiredIngredientsInScene().Count})");
+
+                //controlla se è finita
                 CheckSceneCompletion();
                 return true;
             }
@@ -175,6 +184,8 @@ public class RecipeManager : MonoBehaviour
         return false;
     }
 
+
+    //legge il nome dell'ingrediente
     private List<string> GetRequiredIngredientsInScene()
     {
         List<string> inSceneRequired = new List<string>();
@@ -207,13 +218,13 @@ public class RecipeManager : MonoBehaviour
 
             if (alreadySelected)
             {
-                // GIA PRESO
+                // gia' preso
                 ingredient.SetSelected(true);
                 //Debug.Log($"[RecipeManager] {ingredient.ingredientName} -> GIA PRESO");
             }
             else
             {
-                // NON ANCORA PRESO
+                // non ancora preso
                 bool isRequired = IsIngredientRequired(ingredient.ingredientName);
                 ingredient.SetSelectable(isRequired);
                 //Debug.Log($"[RecipeManager] {ingredient.ingredientName} -> {(isRequired ? "VERDE (da prendere)" : "GRIGIO (non serve)")}");
@@ -301,6 +312,7 @@ public class RecipeManager : MonoBehaviour
         //}
     }
 
+    //reset delle ricette ed ingredienti presi
     public void ResetSelection()
     {
         selectedIngredients.Clear();
@@ -313,6 +325,7 @@ public class RecipeManager : MonoBehaviour
         }
     }
 
+    //getter vari
     public List<string> GetAvailableRecipes()
     {
         if (currentDatabase == null) return new List<string>();

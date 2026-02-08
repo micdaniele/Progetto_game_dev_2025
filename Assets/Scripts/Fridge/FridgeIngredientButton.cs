@@ -8,11 +8,11 @@ public class FridgeIngredientButton : MonoBehaviour
     [Header("Riferimenti")]
     public Image iceOverlay; // Overlay del ghiaccio
     public Image ingredientImage; // L'immagine dell'ingrediente
-    public GameObject highlightEffect; // Effetto outline/glow (opzionale)
+    public GameObject highlightEffect; // Effetto outline/glow
 
     [Header("Sprite Ghiaccio")]
     public Sprite[] iceSprites; // Array di sprite per i vari stati
-    public bool useSpriteChange = true; // Usa cambio sprite invece di alpha
+    public bool useSpriteChange = true;
 
     [Header("Impostazioni Ghiaccio")]
     public Color iceColor = new Color(0.7f, 0.9f, 1f, 0.85f);
@@ -33,9 +33,11 @@ public class FridgeIngredientButton : MonoBehaviour
 
     void Awake()
     {
+        //recuperi il button
         //Debug.Log($"[{gameObject.name}] Awake chiamato");
         button = GetComponent<Button>();
 
+        //aggiungi il listener
         if (button != null)
         {
             button.onClick.AddListener(OnButtonClick);
@@ -46,6 +48,7 @@ public class FridgeIngredientButton : MonoBehaviour
         //    Debug.LogError($"[{gameObject.name}] BUTTON NON TROVATO!");
         //}
 
+        //trova il FridgeDefrostGame
         gameManager = FindFirstObjectByType<FridgeDefrostGame>();
 
         //if (gameManager != null)
@@ -57,11 +60,16 @@ public class FridgeIngredientButton : MonoBehaviour
         //    Debug.LogError($"[{gameObject.name}] GAMEMANAGER NON TROVATO!");
         //}
 
+        //prepari highlightEffect
         if (highlightEffect != null)
             highlightEffect.SetActive(false);
 
+        //recuperi l'audio source
         audioSource = GetComponent<AudioSource>();
 
+        //gestisci AudioSource aggiungendolo se è null
+        //e gli impedisce di riprodurre automaticamente un suono all'avvio
+        //o quando il game object viene attivato
         if (audioSource == null)
         {
             audioSource = gameObject.AddComponent<AudioSource>();
@@ -70,10 +78,11 @@ public class FridgeIngredientButton : MonoBehaviour
 
     }
 
+    //funzione per inizializzare il gioco
     public void InitializeForMinigame(int clicks)
     {
         StopAllCoroutines();
-
+        //resetta i click
         maxClicks = clicks;
         clicksRemaining = clicks;
         isDefrosted = false;
@@ -95,11 +104,12 @@ public class FridgeIngredientButton : MonoBehaviour
         if(highlightEffect != null)
            highlightEffect.SetActive(false);
 
-        // Il bottone è sempre cliccabile
+        // imposta il bottone come sempre cliccabile
         if (button != null)
             button.interactable = true;
     }
 
+    //funzione per controllare se ingrediente è già stato scongelato-> non viene mai evidenziato
     public void Highlight(float duration)
     {
         if (isDefrosted) return;
@@ -108,6 +118,7 @@ public class FridgeIngredientButton : MonoBehaviour
         StartCoroutine(HighlightCoroutine(duration));
     }
 
+    //funzione per evidenziare l'ingrediente da scongelare
     IEnumerator HighlightCoroutine(float duration)
     {
         isHighlighted = true;
@@ -133,6 +144,7 @@ public class FridgeIngredientButton : MonoBehaviour
         }
     }
 
+    //effetto di pulsazione dell'ingrediente
     IEnumerator PulseEffect(float duration)
     {
         Vector3 originalScale = transform.localScale;
@@ -162,6 +174,7 @@ public class FridgeIngredientButton : MonoBehaviour
         transform.localScale = originalScale;
     }
 
+    //funzione che interagisce con il game manager di questo gioco
     void OnButtonClick()
     {
         if (gameManager != null)
@@ -172,11 +185,12 @@ public class FridgeIngredientButton : MonoBehaviour
 
     public bool OnClick()
     {
-        if(isDefrosted || !isHighlighted)
+        //il giocatore può cliccare solo quando è evidenziato
+        if (isDefrosted || !isHighlighted)
            return false;
-
+        //se il click è valido decrementa il numero di click rimanenti
         clicksRemaining--;
-        
+        //attiva il suono
         if (iceClickSound != null)
         {
             audioSource.PlayOneShot(iceClickSound);
@@ -188,12 +202,15 @@ public class FridgeIngredientButton : MonoBehaviour
 
         if (clicksRemaining <= 0)
         {
+            //imposta isDefrosted
             //Debug.Log($"[{gameObject.name}] Ghiaccio completamente scongelato!");
             isDefrosted = true;
+            //fa partire il suono di rottura
             if (iceBreakSound != null)
             {
                 audioSource.PlayOneShot(iceBreakSound);
             }
+            //avvia l'animazione
             StartCoroutine(DefrostEffect());
         }
 
@@ -208,13 +225,13 @@ public class FridgeIngredientButton : MonoBehaviour
             return;
         }
 
-        // Se usiamo cambio sprite
+        // usiamo il cambio di sprite
         if (useSpriteChange && iceSprites != null && iceSprites.Length > 0)
         {
             // Calcola quale sprite usare in base ai click rimanenti
             int spriteIndex = maxClicks - clicksRemaining;
 
-            // Assicurati che l'indice sia valido
+            // Assicura che l'indice sia valido
             if (spriteIndex >= 0 && spriteIndex < iceSprites.Length)
             {
                 iceOverlay.sprite = iceSprites[spriteIndex];
@@ -223,6 +240,7 @@ public class FridgeIngredientButton : MonoBehaviour
         }
         else
         {
+            //fallback con alpha fade
             float progress = (float)clicksRemaining / maxClicks;
             Color newColor = iceOverlay.color;
             newColor.a = progress;
@@ -234,6 +252,7 @@ public class FridgeIngredientButton : MonoBehaviour
 
     IEnumerator DefrostEffect()
     {
+        //fa partire il suono
         if (iceBreakSound != null)
         {
             audioSource.PlayOneShot(iceBreakSound);
@@ -270,6 +289,7 @@ public class FridgeIngredientButton : MonoBehaviour
         }
     }
 
+    //viene passato al game manager del minigame per indicare quale ingrediente deve essere eliminato dalla lista
     public bool IsDefrosted()
     {
         return isDefrosted;

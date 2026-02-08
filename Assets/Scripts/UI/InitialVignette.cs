@@ -13,13 +13,13 @@ public class InitialVignette : MonoBehaviour
 
     void Start()
     {
-        //Debug.Log("=== [InitialVignette] START CHIAMATO ===");
+        //Debug.Log("[InitialVignette] start");
 
         // Controlla se il GameManager esiste
         if (GameManager.Instance == null)
         {
             //Debug.LogError("[InitialVignette] ? GAMEMANAGER È NULL!");
-            ShowVignette(); // Mostra comunque
+            ShowVignette(); // Mostra comunque il pannello iniziale
             return;
         }
 
@@ -39,6 +39,7 @@ public class InitialVignette : MonoBehaviour
             if (vignettePanel != null)
                 vignettePanel.SetActive(false);
 
+
             Time.timeScale = 1f;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
@@ -52,6 +53,7 @@ public class InitialVignette : MonoBehaviour
         ShowVignette();
     }
 
+    //funzione per mostrare il pannello all'inizio
     void ShowVignette()
     {
         if (vignettePanel != null)
@@ -75,6 +77,7 @@ public class InitialVignette : MonoBehaviour
         //}
     }
 
+    //controlla se è stato premuto spazio per chiudere la schermata
     void Update()
     {
         if (vignetteShown && Input.GetKeyDown(closeKey))
@@ -83,6 +86,7 @@ public class InitialVignette : MonoBehaviour
         }
     }
 
+    //
     public void CloseVignette()
     {
         //Debug.Log("[InitialVignette] close vignette è stato chiamato");
@@ -94,10 +98,12 @@ public class InitialVignette : MonoBehaviour
 
             //Debug.Log("[InitialVignette] Vignetta chiusa");
 
-            // Controlla GameManager
+            // Controlla se esiste il GameManager
             if (GameManager.Instance != null)
             {
                 //Debug.Log("[InitialVignette] ? GameManager trovato, salvo lo stato...");
+
+                //registra che è stata chiusa la vignetta
                 GameManager.Instance.CompleteTask("VignetteShown");
                 //Debug.Log("[InitialVignette] ? Task 'VignetteShown' completato!");
 

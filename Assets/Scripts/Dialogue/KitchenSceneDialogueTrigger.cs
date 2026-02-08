@@ -16,10 +16,12 @@ public class KitchenSceneDialogueTrigger : MonoBehaviour
 
     void Start()
     {
-        // Controlla quali task sono state completate e mostra i dialoghi
+        // Controlla appena parte la scena quali task sono state completate e mostra i dialoghi
         CheckAndShowDialogues();
     }
 
+
+    //controlla quali dialoghi mostrare in base alle "task" completate
     void CheckAndShowDialogues()
     {
         if (GameManager.Instance == null || DialogueManager.Instance == null)
@@ -28,6 +30,7 @@ public class KitchenSceneDialogueTrigger : MonoBehaviour
             return;
         }
 
+        //controlla se i due minigame sono stati completati
         bool memoryCompleted = GameManager.Instance.IsTaskCompleted("Memory");
         bool fridgeCompleted = GameManager.Instance.IsTaskCompleted("FridgeMinigame");
 

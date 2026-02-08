@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     private Dictionary<string, bool> kitchenObjectsState = new Dictionary<string, bool>();
     private Dictionary<string, bool> uiObjectsState = new Dictionary<string, bool>(); //UI persistenti
     public List<string> completedTasks = new List<string>();
-    private Vector3 playerPosition;
+    private Vector2 playerPosition;
     private bool hasPlayerPosition = false;
 
     void Awake()
@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
             return;
         }
 
+        //Non viene distrutto al cambio scena
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
@@ -68,12 +69,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //funzione utile
     public bool IsTaskCompleted(string taskName)
     {
         return completedTasks.Contains(taskName);
     }
 
-    public void SavePlayerPosition(Vector3 position)
+    //salva la posizione del player
+    public void SavePlayerPosition(Vector2 position)
     {
         playerPosition = position;
         hasPlayerPosition = true;
@@ -82,6 +85,7 @@ public class GameManager : MonoBehaviour
 
     public bool HasSavedPlayerPosition() => hasPlayerPosition;
 
+    //resetta lo stato della cucina
     public void ResetKitchenState()
     {
         kitchenObjectsState.Clear();
@@ -113,7 +117,7 @@ public class GameManager : MonoBehaviour
         // Svuota lo zaino quando inizi una nuova ricetta
         ingredientiPresi.Clear();
 
-        // Reset anche lo stato della cucina
+        // Reset dello stato della cucina
         ResetKitchenState();
 
         //Debug.Log($"[GameManager] Nuova partita -> Mood: {mood}, Ricetta: {recipe}");
