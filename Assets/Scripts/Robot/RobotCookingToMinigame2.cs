@@ -12,8 +12,8 @@ public class RobotCookingToMinigame : MonoBehaviour
 
     [Header("Dialogo Finale")]
     public Dialogue finalDialogue;       // Dialogo da mostrare all'ultimo sprite
-    public bool isFinalDialogue = false; //variabile utile per segnare la fine dei dialoghi e passare al minigame
-    public string flappyFood = "FlappyFood"; //scena minigame
+    public bool isFinalDialogue = false; // Variabile utile per segnare la fine dei dialoghi e passare al minigame
+    public string flappyFood = "FlappyFood"; // Scena minigame
 
     [Header("Impostazioni Animazione Pop")]
     public float popScale = 1.2f;        // Effetto ingrandimento (1.2 = 20% più grande)
@@ -35,12 +35,16 @@ public class RobotCookingToMinigame : MonoBehaviour
     private float timer = 0f;            // Timer per il cambio automatico degli sprite
     private bool isPaused = false;       // Se è in pausa per un dialogo
     private bool hasStarted = false;     // Se la sequenza è iniziata
+    private float originalVolume = 1f;   // Memorizza il volume originale dell'AudioSource
 
     void Start()
     {
-
         spriteRenderer = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
+
+        // Memorizza il volume originale per poterlo ripristinare dopo il fade out
+        if (audioSource != null)
+            originalVolume = audioSource.volume;
 
         // Memorizza la grandezza iniziale che ha nella scena
         baseScale = transform.localScale;
@@ -62,12 +66,12 @@ public class RobotCookingToMinigame : MonoBehaviour
 
     void Update()
     {
-        //Nasconde il dialogo e fa partire la sequenza
+        // Nasconde il dialogo e fa partire la sequenza
         if (Input.GetKeyDown(KeyCode.Space) && !hasStarted && !isPaused)
         {
             hasStarted = true;
 
-            // Nascondi il gialogo iniziale
+            // Nascondi il dialogo iniziale
             foreach (GameObject panel in startPanels)
             {
                 if (panel != null)
@@ -95,14 +99,15 @@ public class RobotCookingToMinigame : MonoBehaviour
             }
             else
             {
-                // Fine vibrazione
+                // Fine vibrazione -> riporta il robot alla posizione originale
                 isVibrating = false;
                 transform.position = basePosition;
 
-                // Reset del pitch
+                // Reset del pitch e del volume all'originale
                 if (audioSource != null)
                 {
                     audioSource.pitch = 1f;
+                    audioSource.volume = originalVolume;
                 }
             }
         }
@@ -130,7 +135,7 @@ public class RobotCookingToMinigame : MonoBehaviour
             // Cambia l'immagine
             spriteRenderer.sprite = robotSprites[currentIndex];
 
-            // Parte l'audio
+            // Parte l'audio del click
             if (clickSound != null && audioSource != null)
                 audioSource.PlayOneShot(clickSound);
 
@@ -141,7 +146,7 @@ public class RobotCookingToMinigame : MonoBehaviour
                 vibrationTimer = 0f;
                 basePosition = transform.position; // Aggiorna la posizione base
 
-                // riproduce il suono del blender
+                // Riproduce il suono del blender con fade out
                 if (vibrationSound != null && audioSource != null && currentIndex < spriteDurations.Length)
                 {
                     // Calcola il pitch per far durare il suono quanto la vibrazione
@@ -150,7 +155,11 @@ public class RobotCookingToMinigame : MonoBehaviour
                     float pitchAdjustment = originalDuration / vibrationDuration;
 
                     audioSource.pitch = pitchAdjustment;
+                    audioSource.volume = originalVolume; // Assicurati che inizi al volume massimo
                     audioSource.PlayOneShot(vibrationSound);
+
+                    // Avvia la coroutine per il fade out del volume
+                    StartCoroutine(FadeOutVibrationSound(vibrationDuration));
                 }
             }
 
@@ -171,7 +180,52 @@ public class RobotCookingToMinigame : MonoBehaviour
         }
     }
 
-    // Coroutine che aspetta che il dialogo finisca
+
+    // Coroutine che gestisce il fade out del suono della vibrazione.
+    // Il volume rimane al massimo per la prima metà della durata, poi diminuisce gradualmente fino a zero nella seconda metà.
+    // Questo crea un effetto naturale di "spegnimento" del frullatore.
+    IEnumerator FadeOutVibrationSound(float totalDuration)
+    {
+        float elapsed = 0f;
+        float halfDuration = totalDuration / 2f;  // Calcola il punto a metà durata
+
+        // Prima metà: il volume rimane costante al massimo
+        // Questo simula il frullatore che lavora a piena potenza
+        while (elapsed < halfDuration)
+        {
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        // Seconda metà: fade out graduale del volume
+        // Il frullatore inizia a spegnersi progressivamente
+        float fadeStartTime = elapsed;
+        while (elapsed < totalDuration)
+        {
+            elapsed += Time.deltaTime;
+
+            // Calcola quanto siamo avanti nel fade out (0 = inizio fade, 1 = fine fade)
+            float fadeProgress = (elapsed - fadeStartTime) / halfDuration;
+
+            // Interpola il volume dal valore originale a zero
+            // Lerp crea una transizione fluida e naturale
+            if (audioSource != null)
+            {
+                audioSource.volume = Mathf.Lerp(originalVolume, 0f, fadeProgress);
+            }
+
+            yield return null;
+        }
+
+
+        // Questo garantisce che non ci siano residui sonori
+        if (audioSource != null)
+        {
+            audioSource.volume = 0f;
+        }
+    }
+
+    // Coroutine che aspetta che il dialogo finale finisca prima di caricare il minigame.
     IEnumerator WaitForDialogueEnd()
     {
         // Aspetta finché il dialoguePanel è attivo
@@ -182,19 +236,19 @@ public class RobotCookingToMinigame : MonoBehaviour
                 yield return null;
             }
         }
-        ;
 
         // Carica la scena del minigame
         SceneManager.LoadScene(flappyFood);
     }
 
-    // Coroutine per l'effetto "molla"
+    // Coroutine per l'effetto "pop" (molla) quando cambia sprite.
+    // Il robot si ingrandisce leggermente e poi torna alla dimensione normale.
     IEnumerator PopEffect()
     {
         Vector3 targetScale = baseScale * popScale; // Calcola la dimensione ingrandita
         float timer = 0;
 
-        //Ingrandimento (Lerp da base a target)
+        // Fase 1: Ingrandimento (Lerp da dimensione base a dimensione target)
         while (timer < popDuration)
         {
             transform.localScale = Vector3.Lerp(baseScale, targetScale, timer / popDuration);
@@ -204,7 +258,7 @@ public class RobotCookingToMinigame : MonoBehaviour
 
         timer = 0;
 
-        //Ritorno alla normalità (Lerp da target a base)
+        // Fase 2: Ritorno alla normalità (Lerp da dimensione target a dimensione base)
         while (timer < popDuration)
         {
             transform.localScale = Vector3.Lerp(targetScale, baseScale, timer / popDuration);
@@ -212,7 +266,7 @@ public class RobotCookingToMinigame : MonoBehaviour
             yield return null;
         }
 
-        // Assicura che alla fine torni alla dimensione originale
+        // Assicura che alla fine torni esattamente alla dimensione originale
         transform.localScale = baseScale;
     }
 }
