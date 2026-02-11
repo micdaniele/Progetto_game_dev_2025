@@ -1,15 +1,24 @@
 using UnityEngine;
 
+
+//Trigger condizionale per dialoghi basati sul completamento di task.
+// Mostra dialoghi diversi all'avvio della scena in base alle combinazioni di task completate.
+// Specifico per la scena Kitchen con i minigame Memory e Frigo.
+
 public class KitchenSceneDialogueTrigger : MonoBehaviour
 {
-    [Header("Dialogues After Single Task")] //ckeck se sono stati completati i minigame
+    [Header("Dialogues After Single Task")]
+    [Tooltip("Dialogo mostrato quando solo il Memory è completato")]
     [SerializeField] private Dialogue memoryCompletedDialogue;
+
+    [Tooltip("Dialogo mostrato quando solo il Frigo è completato")]
     [SerializeField] private Dialogue fridgeCompletedDialogue;
 
     [Header("Dialogues After Both Tasks")]
+    [Tooltip("Dialogo mostrato quando entrambe le task sono completate")]
     [SerializeField] private Dialogue bothTasksCompletedDialogue;
 
-    //variabili per vedere quali dialoghi mostrare
+    // Flags per tracciare quali dialoghi sono già stati mostrati
     private bool hasShownMemoryDialogue = false;
     private bool hasShownFridgeDialogue = false;
     private bool hasShownBothTasksDialogue = false;
@@ -20,9 +29,14 @@ public class KitchenSceneDialogueTrigger : MonoBehaviour
         CheckAndShowDialogues();
     }
 
+    // Metodo pubblico per ri-controllare i dialoghi.
+    public void RecheckDialogues()
+    {
+        CheckAndShowDialogues();
+    }
 
-    //controlla quali dialoghi mostrare in base alle "task" completate
-    void CheckAndShowDialogues()
+    // Controlla quali task sono completate e mostra il dialogo appropriato.
+    private void CheckAndShowDialogues()
     {
         if (GameManager.Instance == null || DialogueManager.Instance == null)
         {
@@ -30,49 +44,46 @@ public class KitchenSceneDialogueTrigger : MonoBehaviour
             return;
         }
 
-        //controlla se i due minigame sono stati completati
+        // Controlla se i due minigame sono stati completati
         bool memoryCompleted = GameManager.Instance.IsTaskCompleted("Memory");
         bool fridgeCompleted = GameManager.Instance.IsTaskCompleted("FridgeMinigame");
 
         // Dialogo se entrambe le task completate
         if (memoryCompleted && fridgeCompleted && !hasShownBothTasksDialogue)
         {
-            if (bothTasksCompletedDialogue != null)
-            {
-                //Debug.Log("[KitchenSceneDialogueTrigger] Mostrando dialogo per entrambe le task completate");
-                DialogueManager.Instance.StartDialogue(bothTasksCompletedDialogue);
-                hasShownBothTasksDialogue = true;
-            }
+            ShowDialogue(bothTasksCompletedDialogue, ref hasShownBothTasksDialogue, "entrambe le task");
         }
         // Dialogo se solo il Memory è stato completato
         else if (memoryCompleted && !fridgeCompleted && !hasShownMemoryDialogue)
         {
-            if (memoryCompletedDialogue != null)
-            {
-                //Debug.Log("[KitchenSceneDialogueTrigger] Mostrando dialogo Memory completato (Frigo ancora da fare)");
-                DialogueManager.Instance.StartDialogue(memoryCompletedDialogue);
-                hasShownMemoryDialogue = true;
-            }
+            ShowDialogue(memoryCompletedDialogue, ref hasShownMemoryDialogue, "Memory");
         }
-        // Dialogo se solo il minigame del frigo è stato completato
+        // Dialogo se solo il minigame del Frigo è stato completato
         else if (!memoryCompleted && fridgeCompleted && !hasShownFridgeDialogue)
         {
-            if (fridgeCompletedDialogue != null)
-            {
-                //Debug.Log("[KitchenSceneDialogueTrigger] Mostrando dialogo Frigo completato (Memory ancora da fare)");
-                DialogueManager.Instance.StartDialogue(fridgeCompletedDialogue);
-                hasShownFridgeDialogue = true;
-            }
+            ShowDialogue(fridgeCompletedDialogue, ref hasShownFridgeDialogue, "Frigo");
         }
     }
 
-    // Metodo pubblico perchè torniamo più volte nella scena
-    public void RecheckDialogues()
+ 
+    // metodo helper per mostrare un dialogo e aggiornare il flag corrispondente.
+
+    private void ShowDialogue(Dialogue dialogue, ref bool shownFlag, string taskName)
     {
-        CheckAndShowDialogues();
+        if (dialogue != null)
+        {
+            DialogueManager.Instance.StartDialogue(dialogue);
+            shownFlag = true;
+        }
+        //else
+        //{
+        //    Debug.LogWarning($"[KitchenSceneDialogueTrigger] Dialogo per '{taskName}' non assegnato!");
+        //}
     }
 
-    // Flag utili per testare
+
+    // Resetta i flag dei dialoghi mostrati. Utile per testing o per permettere di rivedere i dialoghi.
+
     //public void ResetDialogueFlags()
     //{
     //    hasShownMemoryDialogue = false;

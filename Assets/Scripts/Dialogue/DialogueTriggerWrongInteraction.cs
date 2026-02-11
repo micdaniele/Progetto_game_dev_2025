@@ -1,84 +1,95 @@
 using UnityEngine;
 
-public class DialogueTriggerWrongInteraction : MonoBehaviour
+/// Trigger di dialogo flessibile con vari tipi di attivazione. E richiede condizioni specifiche
+public class DialogueTriggerWrongInteraction : BaseDialogueTrigger
 {
+    public enum TriggerType
+    {
+        OnStart,      // Dialogo parte all'avvio della scena
+        OnInteract,   // Dialogo parte quando il player interagisce (preme E)
+        OnCollision,  // Dialogo parte quando il player entra nell'area
+        Manual        // Dialogo triggerato manualmente tramite codice
+    }
+
     [Header("Dialogue Setup")]
     public Dialogue dialogue;
 
     [Header("Trigger Settings")]
-    public TriggerType triggerType = TriggerType.OnInteract; //tipo di trigger per interaggire con l'oggetto
-    public KeyCode interactKey = KeyCode.E; //tasto per interaggire con l'oggetto
-    public string playerTag = "Player"; //tag per chi può interagire con l'oggetto
+    public TriggerType triggerType = TriggerType.OnInteract;
 
     [Header("Recipe Check")]
-    public bool requiresNoRecipeSelected = false; //il dialogo appare solo se non è stata ancora scelta una ricetta
+    public bool requiresNoRecipeSelected = false; // Il dialogo appare solo se non è stata ancora scelta una ricetta
 
-    private bool playerNearby = false; //check per quando far apparire il promt
-
-
-    //enum utili per varie interazioni
-    public enum TriggerType
+    protected override void Start()
     {
-        OnStart,
-        OnInteract,
-        OnCollision,
-        Manual
-    }
+        base.Start();
 
-    //dialogo parte appena parte la scena
-    void Start()
-    {
+        // Dialogo parte appena parte la scena
         if (triggerType == TriggerType.OnStart)
             TriggerDialogue();
     }
 
-    //dialogo partequando il player è nelle vicinanze ed interagisce
-    void Update()
+    protected override void Update()
     {
-        if (triggerType == TriggerType.OnInteract && playerNearby)
+        // Solo se il tipo è OnInteract usa la logica della classe base
+        if (triggerType == TriggerType.OnInteract)
         {
-            if (Input.GetKeyDown(interactKey))
-                TriggerDialogue();
+            base.Update();
         }
     }
 
-    //dialogo che appare se entri in un'area specifica
-    void OnTriggerEnter2D(Collider2D other)
+    protected override void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.CompareTag(playerTag)) return;
 
+        // Se il tipo è OnCollision, triggera immediatamente il dialogo
         if (triggerType == TriggerType.OnCollision)
+        {
             TriggerDialogue();
-        else
-            playerNearby = true;
+        }
+        else if (triggerType == TriggerType.OnInteract)
+        {
+            // Usa la logica della classe base per OnInteract
+            base.OnTriggerEnter2D(other);
+        }
     }
 
-    //dialogo che appare se esci da un'area specifica
-    void OnTriggerExit2D(Collider2D other)
+    protected override void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag(playerTag))
-            playerNearby = false;
+        if (triggerType == TriggerType.OnInteract)
+        {
+            base.OnTriggerExit2D(other);
+        }
     }
 
-    //dialogo che appare se interagisci con un oggetto
-    public void TriggerDialogue()
+    protected override bool CanTriggerDialogue()
     {
         // Controlla se è richiesto che non ci sia una ricetta selezionata
         if (requiresNoRecipeSelected)
         {
             if (GameManager.Instance != null && GameManager.Instance.HasValidSelection())
             {
-                //Debug.Log($"[DialogueTrigger] Dialogo '{dialogue.dialogueID}' NON mostrato perché è già stata scelta una ricetta");
-                return; // Non mostrare il dialogo se c'è già una ricetta selezionata
+                return false; // Non mostrare il dialogo se c'è già una ricetta selezionata
             }
         }
 
-        if (DialogueManager.Instance != null)
-        {
-            DialogueManager.Instance.StartDialogue(dialogue);
+        // Se showOnlyOnce è attivo e il dialogo è già stato mostrato, non triggerare
+        if (dialogueTriggered && dialogue != null && dialogue.showOnlyOnce)
+            return false;
 
-            if (dialogue.showOnlyOnce && GameManager.Instance != null)
-                GameManager.Instance.CompleteTask("Dialogue_" + dialogue.dialogueID);
+        return true;
+    }
+
+    protected override void TriggerDialogue()
+    {
+        // Controlla se può triggerare il dialogo
+        if (!CanTriggerDialogue())
+            return;
+
+        if (dialogue != null)
+        {
+            ShowDialogue(dialogue);
+            MarkDialogueAsCompleted(dialogue);
         }
     }
 }
