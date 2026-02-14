@@ -112,8 +112,6 @@ public class GameManager : MonoBehaviour
     public void ResetKitchenState()
     {
         kitchenObjectsState.Clear();
-        hasPlayerPosition = false;
-        shouldRestorePosition = false; 
 
         //Debug.Log("[GameManager] RESET STATO CUCINA completo - tutti i flag di posizione azzerati");
     }

@@ -1,18 +1,18 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class Player2DGroundMover : MonoBehaviour
 {
     [Header("Movement Config")]
-    [SerializeField] private float _speed = 5f;
+    [SerializeField] private float _speed = 5f;//velocità
 
-    [Header("Animation Config")]
-    [SerializeField] private Animator _animator;
+    private Animator _animator;//variabile per l'animator
 
     [Header("Audio Config")]
-    [SerializeField] private AudioClip[] _footstepSounds;
-    [SerializeField] private float _footstepInterval = 0.5f;
-    [SerializeField] private float _audioVolume = 1f; // Volume dei passi
+    [SerializeField] private AudioClip[] _footstepSounds;//array con i suoni dei passi
+    [SerializeField] private float _footstepInterval = 0.5f;//intervallo di tempo in cui far partire il suono tra un passo e l'altro
+    [SerializeField] private float _audioVolume = 1f;//volume audio dei passi
 
     // Input
     private InputAction _moveAction;
@@ -24,6 +24,54 @@ public class Player2DGroundMover : MonoBehaviour
 
     // Footstep timer
     private float _footstepTimer;
+    //player ingelton
+    private static Player2DGroundMover instance;
+
+    void Awake()
+    {
+        // Gestione singleton
+        if (instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        instance = this;
+
+        // Il player rimane sempre persistente tra le scene
+        DontDestroyOnLoad(gameObject);
+
+        // Registra il listener per il cambio scena e aggiunge OnSceneLoaded all'inizio della scena
+        // Permettendo così di controllare la visibilità ogni volta che si cambia scena
+        SceneManager.sceneLoaded += OnSceneLoaded;
+
+        // Controlla subito la visibilità nella scena corrente
+        UpdatePlayerVisibility(SceneManager.GetActiveScene().name);
+    }
+
+    void OnDestroy()
+    {
+        // rimuove il listener quando il player viene distrutto
+        // per evitare errori di memoria
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    // Questo metodo viene chiamato automaticamente ogni volta che una nuova scena viene caricata
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        UpdatePlayerVisibility(scene.name);
+    }
+
+    // Controlla se il player deve essere visibile o nascosto
+    private void UpdatePlayerVisibility(string sceneName)
+    {
+        // Il player è visibile SOLO nella scena Kitchen2
+        bool shouldBeVisible = (sceneName == "Kitchen2");
+        //disabilita il gameobject
+        gameObject.SetActive(shouldBeVisible);
+
+        //Debug.Log($"[Player] Scena: {sceneName} - Player visibile: {shouldBeVisible}");
+    }
 
     void Start()
     {
@@ -44,40 +92,24 @@ public class Player2DGroundMover : MonoBehaviour
         _audioSource.volume = _audioVolume;
         _audioSource.spatialBlend = 0f;
 
-        // DEBUG
-        //Debug.Log($"[Footsteps] AudioClips configurati: {(_footstepSounds != null ? _footstepSounds.Length : 0)}");
-        //if (_footstepSounds != null)
-        //{
-        //    for (int i = 0; i < _footstepSounds.Length; i++)
-        //    {
-        //        if (_footstepSounds[i] == null)
-        //            Debug.LogWarning($"[Footsteps] AudioClip {i} è NULL!");
-        //        else
-        //            Debug.Log($"[Footsteps] AudioClip {i}: {_footstepSounds[i].name}");
-        //    }
-        //}
-
-        //azione di movimento
+        // Azione di movimento
         _moveAction = InputSystem.actions.FindAction("Move");
         _rb.gravityScale = 0f;
         _rb.constraints = RigidbodyConstraints2D.FreezeRotation;
 
-        // Sistema di ripristino della posizione esplicito
+        //Debug.Log("Player instance ID: " + GetInstanceID());
+
+        // Sistema di ripristino della posizione
         if (GameManager.Instance != null && GameManager.Instance.ShouldRestorePlayerPosition())
         {
-            // Il GameManager ci dice esplicitamente di ripristinare la posizione
             Vector2 savedPos = GameManager.Instance.GetPlayerPosition();
-            transform.position = savedPos; 
-            //Debug.Log($"[Player] Posizione RIPRISTINATA a: {savedPos}");
-
-            // Cancelliamo immediatamente il flag per evitare ripristini futuri indesiderati
+            _rb.position = savedPos;
+            _rb.linearVelocity = Vector2.zero;
             GameManager.Instance.ClearPositionRestore();
+
+            //Debug.Log("Restore flag: " + GameManager.Instance.ShouldRestorePlayerPosition());
+            //Debug.Log("Player instance ID: " + GetInstanceID());
         }
-        //else
-        //{
-            // Nessun ripristino richiesto: usiamo la posizione di default della scena
-            //Debug.Log($"[Player] Uso posizione DEFAULT della scena: {transform.position}");
-        //}
     }
 
     void Update()
@@ -85,7 +117,7 @@ public class Player2DGroundMover : MonoBehaviour
         // Legge l'input
         _inputMovement = _moveAction.ReadValue<Vector2>();
 
-        //aggiorna l'animator
+        // Aggiorna l'animator
         if (_animator != null)
         {
             //imposta l'intensità del movimento
@@ -93,7 +125,6 @@ public class Player2DGroundMover : MonoBehaviour
 
             if (_inputMovement.magnitude > 0.01f)
             {
-                //direzione movimento
                 _animator.SetFloat("Move x", _inputMovement.x);
                 _animator.SetFloat("Move y", _inputMovement.y);
 
@@ -107,14 +138,16 @@ public class Player2DGroundMover : MonoBehaviour
                 }
             }
         }
-        //gestione del suono dei passi
+
+        // Gestione del suono dei passi
         HandleFootsteps();
     }
 
     //applica il movimento al rigid body
     void FixedUpdate()
     {
-         _rb.linearVelocity = _inputMovement * _speed;
+
+        _rb.linearVelocity = _inputMovement * _speed;
     }
 
     private void HandleFootsteps()
@@ -137,42 +170,25 @@ public class Player2DGroundMover : MonoBehaviour
         else
         {
             //il timer si resetta il prossimo passo parte subito quando riprendi a muoverti
-                        _footstepTimer = 0f;
+            _footstepTimer = 0f;
         }
     }
 
     private void PlayFootstepSound()
     {
-        //controlli di sicurezza
-        if (_audioSource == null)
-        {
-            //Debug.LogError("[Footsteps] AudioSource è NULL!");
-            return;
-        }
-
-        if (_footstepSounds == null || _footstepSounds.Length == 0)
-        {
-            //Debug.LogError("[Footsteps] Nessun AudioClip configurato!");
-            return;
-        }
+        if (_audioSource == null) return;
+        if (_footstepSounds == null || _footstepSounds.Length == 0) return;
 
         // Scegli un suono casuale dall'array
         AudioClip clip = _footstepSounds[Random.Range(0, _footstepSounds.Length)];
-
-        if (clip == null)
-        {
-            //Debug.LogError("[Footsteps] AudioClip selezionato è NULL!");
-            return;
-        }
+        if (clip == null) return;
 
         //piccola variazione nel suono dei passi per suono più realistico 
         _audioSource.pitch = Random.Range(0.9f, 1.1f);
         _audioSource.PlayOneShot(clip, _audioVolume);
-
-        //Debug.Log($"[Footsteps] Suono riprodotto: {clip.name}, Volume: {_audioVolume}");
     }
 
-    //alva la posizione del player quando cambi scena e quando entri in un minigioco
+    //Salva la posizione del player quando cambi scena e quando entri in un minigioco
     public void SavePosition()
     {
         if (GameManager.Instance != null)
