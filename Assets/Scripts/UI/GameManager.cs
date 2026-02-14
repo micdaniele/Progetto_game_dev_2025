@@ -14,9 +14,12 @@ public class GameManager : MonoBehaviour
     // Salva la posizione del player
     private Dictionary<string, bool> kitchenObjectsState = new Dictionary<string, bool>();
     private Dictionary<string, bool> uiObjectsState = new Dictionary<string, bool>(); //UI persistenti
-    public List<string> completedTasks = new List<string>();
-    private Vector2 playerPosition;
-    private bool hasPlayerPosition = false;
+    public List<string> completedTasks = new List<string>();//lista delle task completate
+
+    // Sistema di posizionamento del player
+    private Vector2 playerPosition;//posizione del player prima di cambiare scena
+    private bool hasPlayerPosition = false;//vede se si è salvata una posizione prim del cambio scena
+    private bool shouldRestorePosition = false; // flag che indica se ripristinare la posizione alla prossima scena
 
     void Awake()
     {
@@ -69,44 +72,51 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    //funzione utile
+    //Funzione utile per il completamento delle task
     public bool IsTaskCompleted(string taskName)
     {
         return completedTasks.Contains(taskName);
     }
 
-    //salva la posizione del player
+    // Salva la posizione del player e attiva il flag di ripristino
+    // Questo metodo viene chiamato quando il player sta per entrare in un minigioco o in un'altra area da cui dovrà tornare alla stessa posizione
     public void SavePlayerPosition(Vector2 position)
     {
         playerPosition = position;
         hasPlayerPosition = true;
+        shouldRestorePosition = true; // Attiviamo il flag: alla prossima scena vogliamo ripristinare
+
         //Debug.Log($"[GameManager] Posizione player salvata: {position}");
+        //Debug.Log($"[GameManager] Flag di ripristino ATTIVATO");
     }
 
-    public bool HasSavedPlayerPosition() => hasPlayerPosition;
 
-    //resetta lo stato della cucina
+    // Restituisce true solo se abbiamo una posizione salvata E vogliamo ripristinarla proprio ora
+    public bool ShouldRestorePlayerPosition()
+    {
+        bool result = shouldRestorePosition && hasPlayerPosition;
+        //Debug.Log($"[GameManager] ShouldRestorePlayerPosition? {result} (flag: {shouldRestorePosition}, hasPos: {hasPlayerPosition})");
+        return result;
+    }
+
+    // Cancella il flag di ripristino dopo che è stato usato
+    // Previene ripristini indesiderati nelle scene successive
+    // Viene chiamato dal player subito dopo aver ripristinato la posizione
+    public void ClearPositionRestore()
+    {
+        shouldRestorePosition = false;
+        //Debug.Log("[GameManager] Flag di ripristino DISATTIVATO");
+    }
+
+    // Resetta lo stato della cucina
     public void ResetKitchenState()
     {
         kitchenObjectsState.Clear();
         hasPlayerPosition = false;
+        shouldRestorePosition = false; 
 
-        //Debug.Log("[GameManager] RESET STATO CUCINA (senza resettare tasks e UI)");
+        //Debug.Log("[GameManager] RESET STATO CUCINA completo - tutti i flag di posizione azzerati");
     }
-
-    //metodo per debug
-    //public void PrintCurrentState()
-    //{
-        //Debug.Log("=== GAMEMANAGER STATE ===");
-        //Debug.Log($"Mood: {selectedMood}");
-        //Debug.Log($"Recipe: {selectedRecipe}");
-        //Debug.Log($"Ingredienti Presi: {ingredientiPresi.Count}");
-        //Debug.Log($"Oggetti Cucina Salvati: {kitchenObjectsState.Count}");
-        //Debug.Log($"Oggetti UI Salvati: {uiObjectsState.Count}");
-        //Debug.Log($"Tasks Completati: {completedTasks.Count}");
-        //Debug.Log($"Ha Posizione Player: {hasPlayerPosition}");
-        //Debug.Log("========================");
-    //}
 
     // Set
     public void SetSelection(int mood, string recipe)
@@ -121,7 +131,7 @@ public class GameManager : MonoBehaviour
         ResetKitchenState();
 
         //Debug.Log($"[GameManager] Nuova partita -> Mood: {mood}, Ricetta: {recipe}");
-        //Debug.Log("[GameManager] Inventario svuotato.");
+        //Debug.Log("[GameManager] Inventario svuotato e posizione resettata.");
     }
 
     public void SetMood(int mood)
@@ -141,12 +151,12 @@ public class GameManager : MonoBehaviour
     public int GetCurrentMood() => selectedMood;
     public string GetCurrentRecipe() => selectedRecipe;
 
+    public Vector2 GetPlayerPosition() => playerPosition;
+
     public bool HasValidSelection()
     {
         return selectedMood >= 0 && !string.IsNullOrEmpty(selectedRecipe);
     }
-
-    public Vector3 GetPlayerPosition() => playerPosition;
 
     // Legge se è già stato raccolto e in caso lo disattiva nella scena frigo/dispensa
     public bool GetObjectState(string objectId, bool defaultState = true)

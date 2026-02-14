@@ -1,7 +1,5 @@
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEditor.ShaderData;
 
 public class Player2DGroundMover : MonoBehaviour
 {
@@ -64,11 +62,22 @@ public class Player2DGroundMover : MonoBehaviour
         _rb.gravityScale = 0f;
         _rb.constraints = RigidbodyConstraints2D.FreezeRotation;
 
-        // Ripristina la posizione
-        if (GameManager.Instance != null && GameManager.Instance.HasSavedPlayerPosition())
+        // Sistema di ripristino della posizione esplicito
+        if (GameManager.Instance != null && GameManager.Instance.ShouldRestorePlayerPosition())
         {
-            transform.position = GameManager.Instance.GetPlayerPosition();
+            // Il GameManager ci dice esplicitamente di ripristinare la posizione
+            Vector2 savedPos = GameManager.Instance.GetPlayerPosition();
+            transform.position = savedPos; 
+            //Debug.Log($"[Player] Posizione RIPRISTINATA a: {savedPos}");
+
+            // Cancelliamo immediatamente il flag per evitare ripristini futuri indesiderati
+            GameManager.Instance.ClearPositionRestore();
         }
+        //else
+        //{
+            // Nessun ripristino richiesto: usiamo la posizione di default della scena
+            //Debug.Log($"[Player] Uso posizione DEFAULT della scena: {transform.position}");
+        //}
     }
 
     void Update()
